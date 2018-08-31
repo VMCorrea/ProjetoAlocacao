@@ -30,7 +30,10 @@ public class ConexaoFactory implements ConexaoInterface {
             } catch (SQLException ex) {
                 ex.printStackTrace();
                 throw new ConexaoException("Falha ao abrir conexao!");
+             } catch (Exception e){
+                throw new ConexaoException("Ops...Algo deu errado!");
             }
+
         }
         return connection;
     }
