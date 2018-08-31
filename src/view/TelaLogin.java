@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
 import controller.SugarConnect;
@@ -19,15 +14,15 @@ import javax.swing.JPasswordField;
  */
 public class TelaLogin extends javax.swing.JFrame {
 
-    /**
-     * Creates new form TelaLogin
-     */
+    private String login; 
+    private char[] pwd;
+
     public TelaLogin() {
         
         initComponents();
     }
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         jFrameAutentica = new javax.swing.JInternalFrame();
@@ -96,18 +91,18 @@ public class TelaLogin extends javax.swing.JFrame {
         getContentPane().add(jFrameAutentica);
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
-    private void botaoCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelActionPerformed
+    private void botaoCancelActionPerformed(java.awt.event.ActionEvent evt) {                                            
       dispose(); 
-    }//GEN-LAST:event_botaoCancelActionPerformed
+    }                                           
 
-    private void botaoEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEnviarActionPerformed
-        String name = txtField.getText();
-        String pwd = passwordField.getText();
+    private void botaoEnviarActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        setLogin(txtField.getText());
+        setPwd(passwordField.getPassword());
           
                  
-        if(name.equals("lifetime") && pwd.equals("lifetime")){
+        if(login.equals("lifetime") && pwd.equals("lifetime")){
             JOptionPane.showMessageDialog(null, "Bem-vindo.");
             TelaMenu menu = new TelaMenu();
             menu.setVisible(true);
@@ -117,15 +112,15 @@ public class TelaLogin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Credencias invalidas.");
             dispose();
         }
-    }//GEN-LAST:event_botaoEnviarActionPerformed
+    }                                           
 
-    private void botaoEnviarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_botaoEnviarKeyPressed
+    private void botaoEnviarKeyPressed(java.awt.event.KeyEvent evt) {                                       
         
-    }//GEN-LAST:event_botaoEnviarKeyPressed
+    }                                      
 
-    private void txtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFieldActionPerformed
+    private void txtFieldActionPerformed(java.awt.event.ActionEvent evt) {                                         
 
-    }//GEN-LAST:event_txtFieldActionPerformed
+    }                                        
 
     /**
      * @param args the command line arguments
@@ -162,7 +157,7 @@ public class TelaLogin extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private java.awt.Button botaoCancel;
     private java.awt.Button botaoEnviar;
     private javax.swing.JInternalFrame jFrameAutentica;
@@ -170,5 +165,13 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JLabel lblSenha;
     private javax.swing.JPasswordField passwordField;
     private java.awt.TextField txtField;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
+
+    private void setLogin(String text) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void setPwd(char[] password) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
