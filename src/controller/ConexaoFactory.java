@@ -24,13 +24,11 @@ public class ConexaoFactory implements ConexaoInterface {
                 String url = "jdbc:mysql://" + hostname +  "/" + nomeBancoDados;
                 connection = DriverManager.getConnection(url, usuario, senha);
              
-            } catch (ClassNotFoundException ex) {
-                ex.printStackTrace();
+           } catch (ClassNotFoundException ex) {
                 throw new ConexaoException("Driver JDBC nao encontrado!") ;   
             } catch (SQLException ex) {
-                ex.printStackTrace();
                 throw new ConexaoException("Falha ao abrir conexao!");
-             } catch (Exception e){
+            } catch (Exception e){
                 throw new ConexaoException("Ops...Algo deu errado!");
             }
 
