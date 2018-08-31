@@ -7,9 +7,9 @@ import java.sql.SQLException;
 
 public class ConexaoFactory implements ConexaoInterface {
     
-    private String hostname = "alocacoes.mysql.dbaas.com.br";
-    private String usuario = "alocacoes";
-    private String senha = "Xp097223";
+    private String hostname = "";
+    private String usuario = "";
+    private String senha = "";
     private String nomeBancoDados;
     private Connection connection;
     String driver = "com.mysql.jdbc.Driver";
