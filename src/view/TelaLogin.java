@@ -102,7 +102,9 @@ public class TelaLogin extends javax.swing.JFrame {
         setPwd(passwordField.getPassword());
           
                  
-        if(login.equals("lifetime") && pwd.equals("lifetime")){
+        /**
+            chamar metodo em SugarConnect
+            if(login.equals("lifetime") && pwd.equals("lifetime")){
             JOptionPane.showMessageDialog(null, "Bem-vindo.");
             TelaMenu menu = new TelaMenu();
             menu.setVisible(true);
@@ -112,6 +114,7 @@ public class TelaLogin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Credencias invalidas.");
             dispose();
         }
+        **/
     }                                           
 
     private void botaoEnviarKeyPressed(java.awt.event.KeyEvent evt) {                                       
