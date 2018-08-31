@@ -156,6 +156,22 @@ public class TelaLogin extends javax.swing.JFrame {
             }
         });
     }
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public char[] getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(char[] pwd) {
+        this.pwd = pwd;
+    }
+
 
     // Variables declaration - do not modify                     
     private java.awt.Button botaoCancel;
@@ -167,11 +183,4 @@ public class TelaLogin extends javax.swing.JFrame {
     private java.awt.TextField txtField;
     // End of variables declaration                   
 
-    private void setLogin(String text) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void setPwd(char[] password) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
