@@ -2,22 +2,23 @@ package model;
 
 public class Login{
 
-	private String email;
-	private String senha;
+	private String user;
+	private String password;
 
-	public String getEmail() {
-		return email;
+	public String getUser() {
+		return user;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUser(String user) {
+		this.user = user;
 	}
-	public String getSenha() {
+	public String getPassword() {
 		return senha;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 }
+
