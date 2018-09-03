@@ -1,7 +1,7 @@
 package model;
 
 /**
- * "Vendas", "Ativos", "Compras", "Produtos Disponíveis"
+ * "Vendas", "Ativos", "Compras", "Produtos Disponiveis"
  */
 public class AjusteCliente {
 
