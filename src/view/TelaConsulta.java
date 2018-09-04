@@ -30,8 +30,8 @@ public class TelaConsulta extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jFrameConsulta = new javax.swing.JInternalFrame();
         lblCodigo = new javax.swing.JLabel();
-        txtCodigo = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtSearch = new javax.swing.JTextField();
+        buttonSearch = new javax.swing.JButton();
         buttonMenu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -46,12 +46,22 @@ public class TelaConsulta extends javax.swing.JFrame {
         lblCodigo.setText("Codigo Cliente");
         jFrameConsulta.getContentPane().add(lblCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
-        txtCodigo.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        jFrameConsulta.getContentPane().add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 210, 30));
+        txtSearch.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        txtSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchActionPerformed(evt);
+            }
+        });
+        jFrameConsulta.getContentPane().add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 210, 30));
 
-        jButton1.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        jButton1.setText("Procurar");
-        jFrameConsulta.getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, -1, -1));
+        buttonSearch.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        buttonSearch.setText("Procurar");
+        buttonSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSearchActionPerformed(evt);
+            }
+        });
+        jFrameConsulta.getContentPane().add(buttonSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, -1, -1));
 
         buttonMenu.setText("Retornar Menu");
         buttonMenu.addActionListener(new java.awt.event.ActionListener() {
@@ -66,22 +76,15 @@ public class TelaConsulta extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 332, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jFrameConsulta)))
-                .addContainerGap())
+                .addComponent(jFrameConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
-                .addComponent(jFrameConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(62, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jFrameConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -93,6 +96,14 @@ public class TelaConsulta extends javax.swing.JFrame {
         menu.setVisible(true);
         dispose();
     }//GEN-LAST:event_buttonMenuActionPerformed
+
+    private void buttonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonSearchActionPerformed
+
+    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -131,10 +142,10 @@ public class TelaConsulta extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonMenu;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton buttonSearch;
     private javax.swing.JInternalFrame jFrameConsulta;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblCodigo;
-    private javax.swing.JTextField txtCodigo;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

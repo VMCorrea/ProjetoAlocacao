@@ -57,7 +57,8 @@ public class TelaMenu extends javax.swing.JFrame {
             }
         });
 
-        buttonResumo.setText("Tela Alocação");
+        buttonResumo.setText("Tela Principal");
+        buttonResumo.setActionCommand("Tela Principal");
         buttonResumo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         buttonResumo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,7 +119,7 @@ public class TelaMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonConsultaActionPerformed
 
     private void buttonResumoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonResumoActionPerformed
-        TelaResumo resumo = new TelaResumo();
+        TelaPrincipal resumo = new TelaPrincipal();
         resumo.setVisible(true);
         dispose();
     }//GEN-LAST:event_buttonResumoActionPerformed
