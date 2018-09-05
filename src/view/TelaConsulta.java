@@ -32,7 +32,20 @@ public class TelaConsulta extends javax.swing.JFrame {
         lblCodigo = new javax.swing.JLabel();
         txtSearch = new javax.swing.JTextField();
         buttonSearch = new javax.swing.JButton();
-        buttonMenu = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuSair2 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jAtivo2 = new javax.swing.JMenuItem();
+        jCompra2 = new javax.swing.JMenuItem();
+        jVenda2 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jConsulta2 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jAlocacao2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,7 +57,7 @@ public class TelaConsulta extends javax.swing.JFrame {
 
         lblCodigo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lblCodigo.setText("Codigo Cliente");
-        jFrameConsulta.getContentPane().add(lblCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+        jFrameConsulta.getContentPane().add(lblCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
 
         txtSearch.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         txtSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -52,7 +65,7 @@ public class TelaConsulta extends javax.swing.JFrame {
                 txtSearchActionPerformed(evt);
             }
         });
-        jFrameConsulta.getContentPane().add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 210, 30));
+        jFrameConsulta.getContentPane().add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 240, 30));
 
         buttonSearch.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         buttonSearch.setText("Procurar");
@@ -61,41 +74,124 @@ public class TelaConsulta extends javax.swing.JFrame {
                 buttonSearchActionPerformed(evt);
             }
         });
-        jFrameConsulta.getContentPane().add(buttonSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, -1, -1));
+        jFrameConsulta.getContentPane().add(buttonSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 70, -1, -1));
 
-        buttonMenu.setText("Retornar Menu");
-        buttonMenu.addActionListener(new java.awt.event.ActionListener() {
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "CLASSIFICACAO", "TIPO FISCAL", "NOME ATIVO", "VENCIMENTO", "TAXA", "VALOR"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jFrameConsulta.getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 750, 170));
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel1.setText("Resultado");
+        jFrameConsulta.getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, -1, -1));
+
+        jMenu1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\page.png")); // NOI18N
+        jMenu1.setText("Arquivo");
+
+        jMenuSair2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\door_out.png")); // NOI18N
+        jMenuSair2.setText("Sair");
+        jMenuSair2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonMenuActionPerformed(evt);
+                jMenuSair2ActionPerformed(evt);
             }
         });
-        jFrameConsulta.getContentPane().add(buttonMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, -1, -1));
+        jMenu1.add(jMenuSair2);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\wrench_orange.png")); // NOI18N
+        jMenu2.setText("Ajuste");
+
+        jAtivo2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\user.png")); // NOI18N
+        jAtivo2.setText("Ativos");
+        jAtivo2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jAtivo2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jAtivo2);
+
+        jCompra2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\user_add.png")); // NOI18N
+        jCompra2.setText("Compra");
+        jCompra2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCompra2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jCompra2);
+
+        jVenda2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\user_delete.png")); // NOI18N
+        jVenda2.setText("Venda");
+        jVenda2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jVenda2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jVenda2);
+
+        jMenuBar1.add(jMenu2);
+
+        jMenu4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\group.png")); // NOI18N
+        jMenu4.setText("Clientes");
+
+        jConsulta2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\zoom.png")); // NOI18N
+        jConsulta2.setText("Consulta");
+        jConsulta2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jConsulta2ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jConsulta2);
+
+        jMenuBar1.add(jMenu4);
+
+        jMenu3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\information.png")); // NOI18N
+        jMenu3.setText("Menu");
+
+        jAlocacao2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\page.png")); // NOI18N
+        jAlocacao2.setText("Alocação");
+        jAlocacao2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jAlocacao2ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jAlocacao2);
+
+        jMenuBar1.add(jMenu3);
+
+        jFrameConsulta.setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jFrameConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(397, 397, 397)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(256, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jFrameConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(jFrameConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jFrameConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void buttonMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMenuActionPerformed
-        TelaMenu menu = new TelaMenu();
-        menu.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_buttonMenuActionPerformed
 
     private void buttonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSearchActionPerformed
         // TODO add your handling code here:
@@ -104,6 +200,35 @@ public class TelaConsulta extends javax.swing.JFrame {
     private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSearchActionPerformed
+
+    private void jMenuSair2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSair2ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jMenuSair2ActionPerformed
+
+    private void jAtivo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAtivo2ActionPerformed
+        TelaAjusteAtivo telaAtivo = new TelaAjusteAtivo();
+        telaAtivo.setVisible(true);
+    }//GEN-LAST:event_jAtivo2ActionPerformed
+
+    private void jCompra2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCompra2ActionPerformed
+        TelaAjusteCompra telaCompra = new TelaAjusteCompra();
+        telaCompra.setVisible(true);
+    }//GEN-LAST:event_jCompra2ActionPerformed
+
+    private void jConsulta2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsulta2ActionPerformed
+        TelaConsulta telaConsulta = new TelaConsulta();
+        telaConsulta.setVisible(true);
+    }//GEN-LAST:event_jConsulta2ActionPerformed
+
+    private void jVenda2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVenda2ActionPerformed
+        TelaAjusteVenda telaVenda = new TelaAjusteVenda();
+        telaVenda.setVisible(true);
+    }//GEN-LAST:event_jVenda2ActionPerformed
+
+    private void jAlocacao2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAlocacao2ActionPerformed
+        TelaPrincipal menu = new TelaPrincipal();
+        menu.setVisible(true);
+    }//GEN-LAST:event_jAlocacao2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -141,10 +266,23 @@ public class TelaConsulta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonMenu;
     private javax.swing.JButton buttonSearch;
+    private javax.swing.JMenuItem jAlocacao2;
+    private javax.swing.JMenuItem jAtivo2;
+    private javax.swing.JMenuItem jCompra2;
+    private javax.swing.JMenuItem jConsulta2;
     private javax.swing.JInternalFrame jFrameConsulta;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuSair2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JMenuItem jVenda2;
     private javax.swing.JLabel lblCodigo;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables

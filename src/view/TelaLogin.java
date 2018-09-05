@@ -2,6 +2,7 @@ package view;
 
 import controller.SugarConnect;
 import java.awt.TextField;
+import java.awt.event.KeyEvent;
 import static javafx.application.Platform.exit;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -16,7 +17,7 @@ import model.Usuario;
 public class TelaLogin extends javax.swing.JFrame {
 
     private String login; 
-    private char[] pwd;
+    private String pwd;
 
     public TelaLogin() {
         
@@ -28,10 +29,10 @@ public class TelaLogin extends javax.swing.JFrame {
 
         jFrameAutentica = new javax.swing.JInternalFrame();
         lblLogin = new javax.swing.JLabel();
-        txtField = new java.awt.TextField();
+        txtLogin = new java.awt.TextField();
         lblSenha = new javax.swing.JLabel();
         botaoCancel = new java.awt.Button();
-        passwordField = new javax.swing.JPasswordField();
+        txtSenha = new javax.swing.JPasswordField();
         botaoEnviar = new java.awt.Button();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -47,13 +48,13 @@ public class TelaLogin extends javax.swing.JFrame {
         lblLogin.setText("Login");
         jFrameAutentica.getContentPane().add(lblLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 13, 43, 27));
 
-        txtField.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        txtField.addActionListener(new java.awt.event.ActionListener() {
+        txtLogin.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFieldActionPerformed(evt);
+                txtLoginActionPerformed(evt);
             }
         });
-        jFrameAutentica.getContentPane().add(txtField, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 10, 139, 30));
+        jFrameAutentica.getContentPane().add(txtLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 10, 139, 30));
 
         lblSenha.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lblSenha.setText("Senha");
@@ -70,8 +71,13 @@ public class TelaLogin extends javax.swing.JFrame {
         jFrameAutentica.getContentPane().add(botaoCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 123, -1, -1));
         botaoCancel.getAccessibleContext().setAccessibleDescription("");
 
-        passwordField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        jFrameAutentica.getContentPane().add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 64, 139, 30));
+        txtSenha.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        txtSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSenhaActionPerformed(evt);
+            }
+        });
+        jFrameAutentica.getContentPane().add(txtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 64, 139, 30));
 
         botaoEnviar.setActionCommand("buttonEnviar");
         botaoEnviar.setBackground(new java.awt.Color(204, 204, 204));
@@ -100,21 +106,38 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void botaoEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEnviarActionPerformed
         
-        setLogin(txtField.getText());
-        setPwd(passwordField.getPassword());
+        setLogin(txtLogin.getText());
+        setPwd(txtSenha.getPassword());
           
-        Usuario validacao = new Usuario();
-        validacao.validaLogin(login, pwd);
+        if (this.checkLogin(txtLogin.getText(), new String(txtSenha.getPassword()))) {
+                JOptionPane.showMessageDialog(null, "Bem vindo!");
+                new TelaPrincipal().setVisible(true);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Dados invalidos!");
+            }
         
     }//GEN-LAST:event_botaoEnviarActionPerformed
 
     private void botaoEnviarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_botaoEnviarKeyPressed
-        
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (this.checkLogin(txtLogin.getText(), new String(txtSenha.getPassword()))) {
+                JOptionPane.showMessageDialog(null, "Bem vindo!");
+                new TelaPrincipal().setVisible(true);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Dados invalidos!");
+            }
+        }
     }//GEN-LAST:event_botaoEnviarKeyPressed
 
-    private void txtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFieldActionPerformed
+    private void txtLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLoginActionPerformed
 
-    }//GEN-LAST:event_txtFieldActionPerformed
+    }//GEN-LAST:event_txtLoginActionPerformed
+
+    private void txtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSenhaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -158,8 +181,8 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JInternalFrame jFrameAutentica;
     private javax.swing.JLabel lblLogin;
     private javax.swing.JLabel lblSenha;
-    private javax.swing.JPasswordField passwordField;
-    private java.awt.TextField txtField;
+    private java.awt.TextField txtLogin;
+    private javax.swing.JPasswordField txtSenha;
     // End of variables declaration//GEN-END:variables
 
     private void setLogin(String text) {
@@ -170,5 +193,9 @@ public class TelaLogin extends javax.swing.JFrame {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public boolean checkLogin(String login, String senha){
+        
+        return login.equals("lifetime") && senha.equals("lifetime");
+    }
    
 }
