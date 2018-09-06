@@ -12,6 +12,7 @@ public class PosicaoCliente{
     private Connection conn;
     private Statement statement;
     private ConexaoInterface conexao;
+    private PreparedStatement pst;
         
   public void inserePosicaoCliente(Posicao posicao) throws ConexaoException, SQLException{
     	/*Param: ?
@@ -21,6 +22,13 @@ public class PosicaoCliente{
     	String query = "INSERT INTO posicaoCliente (classificacaoPosicao, tipoFiscalPosicao, nomeAtivoPosicao, vencimentoPosicao, taxaPosicao, valorPosicao) VALUES (?,?,?,?,?,?)";
     	statement = conexao.prepareStatement(query);
         ResultSet rs = statement.executeQuery(query);
+        
+        
+        
+        
+        
+        
+        
         
     	
   }
@@ -69,5 +77,6 @@ public class PosicaoCliente{
             statement = conexao.prepareStatement(query);
             ResultSet rs = statement.executeQuery(query);
 	}
-			
+       
+	
 }
