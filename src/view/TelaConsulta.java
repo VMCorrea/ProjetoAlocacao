@@ -5,17 +5,37 @@
  */
 package view;
 
+import controller.ConexaoException;
+import controller.ConexaoFactory;
+import controller.ConexaoInterface;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import model.ModeloTabela;
+
 /**
  *
  * @author Beatriz.aurelio
  */
 public class TelaConsulta extends javax.swing.JFrame {
-
+      
+    
     /**
      * Creates new form TelaConsulta
      */
     public TelaConsulta() {
         initComponents();
+        try {
+            preencherTabela("SELECT * FROM posicaoCliente");
+        } catch (ConexaoException ex) {
+            Logger.getLogger(TelaConsulta.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -33,7 +53,7 @@ public class TelaConsulta extends javax.swing.JFrame {
         txtSearch = new javax.swing.JTextField();
         buttonSearch = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableConsulta = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -76,7 +96,7 @@ public class TelaConsulta extends javax.swing.JFrame {
         });
         jFrameConsulta.getContentPane().add(buttonSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 70, -1, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableConsulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -84,9 +104,9 @@ public class TelaConsulta extends javax.swing.JFrame {
                 "CLASSIFICACAO", "TIPO FISCAL", "NOME ATIVO", "VENCIMENTO", "TAXA", "VALOR"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableConsulta);
 
-        jFrameConsulta.getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 750, 170));
+        jFrameConsulta.getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 620, 170));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("Resultado");
@@ -230,6 +250,55 @@ public class TelaConsulta extends javax.swing.JFrame {
         menu.setVisible(true);
     }//GEN-LAST:event_jAlocacao2ActionPerformed
 
+    public void preencherTabela(String sql) throws ConexaoException{
+        ResultSet rs = null;
+        
+        ArrayList dados = new ArrayList();
+        String[] colunas = new String[]{"CLASSIFICACAO", "TIPO FISCAL", "NOME ATIVO", "VENCIMENTO", "TAXA", "VALOR"};
+        
+        ConexaoFactory conexao = new ConexaoFactory();
+        conexao.getConnection();
+        conexao.executaSql(sql);
+        
+        try{
+            rs.first();
+            do{
+                dados.add(new Object[]{rs.getString("classificacao"),rs.getString("tipofiscal"), rs.getString("nomeAtivo"), rs.getDate("vencimento"), rs.getDouble("taxa"), rs.getDouble("valor")});
+            }while(rs.next());
+            
+        } catch(SQLException ex){
+            JOptionPane.showMessageDialog(rootPane, "Erro");
+        }
+        
+        ModeloTabela modelo = new ModeloTabela(dados,colunas);
+        jTableConsulta.setModel(modelo);
+        //classificacao
+        jTableConsulta.getColumnModel().getColumn(0).setPreferredWidth(220);
+        jTableConsulta.getColumnModel().getColumn(0).setResizable(false);
+        //tipo fiscal
+        jTableConsulta.getColumnModel().getColumn(1).setPreferredWidth(100);
+        jTableConsulta.getColumnModel().getColumn(1).setResizable(false);
+        //nome ativo
+        jTableConsulta.getColumnModel().getColumn(2).setPreferredWidth(100);
+        jTableConsulta.getColumnModel().getColumn(2).setResizable(false);
+        //vencimento
+        jTableConsulta.getColumnModel().getColumn(3).setPreferredWidth(20);
+        jTableConsulta.getColumnModel().getColumn(3).setResizable(false);
+        //taxa
+        jTableConsulta.getColumnModel().getColumn(4).setPreferredWidth(20);
+        jTableConsulta.getColumnModel().getColumn(4).setResizable(false);
+        //valor
+        jTableConsulta.getColumnModel().getColumn(5).setPreferredWidth(20);
+        jTableConsulta.getColumnModel().getColumn(5).setResizable(false);
+        
+        jTableConsulta.getTableHeader().setReorderingAllowed(false);
+        jTableConsulta.setAutoResizeMode(jTableConsulta.AUTO_RESIZE_OFF);
+        jTableConsulta.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        
+        conexao.close();
+        
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -281,7 +350,7 @@ public class TelaConsulta extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuSair2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableConsulta;
     private javax.swing.JMenuItem jVenda2;
     private javax.swing.JLabel lblCodigo;
     private javax.swing.JTextField txtSearch;

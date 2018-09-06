@@ -7,8 +7,11 @@ import static javafx.application.Platform.exit;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
-import model.Usuario;
 
+import model.Usuario;
+import controller.ConexaoInterface;
+import java.sql.Connection;
+import java.sql.Statement;
 
 /**
  *
@@ -18,10 +21,11 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private String login; 
     private String pwd;
-
+    
     public TelaLogin() {
         
         initComponents();
+        
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
