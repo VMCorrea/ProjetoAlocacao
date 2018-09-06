@@ -2,7 +2,8 @@ package model;
 
 import javax.swing.JOptionPane;
 import java.util.Date;
-import view.TelaResumo;
+import view.TelaPrincipal;
+import view.TelaLogin;
 
 public class Usuario {
 
@@ -10,6 +11,8 @@ public class Usuario {
     private String nome;
     private String senha;
     private Date dataCadastro;
+    private Object txtLogin;
+    private Object txtPwd;
 
     
     public Integer getId() {
@@ -44,13 +47,4 @@ public class Usuario {
         this.dataCadastro = dataCadastro;
     }
 
-    
-    public void validaLogin(String login, char[] pwd) {
-        if(login.equals("lifetime")){ 
-            JOptionPane.showMessageDialog(null,"Bem-vindo."); 
-            TelaResumo resumo = new TelaResumo();
-            resumo.setVisible(true); 
-        } else{ JOptionPane.showMessageDialog(null,"Credencias invalidas."); }
-     }
-    
 }
