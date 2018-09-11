@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 
 import model.Usuario;
-import controller.ConexaoInterface;
+import controller.ConexaoBD;
 import java.sql.Connection;
 import java.sql.Statement;
 
