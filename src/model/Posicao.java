@@ -1,24 +1,30 @@
 package model;
 
+import java.sql.Date;
+
 
 public class Posicao {
+
 	@SuppressWarnings("unused")
-	private double assessor;
-	private double cliente;
+	private int assessor;
+	private int cliente;
 	private String produto;
 	private String subproduto;
 	private String produtoGarantia;
-	private double cnpj;
+	private int cnpj;
 	private String ativo;
 	private String emissor;
-	private double quantidade;
-	private double dataVencimento;
-	private double net;
+	private float quantidade;
+	private Date dataVencimento;
+	private float net;
 	private String classificacao;
+        
+        private String pesquisa;
+        
 	
 	public Posicao() {}
 	
-	public Posicao(double assessor, double cliente, String produto, String subproduto, String produtoGarantia, double cnpj, String ativo, String emissor, double quantidade, double dataVencimento, float net, String classificacao) {
+	public Posicao(int assessor, int cliente, String produto, String subproduto, String produtoGarantia, int cnpj, String ativo, String emissor, float quantidade, Date dataVencimento, float net, String classificacao) {
 		this.assessor = assessor;
 		this.cliente = cliente;
 		this.produto = produto;
@@ -34,7 +40,7 @@ public class Posicao {
 	}	
 	
 	
-	public void setAssessor(double assessor) {
+	public void setAssessor(int assessor) {
 		this.assessor = assessor;
 	}
 	public void setAssessor() {}
@@ -42,7 +48,7 @@ public class Posicao {
 	public double getCliente() {
 		return cliente;
 	}
-	public void setCliente(double cliente) {
+	public void setCliente(int cliente) {
 		this.cliente = cliente;
 	}
 	
@@ -60,17 +66,17 @@ public class Posicao {
 		this.subproduto = subproduto;
 	}
 	
-	public double getCnpj() {
+	public int getCnpj() {
 		return cnpj;
 	}
-	public void setCnpj(double cnpj) {
+	public void setCnpj(int cnpj) {
 		this.cnpj = cnpj;
 	}
 	
-	public double getNet() {
+	public float getNet() {
 		return net;
 	}
-	public void setNet(double net) {
+	public void setNet(float net) {
 		this.net = net;
 	}
 	
@@ -88,10 +94,10 @@ public class Posicao {
 		this.emissor = emissor;
 	}
 	
-	public double getQuantidade() {
+	public float getQuantidade() {
 		return quantidade;
 	}
-	public void setQuantidade(double quantidade) {
+	public void setQuantidade(float quantidade) {
 		this.quantidade = quantidade;
 	}
 	
@@ -102,10 +108,10 @@ public class Posicao {
 		this.ativo = ativo;
 	}
 	
-	public double getDataVencimento() {
+	public Date getDataVencimento() {
 		return dataVencimento;
 	}
-	public void setDataVencimento(double dataVencimento) {
+	public void setDataVencimento(Date dataVencimento) {
 		this.dataVencimento = dataVencimento;
 	}
 	
@@ -116,4 +122,19 @@ public class Posicao {
 		this.classificacao = classificacao;
 	}
 	
+        
+    /**
+     * @return the pesquisa
+     */
+    public String getPesquisa() {
+        return pesquisa;
+    }
+
+    /**
+     * @param pesquisa the pesquisa to set
+     */
+    public void setPesquisa(String pesquisa) {
+        this.pesquisa = pesquisa;
+    }
+        
 }
