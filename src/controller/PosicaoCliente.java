@@ -23,7 +23,7 @@ public class PosicaoCliente{
            Cria o Cliente no Banco (mySQL)
           retorna Objeto de Model com Posicao vazia*/
 	   
-    	String query = "INSERT INTO alocacoes (classificacao, garantia_produto, ativo, data_vencimento, NET) VALUES (?,?,?,?,?)";
+    	String query = "INSERT INTO catalogo_op (classificacao, garantia_produto, ativo, data_vencimento, NET) VALUES (?,?,?,?,?)";
     	pst = conex.con.prepareStatement(query);
         
         pst.setString(1, pos.getClassificacao());
@@ -42,7 +42,7 @@ public class PosicaoCliente{
          */
   
         conex.open();
-        conex.executaSql("SELECT * FROM posicaoCliente WHERE id_cliente LIKE '%"+mod.getPesquisa()+"%'");
+        conex.executaSql("SELECT classificacao, garantia_produto, ativo, data_vencimento, NET FROM catalogo_op WHERE id LIKE '%"+mod.getPesquisa()+"%'");
         try {
             conex.rs.first();
             mod.setClassificacao(conex.rs.getString("classificacao"));
@@ -62,8 +62,9 @@ public class PosicaoCliente{
     }
 
     public void atualizaPosicaoCliente() throws ConexaoException, SQLException {
-   	
-        String query = "UPDATE alocacoes SET classificacao=?, garantia_produto=?, ativo=?, data_vencimento=?, NET=? WHERE id_cliente= ?";
+   	conex.open();
+        
+        String query = "UPDATE catalogo_op SET classificacao=?, garantia_produto=?, ativo=?, data_vencimento=?, NET=? WHERE id_cliente= ?";
     	pst = conex.con.prepareStatement(query);
         
         pst.setString(1, pos.getClassificacao());
@@ -73,14 +74,17 @@ public class PosicaoCliente{
         pst.setFloat(5, pos.getNet());
         
         pst.execute();	
-	
+	conex.close();
         }
 	
 	public void deletaPosicaoCliente() throws ConexaoException, SQLException{
-	    			
+	    conex.open();
+            
             String query = "DELETE FROM alocacoes WHERE id_cliente=?";
             pst = conex.con.prepareStatement(query);
             pst.execute(query);
+            
+            conex.close();
 	}
        
 	

@@ -25,10 +25,11 @@ public class ConexaoBD{
 
     
     public void open() throws ConexaoException {
+        
         System.setProperty("jdbc.Drivers", driver);
         try {
             con = DriverManager.getConnection(caminho, usuario, senha);
-            //JOptionPane.showMessageDialog(null, "Conexao efetuada com sucesso.");
+            JOptionPane.showMessageDialog(null, "Conexao efetuada com sucesso.");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao efetuar conexao." +ex.getMessage());
         }
