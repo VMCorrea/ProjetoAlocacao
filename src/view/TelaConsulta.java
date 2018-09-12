@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import model.ModeloTabela;
@@ -32,7 +33,7 @@ public class TelaConsulta extends javax.swing.JFrame {
     public TelaConsulta() {
         initComponents();
         try {
-            preencherTabela("SELECT * FROM alocacao.alocacoes");
+            preencherTabela("SELECT classificacao, garantia_produto, ativo, data_vencimento, NET FROM alocacao.catalogo_op");
         } catch (ConexaoException ex) {
             JOptionPane.showMessageDialog(null, "Erro: "+ex);
         }
@@ -55,7 +56,7 @@ public class TelaConsulta extends javax.swing.JFrame {
         buttonPesquisa = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableConsulta = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelResultado = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuSair2 = new javax.swing.JMenuItem();
@@ -69,8 +70,11 @@ public class TelaConsulta extends javax.swing.JFrame {
         jAlocacao2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
 
         jPanel1.setLayout(new javax.swing.OverlayLayout(jPanel1));
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(397, 463, 0, 0);
 
         jFrameConsulta.setTitle("Consulta");
         jFrameConsulta.setVisible(true);
@@ -108,15 +112,20 @@ public class TelaConsulta extends javax.swing.JFrame {
                 "ID", "CLASSIFICACAO", "TIPO FISCAL", "NOME ATIVO", "VENCIMENTO", "VALOR"
             }
         ));
+        jTableConsulta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableConsultaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableConsulta);
 
         jFrameConsulta.getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(10, 110, 910, 290);
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel1.setText("Resultado");
-        jFrameConsulta.getContentPane().add(jLabel1);
-        jLabel1.setBounds(30, 80, 71, 17);
+        jLabelResultado.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabelResultado.setText("Resultado");
+        jFrameConsulta.getContentPane().add(jLabelResultado);
+        jLabelResultado.setBounds(30, 80, 71, 17);
 
         jMenu1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\page.png")); // NOI18N
         jMenu1.setText("Arquivo");
@@ -194,26 +203,10 @@ public class TelaConsulta extends javax.swing.JFrame {
 
         jFrameConsulta.setJMenuBar(jMenuBar1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(397, 397, 397)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(546, Short.MAX_VALUE))
-            .addComponent(jFrameConsulta)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jFrameConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        getContentPane().add(jFrameConsulta);
+        jFrameConsulta.setBounds(0, 0, 943, 480);
 
-        pack();
+        setSize(new java.awt.Dimension(951, 505));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -225,6 +218,15 @@ public class TelaConsulta extends javax.swing.JFrame {
         jFormattedTextFieldCRM.setText(String.valueOf(model.getCrm()));
         jComboBoxEspecialidade.setSelectedItem(model.getEspecialidade());
         */
+         mod.setPesquisa(txtFieldPesquisa.getText());
+        try {
+            Posicao model = control.buscaPosicaoCliente(mod);
+            //classificacao, garantia_produto, ativo, data_vencimento, NET
+        } catch (ConexaoException ex) {
+            JOptionPane.showMessageDialog(null, "Erro.\n" +ex.getMessage());
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro.\n" +ex.getMessage());
+        }
     }//GEN-LAST:event_buttonPesquisaActionPerformed
 
     private void txtFieldPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFieldPesquisaActionPerformed
@@ -260,10 +262,13 @@ public class TelaConsulta extends javax.swing.JFrame {
         menu.setVisible(true);
     }//GEN-LAST:event_jAlocacao2ActionPerformed
 
+    private void jTableConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableConsultaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTableConsultaMouseClicked
+
      public void preencherTabela(String sql) throws ConexaoException{
         ArrayList dados = new ArrayList();
         String[] colunas = new String[]{"id_cliente", "Classificacao", "Tipo Fiscal", "Nome Ativo", "Vencimento", "Valor"};
-        
         conex.open();
         conex.executaSql(sql);
         
@@ -348,7 +353,7 @@ public class TelaConsulta extends javax.swing.JFrame {
     private javax.swing.JMenuItem jCompra2;
     private javax.swing.JMenuItem jConsulta2;
     private javax.swing.JInternalFrame jFrameConsulta;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelResultado;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

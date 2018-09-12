@@ -43,8 +43,10 @@ public class TelaAjusteVenda extends javax.swing.JFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
 
         jFVenda.setVisible(true);
+        jFVenda.getContentPane().setLayout(null);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -53,8 +55,12 @@ public class TelaAjusteVenda extends javax.swing.JFrame {
                 jComboBox1ActionPerformed(evt);
             }
         });
+        jFVenda.getContentPane().add(jComboBox1);
+        jComboBox1.setBounds(33, 87, 73, 24);
 
         jLabel1.setText("Vendas");
+        jFVenda.getContentPane().add(jLabel1);
+        jLabel1.setBounds(33, 55, 73, 26);
 
         jMenu1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\page.png")); // NOI18N
         jMenu1.setText("Arquivo");
@@ -132,39 +138,11 @@ public class TelaAjusteVenda extends javax.swing.JFrame {
 
         jFVenda.setJMenuBar(jMenuBar1);
 
-        javax.swing.GroupLayout jFVendaLayout = new javax.swing.GroupLayout(jFVenda.getContentPane());
-        jFVenda.getContentPane().setLayout(jFVendaLayout);
-        jFVendaLayout.setHorizontalGroup(
-            jFVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jFVendaLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(jFVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox1, 0, 73, Short.MAX_VALUE))
-                .addContainerGap(278, Short.MAX_VALUE))
-        );
-        jFVendaLayout.setVerticalGroup(
-            jFVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jFVendaLayout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(138, Short.MAX_VALUE))
-        );
+        getContentPane().add(jFVenda);
+        jFVenda.setBounds(0, 0, 860, 540);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jFVenda)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jFVenda, javax.swing.GroupLayout.Alignment.TRAILING)
-        );
-
-        pack();
+        setSize(new java.awt.Dimension(871, 564));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed

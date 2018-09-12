@@ -46,11 +46,12 @@ public class TelaLogin extends javax.swing.JFrame {
         jFrameAutentica.setResizable(true);
         jFrameAutentica.setTitle("Autenticacao");
         jFrameAutentica.setVisible(true);
-        jFrameAutentica.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jFrameAutentica.getContentPane().setLayout(null);
 
         lblLogin.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lblLogin.setText("Login");
-        jFrameAutentica.getContentPane().add(lblLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 13, 43, 27));
+        jFrameAutentica.getContentPane().add(lblLogin);
+        lblLogin.setBounds(10, 13, 43, 27);
 
         txtLogin.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         txtLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -58,11 +59,13 @@ public class TelaLogin extends javax.swing.JFrame {
                 txtLoginActionPerformed(evt);
             }
         });
-        jFrameAutentica.getContentPane().add(txtLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 10, 139, 30));
+        jFrameAutentica.getContentPane().add(txtLogin);
+        txtLogin.setBounds(86, 10, 139, 30);
 
         lblSenha.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lblSenha.setText("Senha");
-        jFrameAutentica.getContentPane().add(lblSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 67, -1, 23));
+        jFrameAutentica.getContentPane().add(lblSenha);
+        lblSenha.setBounds(10, 67, 36, 23);
 
         botaoCancel.setBackground(new java.awt.Color(204, 204, 204));
         botaoCancel.setCursor(new java.awt.Cursor(java.awt.Cursor.E_RESIZE_CURSOR));
@@ -72,7 +75,8 @@ public class TelaLogin extends javax.swing.JFrame {
                 botaoCancelActionPerformed(evt);
             }
         });
-        jFrameAutentica.getContentPane().add(botaoCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 123, -1, -1));
+        jFrameAutentica.getContentPane().add(botaoCancel);
+        botaoCancel.setBounds(155, 123, 66, 24);
         botaoCancel.getAccessibleContext().setAccessibleDescription("");
 
         txtSenha.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
@@ -81,7 +85,8 @@ public class TelaLogin extends javax.swing.JFrame {
                 txtSenhaActionPerformed(evt);
             }
         });
-        jFrameAutentica.getContentPane().add(txtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 64, 139, 30));
+        jFrameAutentica.getContentPane().add(txtSenha);
+        txtSenha.setBounds(86, 64, 139, 30);
 
         botaoEnviar.setActionCommand("buttonEnviar");
         botaoEnviar.setBackground(new java.awt.Color(204, 204, 204));
@@ -97,7 +102,8 @@ public class TelaLogin extends javax.swing.JFrame {
                 botaoEnviarKeyPressed(evt);
             }
         });
-        jFrameAutentica.getContentPane().add(botaoEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 123, -1, -1));
+        jFrameAutentica.getContentPane().add(botaoEnviar);
+        botaoEnviar.setBounds(86, 123, 50, 24);
 
         getContentPane().add(jFrameAutentica);
 

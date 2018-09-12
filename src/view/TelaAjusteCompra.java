@@ -5,17 +5,36 @@
  */
 package view;
 
+import controller.ConexaoBD;
+import controller.ConexaoException;
+import controller.PosicaoCliente;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import model.ModeloTabela;
+import model.Posicao;
+
 /**
  *
  * @author Beatriz.aurelio
  */
 public class TelaAjusteCompra extends javax.swing.JFrame {
 
+    Posicao mod = new Posicao();
+    PosicaoCliente control = new PosicaoCliente();
+    ConexaoBD conex = new ConexaoBD();
     /**
-     * Creates new form TelaAjusteCompra
+     * Creates new form TelaCompra
      */
     public TelaAjusteCompra() {
         initComponents();
+         try {
+            preencherTabela("SELECT produto , sub_produto , cnpj , ativo, emissor, data_vencimento, classificacao FROM alocacao.catalogo_op");
+        } catch (ConexaoException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: "+ex);
+        }
+        
     }
 
     /**
@@ -27,9 +46,9 @@ public class TelaAjusteCompra extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jFCompra = new javax.swing.JInternalFrame();
-        jLabel3 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        jComboBoxItens = new javax.swing.JComboBox<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableCompra = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuSair4 = new javax.swing.JMenuItem();
@@ -42,14 +61,74 @@ public class TelaAjusteCompra extends javax.swing.JFrame {
         jAlocacao3 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(null);
 
-        jFCompra.setVisible(true);
+        jComboBoxItens.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jComboBoxItens.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "< Selecione uma das opções >", "Renda Fixa Pós com liquidez (LFT, CDBs, Fundos DI, Poupança)", "Renda Fixa Pós sem liquidez (LC, LCIs, LCAs, CDB longo)", "Renda Fixa Pós Crédito Privado (sem FGC - CRI, CRA, Deb)", "Renda Fixa Pré com liquidez (LTNs, NTN-F)", "Renda Fixa Pré sem liquidez (CDBs, LCs)", "Renda Fixa Pré Crédito Privado (LF, Debentures)", "Renda Fixa IPCA com liquidez (NTN-B)", "Renda Fixa IPCA sem liquidez (CDBs, LCs)", "Renda Fixa IPCA Crédito Privado (CRI, CRA, Debentures)", "Multimercado Baixa Vol (até 1.5%)", "Multimercado Média Vol (de 1.5% até 4%)", "Multimercado Alta Vol (acima de 4%)", "Fundos Imobiliários", "Carteira de Ações ", "Fundos Internacionas sem hedge", "Proteção (Seguro Vida)", "Carteira Offshore (FX)" }));
+        jComboBoxItens.setToolTipText("Opções Compra");
+        jComboBoxItens.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jComboBoxItens.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxItensActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jComboBoxItens);
+        jComboBoxItens.setBounds(10, 20, 385, 25);
 
-        jLabel3.setText("Compras");
+        jTableCompra.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jTableCompra.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        jTableCompra.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Produto", "Sub Produto", "CNPJ Fundo", "Ativo", "Emissor", "Data Vencimento", "Classificação"
+            }
+        ));
+        jScrollPane2.setViewportView(jTableCompra);
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(410, 20, 920, 640);
 
         jMenu1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\page.png")); // NOI18N
         jMenu1.setText("Arquivo");
@@ -125,43 +204,10 @@ public class TelaAjusteCompra extends javax.swing.JFrame {
 
         jMenuBar1.add(jAlocacao3);
 
-        jFCompra.setJMenuBar(jMenuBar1);
+        setJMenuBar(jMenuBar1);
 
-        javax.swing.GroupLayout jFCompraLayout = new javax.swing.GroupLayout(jFCompra.getContentPane());
-        jFCompra.getContentPane().setLayout(jFCompraLayout);
-        jFCompraLayout.setHorizontalGroup(
-            jFCompraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jFCompraLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(jFCompraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jFCompraLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(305, Short.MAX_VALUE))
-        );
-        jFCompraLayout.setVerticalGroup(
-            jFCompraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jFCompraLayout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(159, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jFCompra)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jFCompra, javax.swing.GroupLayout.Alignment.TRAILING)
-        );
-
-        pack();
+        setSize(new java.awt.Dimension(1360, 746));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuSair4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSair4ActionPerformed
@@ -193,6 +239,58 @@ public class TelaAjusteCompra extends javax.swing.JFrame {
         menu.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    private void jComboBoxItensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxItensActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxItensActionPerformed
+
+    public void preencherTabela(String sql) throws ConexaoException{
+        ArrayList dados = new ArrayList();
+        String[] colunas = new String[]{"id", "Produto", "Sub Produto", "CNPJ Fundo", "Ativo", "Emissor", "Vencimento", "Classificacao"};
+        
+        conex.open();
+        conex.executaSql(sql);
+        
+        try{
+            conex.rs.first();
+            do{
+                Object[] tabela = new Object[]{conex.rs.getInt("id"), conex.rs.getString("produto"), conex.rs.getString("sub_produto"), 
+                    conex.rs.getInt("cnpj"), conex.rs.getString("ativo"), conex.rs.getString("emissor"),
+                    conex.rs.getDate("data_vencimento"), conex.rs.getString("classificacao")
+                };
+                dados.add(tabela);
+            }while(conex.rs.next());
+            
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(rootPane, "Erro ao preencher.");
+        }
+        
+        ModeloTabela modelo = new ModeloTabela(dados, colunas);
+        
+        jTableCompra.setModel(modelo);
+        jTableCompra.getColumnModel().getColumn(0).setPreferredWidth(80);
+        jTableCompra.getColumnModel().getColumn(0).setResizable(false);
+        jTableCompra.getColumnModel().getColumn(1).setPreferredWidth(300);
+        jTableCompra.getColumnModel().getColumn(1).setResizable(false);
+        jTableCompra.getColumnModel().getColumn(2).setPreferredWidth(80);
+        jTableCompra.getColumnModel().getColumn(2).setResizable(false);
+        jTableCompra.getColumnModel().getColumn(3).setPreferredWidth(100);
+        jTableCompra.getColumnModel().getColumn(3).setResizable(false);  
+        jTableCompra.getColumnModel().getColumn(4).setPreferredWidth(80);
+        jTableCompra.getColumnModel().getColumn(4).setResizable(false);   
+        jTableCompra.getColumnModel().getColumn(5).setPreferredWidth(80);
+        jTableCompra.getColumnModel().getColumn(5).setResizable(false);      
+        jTableCompra.getColumnModel().getColumn(6).setPreferredWidth(80);
+        jTableCompra.getColumnModel().getColumn(6).setResizable(false);  
+        jTableCompra.getTableHeader().setReorderingAllowed(false);
+        jTableCompra.setAutoResizeMode(jTableCompra.AUTO_RESIZE_OFF);
+        jTableCompra.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        
+        
+        
+        conex.close();
+        
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -219,6 +317,7 @@ public class TelaAjusteCompra extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(TelaAjusteCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -231,17 +330,17 @@ public class TelaAjusteCompra extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jAlocacao3;
     private javax.swing.JMenuItem jAtivo4;
-    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> jComboBoxItens;
     private javax.swing.JMenuItem jCompra4;
     private javax.swing.JMenuItem jConsulta4;
-    private javax.swing.JInternalFrame jFCompra;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuSair4;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTableCompra;
     private javax.swing.JMenuItem jVenda4;
     // End of variables declaration//GEN-END:variables
 }
