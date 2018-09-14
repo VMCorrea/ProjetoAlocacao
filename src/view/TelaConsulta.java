@@ -32,12 +32,7 @@ public class TelaConsulta extends javax.swing.JFrame {
     
     public TelaConsulta() {
         initComponents();
-        try {
-            preencherTabela("SELECT classificacao, garantia_produto, ativo, data_vencimento, NET FROM alocacao.catalogo_op");
-        } catch (ConexaoException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: "+ex);
-        }
-        
+               
     }
 
     /**
@@ -61,7 +56,6 @@ public class TelaConsulta extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuSair2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jAtivo2 = new javax.swing.JMenuItem();
         jCompra2 = new javax.swing.JMenuItem();
         jVenda2 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
@@ -144,15 +138,6 @@ public class TelaConsulta extends javax.swing.JFrame {
         jMenu2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\wrench_orange.png")); // NOI18N
         jMenu2.setText("Ajuste");
 
-        jAtivo2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\user.png")); // NOI18N
-        jAtivo2.setText("Ativos");
-        jAtivo2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jAtivo2ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jAtivo2);
-
         jCompra2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\user_add.png")); // NOI18N
         jCompra2.setText("Compra");
         jCompra2.addActionListener(new java.awt.event.ActionListener() {
@@ -211,13 +196,7 @@ public class TelaConsulta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPesquisaActionPerformed
-         /*
-        mod.setPesquisa(jTextFieldPesquisa.getText());
-        BeansMedico model = control.buscaMedico(mod);
-        jTextFieldNome.setText(model.getNome());
-        jFormattedTextFieldCRM.setText(String.valueOf(model.getCrm()));
-        jComboBoxEspecialidade.setSelectedItem(model.getEspecialidade());
-        */
+        
          mod.setPesquisa(txtFieldPesquisa.getText());
         try {
             Posicao model = control.buscaPosicaoCliente(mod);
@@ -226,6 +205,12 @@ public class TelaConsulta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Erro.\n" +ex.getMessage());
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro.\n" +ex.getMessage());
+        }
+        
+        try {
+            preencherTabela("SELECT classificacao, garantia_produto, ativo, data_vencimento, NET FROM alocacao.catalogo_op WHERE = '"+mod.getPesquisa()+"'");
+        } catch (ConexaoException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: "+ex);
         }
     }//GEN-LAST:event_buttonPesquisaActionPerformed
 
@@ -236,11 +221,6 @@ public class TelaConsulta extends javax.swing.JFrame {
     private void jMenuSair2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSair2ActionPerformed
         dispose();
     }//GEN-LAST:event_jMenuSair2ActionPerformed
-
-    private void jAtivo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAtivo2ActionPerformed
-        TelaAjusteAtivo telaAtivo = new TelaAjusteAtivo();
-        telaAtivo.setVisible(true);
-    }//GEN-LAST:event_jAtivo2ActionPerformed
 
     private void jCompra2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCompra2ActionPerformed
         TelaAjusteCompra telaCompra = new TelaAjusteCompra();
@@ -268,14 +248,16 @@ public class TelaConsulta extends javax.swing.JFrame {
 
      public void preencherTabela(String sql) throws ConexaoException{
         ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"id_cliente", "Classificacao", "Tipo Fiscal", "Nome Ativo", "Vencimento", "Valor"};
+        String[] colunas = new String[]{"id", "Classificacao", "Tipo Fiscal", "Nome Ativo", "Vencimento", "Valor"};
         conex.open();
         conex.executaSql(sql);
         
         try{
             conex.rs.first();
             do{
-                Object[] tabela = new Object[]{conex.rs.getInt("cod_medico"), conex.rs.getString("nome_medico"), conex.rs.getString("especialidade"), conex.rs.getInt("crm_medico")};
+                Object[] tabela = new Object[]{conex.rs.getInt("id"), conex.rs.getString("classificacao"), conex.rs.getString("sub_produto"), 
+                    conex.rs.getString("ativo"), conex.rs.getDate("data_vencimento"), conex.rs.getFloat("NET")
+                };
                 dados.add(tabela);
             }while(conex.rs.next());
             
@@ -301,8 +283,6 @@ public class TelaConsulta extends javax.swing.JFrame {
         jTableConsulta.getTableHeader().setReorderingAllowed(false);
         jTableConsulta.setAutoResizeMode(jTableConsulta.AUTO_RESIZE_OFF);
         jTableConsulta.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        
-        
         
         conex.close();
         
@@ -349,7 +329,6 @@ public class TelaConsulta extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonPesquisa;
     private javax.swing.JMenuItem jAlocacao2;
-    private javax.swing.JMenuItem jAtivo2;
     private javax.swing.JMenuItem jCompra2;
     private javax.swing.JMenuItem jConsulta2;
     private javax.swing.JInternalFrame jFrameConsulta;

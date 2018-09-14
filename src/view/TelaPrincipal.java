@@ -225,7 +225,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuSair = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jAtivo = new javax.swing.JMenuItem();
         jCompra = new javax.swing.JMenuItem();
         jVenda = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
@@ -2401,15 +2400,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\wrench_orange.png")); // NOI18N
         jMenu2.setText("Ajuste");
 
-        jAtivo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\user.png")); // NOI18N
-        jAtivo.setText("Ativos");
-        jAtivo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jAtivoActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jAtivo);
-
         jCompra.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\user_add.png")); // NOI18N
         jCompra.setText("Compra");
         jCompra.addActionListener(new java.awt.event.ActionListener() {
@@ -3064,11 +3054,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jMenuSairActionPerformed
 
-    private void jAtivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAtivoActionPerformed
-        TelaAjusteAtivo telaAtivo = new TelaAjusteAtivo();
-        telaAtivo.setVisible(true);
-    }//GEN-LAST:event_jAtivoActionPerformed
-
     private void jCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCompraActionPerformed
         TelaAjusteCompra telaCompra = new TelaAjusteCompra();
         telaCompra.setVisible(true);
@@ -3235,7 +3220,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField finalPerc8;
     private javax.swing.JTextField finalPerc9;
     private javax.swing.JMenu jAlocacao;
-    private javax.swing.JMenuItem jAtivo;
     private javax.swing.JMenuItem jCompra;
     private javax.swing.JMenuItem jConsulta;
     private javax.swing.JLabel jLabel1;

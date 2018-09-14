@@ -16,7 +16,6 @@ public class TelaAjuste extends javax.swing.JFrame {
      */
     public TelaAjuste() {
         initComponents();
-        
     }
 
     /**
@@ -28,122 +27,114 @@ public class TelaAjuste extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jSpinner1 = new javax.swing.JSpinner();
-        jInternalFrame1 = new javax.swing.JInternalFrame();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        botaoMenu = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuSair4 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jCompra4 = new javax.swing.JMenuItem();
+        jVenda4 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jConsulta4 = new javax.swing.JMenuItem();
+        jAlocacao3 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(null);
 
-        jInternalFrame1.setVisible(true);
+        jMenu1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\page.png")); // NOI18N
+        jMenu1.setText("Arquivo");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuSair4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\door_out.png")); // NOI18N
+        jMenuSair4.setText("Sair");
+        jMenuSair4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                jMenuSair4ActionPerformed(evt);
             }
         });
+        jMenu1.add(jMenuSair4);
 
-        jLabel1.setText("Vendas");
+        jMenuBar1.add(jMenu1);
 
-        jLabel2.setText("Ativos");
+        jMenu2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\wrench_orange.png")); // NOI18N
+        jMenu2.setText("Ajuste");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        jCompra4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\user_add.png")); // NOI18N
+        jCompra4.setText("Compra");
+        jCompra4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                jCompra4ActionPerformed(evt);
             }
         });
+        jMenu2.add(jCompra4);
 
-        jLabel3.setText("Compras");
-
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        botaoMenu.setText("Menu");
-        botaoMenu.addActionListener(new java.awt.event.ActionListener() {
+        jVenda4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\user_delete.png")); // NOI18N
+        jVenda4.setText("Venda");
+        jVenda4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoMenuActionPerformed(evt);
+                jVenda4ActionPerformed(evt);
             }
         });
+        jMenu2.add(jVenda4);
 
-        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
-        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
-        jInternalFrame1Layout.setHorizontalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox1, 0, 73, Short.MAX_VALUE))
-                        .addGap(45, 45, 45)
-                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBox2, 0, 77, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(54, 54, 54)
-                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox3, 0, 69, Short.MAX_VALUE)))
-                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(botaoMenu)))
-                .addContainerGap(33, Short.MAX_VALUE))
-        );
-        jInternalFrame1Layout.setVerticalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
-                        .addComponent(jLabel3))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
-                .addComponent(botaoMenu)
-                .addContainerGap())
-        );
+        jMenuBar1.add(jMenu2);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jInternalFrame1)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jInternalFrame1, javax.swing.GroupLayout.Alignment.TRAILING)
-        );
+        jMenu4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\group.png")); // NOI18N
+        jMenu4.setText("Clientes");
 
-        pack();
+        jConsulta4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\zoom.png")); // NOI18N
+        jConsulta4.setText("Consulta");
+        jConsulta4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jConsulta4ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jConsulta4);
+
+        jMenuBar1.add(jMenu4);
+
+        jAlocacao3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\information.png")); // NOI18N
+        jAlocacao3.setText("Menu");
+
+        jMenuItem4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\page.png")); // NOI18N
+        jMenuItem4.setText("Alocação");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jAlocacao3.add(jMenuItem4);
+
+        jMenuBar1.add(jAlocacao3);
+
+        setJMenuBar(jMenuBar1);
+
+        setSize(new java.awt.Dimension(408, 331));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
-
-    private void botaoMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoMenuActionPerformed
-        TelaMenu menu = new TelaMenu();
-        menu.setVisible(true);
+    private void jMenuSair4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSair4ActionPerformed
         dispose();
-    }//GEN-LAST:event_botaoMenuActionPerformed
+    }//GEN-LAST:event_jMenuSair4ActionPerformed
+
+    private void jCompra4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCompra4ActionPerformed
+        TelaAjusteCompra telaCompra = new TelaAjusteCompra();
+        telaCompra.setVisible(true);
+    }//GEN-LAST:event_jCompra4ActionPerformed
+
+    private void jVenda4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVenda4ActionPerformed
+        TelaAjusteVenda telaVenda = new TelaAjusteVenda();
+        telaVenda.setVisible(true);
+    }//GEN-LAST:event_jVenda4ActionPerformed
+
+    private void jConsulta4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsulta4ActionPerformed
+        TelaConsulta telaConsulta = new TelaConsulta();
+        telaConsulta.setVisible(true);
+    }//GEN-LAST:event_jConsulta4ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        TelaPrincipal menu = new TelaPrincipal();
+        menu.setVisible(true);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -181,15 +172,15 @@ public class TelaAjuste extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botaoMenu;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JInternalFrame jInternalFrame1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JMenu jAlocacao3;
+    private javax.swing.JMenuItem jCompra4;
+    private javax.swing.JMenuItem jConsulta4;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuSair4;
+    private javax.swing.JMenuItem jVenda4;
     // End of variables declaration//GEN-END:variables
-
 }

@@ -5,12 +5,25 @@
  */
 package view;
 
+import controller.ConexaoBD;
+import controller.ConexaoException;
+import controller.PosicaoCliente;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import model.ModeloTabela;
+import model.Posicao;
+
 /**
  *
  * @author Beatriz.aurelio
  */
 public class TelaAjusteVenda extends javax.swing.JFrame {
 
+    Posicao mod = new Posicao();
+    PosicaoCliente control = new PosicaoCliente();
+    ConexaoBD conex = new ConexaoBD();
     /**
      * Creates new form TelaAjusteVenda
      */
@@ -27,156 +40,244 @@ public class TelaAjusteVenda extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jFVenda = new javax.swing.JInternalFrame();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableVenda = new javax.swing.JTable();
+        jComboBoxItens = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuSair5 = new javax.swing.JMenuItem();
+        jMenuSair4 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jAtivo5 = new javax.swing.JMenuItem();
-        jCompra5 = new javax.swing.JMenuItem();
-        jVenda5 = new javax.swing.JMenuItem();
+        jCompra4 = new javax.swing.JMenuItem();
+        jVenda4 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jConsulta5 = new javax.swing.JMenuItem();
+        jConsulta4 = new javax.swing.JMenuItem();
         jAlocacao3 = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Vendas");
         getContentPane().setLayout(null);
 
-        jFVenda.setVisible(true);
-        jFVenda.getContentPane().setLayout(null);
+        jTableVenda.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Produto", "Sub Produto", "Ativo", "Produto em Garantia", "Data Vencimento", "NET", "Classificação"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
-        jFVenda.getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(33, 87, 73, 24);
+        jTableVenda.getTableHeader().setReorderingAllowed(false);
+        jTableVenda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableVendaMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jTableVenda);
+        if (jTableVenda.getColumnModel().getColumnCount() > 0) {
+            jTableVenda.getColumnModel().getColumn(4).setResizable(false);
+        }
 
-        jLabel1.setText("Vendas");
-        jFVenda.getContentPane().add(jLabel1);
-        jLabel1.setBounds(33, 55, 73, 26);
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(410, 20, 930, 480);
+
+        jComboBoxItens.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jComboBoxItens.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "< Selecione uma das opções >", "Renda Fixa Pós com liquidez (LFT, CDBs, Fundos DI, Poupança)", "Renda Fixa Pós sem liquidez (LC, LCIs, LCAs, CDB longo)", "Renda Fixa Pós Crédito Privado (sem FGC - CRI, CRA, Deb)", "Renda Fixa Pré com liquidez (LTNs, NTN-F)", "Renda Fixa Pré sem liquidez (CDBs, LCs)", "Renda Fixa Pré Crédito Privado (LF, Debentures)", "Renda Fixa IPCA com liquidez (NTN-B)", "Renda Fixa IPCA sem liquidez (CDBs, LCs)", "Renda Fixa IPCA Crédito Privado (CRI, CRA, Debentures)", "Multimercado Baixa Vol (até 1.5%)", "Multimercado Média Vol (de 1.5% até 4%)", "Multimercado Alta Vol (acima de 4%)", "Fundos Imobiliários", "Carteira de Ações ", "Fundos Internacionas sem hedge", "Proteção (Seguro Vida)", "Carteira Offshore (FX)" }));
+        jComboBoxItens.setToolTipText("Opções Compra");
+        jComboBoxItens.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jComboBoxItens.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxItensActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jComboBoxItens);
+        jComboBoxItens.setBounds(10, 20, 385, 30);
 
         jMenu1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\page.png")); // NOI18N
         jMenu1.setText("Arquivo");
 
-        jMenuSair5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\door_out.png")); // NOI18N
-        jMenuSair5.setText("Sair");
-        jMenuSair5.addActionListener(new java.awt.event.ActionListener() {
+        jMenuSair4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\door_out.png")); // NOI18N
+        jMenuSair4.setText("Sair");
+        jMenuSair4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuSair5ActionPerformed(evt);
+                jMenuSair4ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuSair5);
+        jMenu1.add(jMenuSair4);
 
         jMenuBar1.add(jMenu1);
 
         jMenu2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\wrench_orange.png")); // NOI18N
         jMenu2.setText("Ajuste");
 
-        jAtivo5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\user.png")); // NOI18N
-        jAtivo5.setText("Ativos");
-        jAtivo5.addActionListener(new java.awt.event.ActionListener() {
+        jCompra4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\user_add.png")); // NOI18N
+        jCompra4.setText("Compra");
+        jCompra4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jAtivo5ActionPerformed(evt);
+                jCompra4ActionPerformed(evt);
             }
         });
-        jMenu2.add(jAtivo5);
+        jMenu2.add(jCompra4);
 
-        jCompra5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\user_add.png")); // NOI18N
-        jCompra5.setText("Compra");
-        jCompra5.addActionListener(new java.awt.event.ActionListener() {
+        jVenda4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\user_delete.png")); // NOI18N
+        jVenda4.setText("Venda");
+        jVenda4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCompra5ActionPerformed(evt);
+                jVenda4ActionPerformed(evt);
             }
         });
-        jMenu2.add(jCompra5);
-
-        jVenda5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\user_delete.png")); // NOI18N
-        jVenda5.setText("Venda");
-        jVenda5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jVenda5ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jVenda5);
+        jMenu2.add(jVenda4);
 
         jMenuBar1.add(jMenu2);
 
         jMenu4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\group.png")); // NOI18N
         jMenu4.setText("Clientes");
 
-        jConsulta5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\zoom.png")); // NOI18N
-        jConsulta5.setText("Consulta");
-        jConsulta5.addActionListener(new java.awt.event.ActionListener() {
+        jConsulta4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\zoom.png")); // NOI18N
+        jConsulta4.setText("Consulta");
+        jConsulta4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jConsulta5ActionPerformed(evt);
+                jConsulta4ActionPerformed(evt);
             }
         });
-        jMenu4.add(jConsulta5);
+        jMenu4.add(jConsulta4);
 
         jMenuBar1.add(jMenu4);
 
         jAlocacao3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\information.png")); // NOI18N
         jAlocacao3.setText("Menu");
 
-        jMenuItem5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\page.png")); // NOI18N
-        jMenuItem5.setText("Alocação");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\page.png")); // NOI18N
+        jMenuItem4.setText("Alocação");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+                jMenuItem4ActionPerformed(evt);
             }
         });
-        jAlocacao3.add(jMenuItem5);
+        jAlocacao3.add(jMenuItem4);
 
         jMenuBar1.add(jAlocacao3);
 
-        jFVenda.setJMenuBar(jMenuBar1);
+        setJMenuBar(jMenuBar1);
 
-        getContentPane().add(jFVenda);
-        jFVenda.setBounds(0, 0, 860, 540);
-
-        setSize(new java.awt.Dimension(871, 564));
+        setSize(new java.awt.Dimension(1365, 569));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
-    private void jMenuSair5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSair5ActionPerformed
+    private void jMenuSair4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSair4ActionPerformed
         dispose();
-    }//GEN-LAST:event_jMenuSair5ActionPerformed
+    }//GEN-LAST:event_jMenuSair4ActionPerformed
 
-    private void jAtivo5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAtivo5ActionPerformed
-       TelaAjusteAtivo telaAtivo = new TelaAjusteAtivo();
-        telaAtivo.setVisible(true);
-    }//GEN-LAST:event_jAtivo5ActionPerformed
-
-    private void jCompra5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCompra5ActionPerformed
+    private void jCompra4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCompra4ActionPerformed
         TelaAjusteCompra telaCompra = new TelaAjusteCompra();
         telaCompra.setVisible(true);
-    }//GEN-LAST:event_jCompra5ActionPerformed
+    }//GEN-LAST:event_jCompra4ActionPerformed
 
-    private void jVenda5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVenda5ActionPerformed
+    private void jVenda4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVenda4ActionPerformed
         TelaAjusteVenda telaVenda = new TelaAjusteVenda();
         telaVenda.setVisible(true);
-    }//GEN-LAST:event_jVenda5ActionPerformed
+    }//GEN-LAST:event_jVenda4ActionPerformed
 
-    private void jConsulta5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsulta5ActionPerformed
+    private void jConsulta4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsulta4ActionPerformed
         TelaConsulta telaConsulta = new TelaConsulta();
         telaConsulta.setVisible(true);
-    }//GEN-LAST:event_jConsulta5ActionPerformed
+    }//GEN-LAST:event_jConsulta4ActionPerformed
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         TelaPrincipal menu = new TelaPrincipal();
         menu.setVisible(true);
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jTableVendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableVendaMouseClicked
+        TelaAjuste ajuste = new TelaAjuste();
+        ajuste.setVisible(true);
+    }//GEN-LAST:event_jTableVendaMouseClicked
+
+    private void jComboBoxItensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxItensActionPerformed
+        String[] mensagem = {"< Selecione uma das opções >",
+            "Renda Fixa Pós com liquidez (LFT, CDBs, Fundos DI, Poupança)",
+            "Renda Fixa Pós sem liquidez (LC, LCIs, LCAs, CDB longo)",
+            "Renda Fixa Pós Crédito Privado (sem FGC - CRI, CRA, Deb)",
+            "Renda Fixa Pré com liquidez (LTNs, NTN-F)",
+            "Renda Fixa Pré sem liquidez (CDBs, LCs)",
+            "Renda Fixa Pré Crédito Privado (LF, Debentures)",
+            "Renda Fixa IPCA com liquidez (NTN-B)",
+            "Renda Fixa IPCA sem liquidez (CDBs, LCs)",
+            "Renda Fixa IPCA Crédito Privado (CRI, CRA, Debentures)",
+            "Multimercado Baixa Vol (até 1.5%)",
+            "Multimercado Média Vol (de 1.5% até 4%)",
+            "Multimercado Alta Vol (acima de 4%)",
+            "Fundos Imobiliários",
+            "Carteira de Ações ",
+            "Fundos Internacionas sem hedge",
+            "Proteção (Seguro Vida)",
+            "Carteira Offshore (FX)"};
+
+        if (jComboBoxItens.getSelectedItem() == mensagem[0]) {
+            JOptionPane.showMessageDialog(null, "Selecione uma das opções.");
+        } else if (jComboBoxItens.getSelectedItem() == mensagem[jComboBoxItens.getSelectedIndex()]) {
+            try {
+                preencherTabela("SELECT produto , sub_produto , cnpj , ativo, emissor, data_vencimento, classificacao FROM alocacao.catalogo_op WHERE classificacao = '" + mensagem[jComboBoxItens.getSelectedIndex()] + "'");
+            } catch (ConexaoException ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao selecionar dados. " + ex);
+            }
+        }
+
+    }//GEN-LAST:event_jComboBoxItensActionPerformed
+
+    public void preencherTabela(String sql) throws ConexaoException {
+        ArrayList dados = new ArrayList();
+        String[] colunas = new String[]{"Produto", "Sub Produto", "Ativo", "Produto em Garantia", "Data Vencimento", "NET", "Classificacao"};
+
+        conex.open();
+        conex.executaSql(sql);
+
+        try {
+            conex.rs.first();
+            do {
+                Object[] tabela = new Object[]{conex.rs.getString("produto"), conex.rs.getString("sub_produto"),
+                    conex.rs.getString("ativo"), conex.rs.getString("garantia_produto"),
+                    conex.rs.getDate("data_vencimento"), conex.rs.getFloat("NET"), conex.rs.getString("classificacao")
+                };
+                dados.add(tabela);
+            } while (conex.rs.next());
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(rootPane, "Erro ao preencher.");
+        }
+
+        ModeloTabela modelo = new ModeloTabela(dados, colunas);
+
+        jTableVenda.setModel(modelo);
+        jTableVenda.getColumnModel().getColumn(0).setPreferredWidth(200);
+        jTableVenda.getColumnModel().getColumn(0).setResizable(false);
+        jTableVenda.getColumnModel().getColumn(1).setPreferredWidth(200);
+        jTableVenda.getColumnModel().getColumn(1).setResizable(false);
+        jTableVenda.getColumnModel().getColumn(2).setPreferredWidth(200);
+        jTableVenda.getColumnModel().getColumn(2).setResizable(false);
+        jTableVenda.getColumnModel().getColumn(3).setPreferredWidth(150);
+        jTableVenda.getColumnModel().getColumn(3).setResizable(false);
+        jTableVenda.getColumnModel().getColumn(4).setPreferredWidth(30);
+        jTableVenda.getColumnModel().getColumn(4).setResizable(false);
+        jTableVenda.getColumnModel().getColumn(5).setPreferredWidth(30);
+        jTableVenda.getColumnModel().getColumn(5).setResizable(false);
+        jTableVenda.getColumnModel().getColumn(6).setPreferredWidth(300);
+        jTableVenda.getColumnModel().getColumn(6).setResizable(false);
+
+        jTableVenda.getTableHeader().setReorderingAllowed(false);
+        jTableVenda.setAutoResizeMode(jTableVenda.AUTO_RESIZE_OFF);
+        jTableVenda.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        conex.close();
+
+    }
 
     /**
      * @param args the command line arguments
@@ -215,18 +316,17 @@ public class TelaAjusteVenda extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jAlocacao3;
-    private javax.swing.JMenuItem jAtivo5;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JMenuItem jCompra5;
-    private javax.swing.JMenuItem jConsulta5;
-    private javax.swing.JInternalFrame jFVenda;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JComboBox<String> jComboBoxItens;
+    private javax.swing.JMenuItem jCompra4;
+    private javax.swing.JMenuItem jConsulta4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuSair5;
-    private javax.swing.JMenuItem jVenda5;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuSair4;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTableVenda;
+    private javax.swing.JMenuItem jVenda4;
     // End of variables declaration//GEN-END:variables
 }
