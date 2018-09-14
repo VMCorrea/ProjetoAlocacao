@@ -64,7 +64,7 @@ public class PosicaoCliente{
     public void atualizaPosicaoCliente() throws ConexaoException, SQLException {
    	conex.open();
         
-        String query = "UPDATE catalogo_op SET classificacao=?, garantia_produto=?, ativo=?, data_vencimento=?, NET=? WHERE id_cliente= ?";
+        String query = "UPDATE catalogo_op SET classificacao=?, garantia_produto=?, ativo=?, data_vencimento=?, NET=? INNER JOIN clientes AS client ON client.id = id WHERE id= ?";
     	pst = conex.con.prepareStatement(query);
         
         pst.setString(1, pos.getClassificacao());
@@ -80,7 +80,7 @@ public class PosicaoCliente{
 	public void deletaPosicaoCliente() throws ConexaoException, SQLException{
 	    conex.open();
             
-            String query = "DELETE FROM alocacoes WHERE id_cliente=?";
+            String query = "DELETE FROM alocacoes WHERE id=?";
             pst = conex.con.prepareStatement(query);
             pst.execute(query);
             

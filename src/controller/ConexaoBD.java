@@ -9,49 +9,53 @@ import java.sql.Statement;
 import java.util.*;
 import javax.swing.JOptionPane;
 
-public class ConexaoBD{
+public class ConexaoBD {
 
     private String driver = "com.mysql.jdbc.Driver";
     private String caminho = "jdbc:mysql://192.168.1.4:3306/alocacao";
     private String usuario = "alocacao";
     private String senha = "alocacao@2018";
-    
-    public ResultSet rs;
-    public Statement statement;
-    public Connection con;
 
-    
-    public ConexaoBD() {}
+    public static ResultSet rs = null;
+    public static Statement statement = null;
+    public static Connection con = null;
 
-    
+    public ConexaoBD() {
+    }
+
     public void open() throws ConexaoException {
-        
+
         System.setProperty("jdbc.Drivers", driver);
-        try {
-            con = DriverManager.getConnection(caminho, usuario, senha);
-            JOptionPane.showMessageDialog(null, "Conexao efetuada com sucesso.");
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao efetuar conexao." +ex.getMessage());
+        if (con == null) {
+            try {
+                con = DriverManager.getConnection(caminho, usuario, senha);
+                JOptionPane.showMessageDialog(null, "Conexao efetuada com sucesso.");
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro conexao: " + ex.getMessage());
+            }
         }
     }
 
-    public void executaSql(String sql){
-        try {
-            statement = con.createStatement(rs.TYPE_SCROLL_INSENSITIVE, rs.CONCUR_READ_ONLY);
-            rs = statement.executeQuery(sql);
-        
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao executar sql./n" +ex.getMessage());
-        }    
-    } 
+    public void executaSql(String sql) {
+        if(con ==null){
+            try {
+                statement = con.createStatement(rs.TYPE_SCROLL_INSENSITIVE, rs.CONCUR_READ_ONLY);
+                rs = statement.executeQuery(sql);
 
-    
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro sql: " + ex.getMessage());
+            }
+        }
+    }
+
     public void close() throws ConexaoException {
-         try{
-            con.close();
-            
-        }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "Erro ao fechar conexao.");
+        if (con == null) {
+            try {
+                con.close();
+
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao fechar conexao.");
+            }
         }
     }
 
@@ -59,6 +63,4 @@ public class ConexaoBD{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-	
-    
 }
