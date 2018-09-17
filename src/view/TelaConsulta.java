@@ -202,16 +202,22 @@ public class TelaConsulta extends javax.swing.JFrame {
             Posicao model = control.buscaPosicaoCliente(mod);
             //classificacao, garantia_produto, ativo, data_vencimento, NET
         } catch (ConexaoException ex) {
-            JOptionPane.showMessageDialog(null, "Erro.\n" +ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro.");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro.\n" +ex.getMessage());
-        }
+            JOptionPane.showMessageDialog(null, "Erro.");
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Erro.");
+        }catch (NullPointerException ex){
+                JOptionPane.showMessageDialog(null, "Erro. " + ex);
+            }
         
         try {
-            preencherTabela("SELECT classificacao, garantia_produto, ativo, data_vencimento, NET FROM alocacao.catalogo_op WHERE = '"+mod.getPesquisa()+"'");
+            preencherTabela("SELECT classificacao, garantia_produto, ativo, data_vencimento, NET FROM alocacao.catalogo_op WHERE id = '"+mod.getPesquisa()+"'");
         } catch (ConexaoException ex) {
             JOptionPane.showMessageDialog(null, "Erro: "+ex);
-        }
+        }catch (NullPointerException ex){
+            JOptionPane.showMessageDialog(null, "Erro... " + ex);
+            }
     }//GEN-LAST:event_buttonPesquisaActionPerformed
 
     private void txtFieldPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFieldPesquisaActionPerformed
@@ -249,7 +255,11 @@ public class TelaConsulta extends javax.swing.JFrame {
      public void preencherTabela(String sql) throws ConexaoException{
         ArrayList dados = new ArrayList();
         String[] colunas = new String[]{"id", "Classificacao", "Tipo Fiscal", "Nome Ativo", "Vencimento", "Valor"};
-        conex.open();
+        try {
+            conex.open();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TelaConsulta.class.getName()).log(Level.SEVERE, null, ex);
+        }
         conex.executaSql(sql);
         
         try{

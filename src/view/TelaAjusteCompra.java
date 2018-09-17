@@ -10,6 +10,8 @@ import controller.ConexaoException;
 import controller.PosicaoCliente;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
@@ -252,10 +254,14 @@ public class TelaAjusteCompra extends javax.swing.JFrame {
         }
         else if (jComboBoxItens.getSelectedItem() == selecao[jComboBoxItens.getSelectedIndex()]){
             try {
-                    preencherTabela("SELECT produto , sub_produto , cnpj , ativo, emissor, data_vencimento, classificacao FROM alocacao.catalogo_op WHERE classificacao = '"+selecao[jComboBoxItens.getSelectedIndex()]+"'");
+                    preencherTabela("SELECT (produto, sub_produto, cnpj, ativo, emissor, data_vencimento, classificacao) FROM catalogo_op WHERE classificacao = '"+selecao[jComboBoxItens.getSelectedIndex()]+"'");
                 } catch (ConexaoException ex) {
                     JOptionPane.showMessageDialog(null, "Erro ao selecionar dados. " + ex);
-                }
+                } catch (ClassNotFoundException ex) {
+                JOptionPane.showMessageDialog(null, "Erro: " + ex);
+                }catch (NullPointerException ex){
+                JOptionPane.showMessageDialog(null, "Erro... " + ex);
+            }
         }
 
 
@@ -267,7 +273,7 @@ public class TelaAjusteCompra extends javax.swing.JFrame {
        
     }//GEN-LAST:event_jTableCompraMouseClicked
 
-    public void preencherTabela(String sql) throws ConexaoException {
+    public void preencherTabela(String sql) throws ConexaoException, ClassNotFoundException {
         ArrayList dados = new ArrayList();
         String[] colunas = new String[]{"Produto", "Sub Produto", "CNPJ Fundo", "Ativo", "Emissor", "Vencimento", "Classificacao"};
 

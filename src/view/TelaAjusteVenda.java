@@ -10,6 +10,8 @@ import controller.ConexaoException;
 import controller.PosicaoCliente;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import model.ModeloTabela;
@@ -227,12 +229,16 @@ public class TelaAjusteVenda extends javax.swing.JFrame {
                 preencherTabela("SELECT produto , sub_produto , cnpj , ativo, emissor, data_vencimento, classificacao FROM alocacao.catalogo_op WHERE classificacao = '" + mensagem[jComboBoxItens.getSelectedIndex()] + "'");
             } catch (ConexaoException ex) {
                 JOptionPane.showMessageDialog(null, "Erro ao selecionar dados. " + ex);
+            } catch (ClassNotFoundException ex) {
+                JOptionPane.showMessageDialog(null, "Erro: " + ex);
+            }catch (NullPointerException ex){
+                JOptionPane.showMessageDialog(null, "Erro... " + ex);
             }
         }
 
     }//GEN-LAST:event_jComboBoxItensActionPerformed
 
-    public void preencherTabela(String sql) throws ConexaoException {
+    public void preencherTabela(String sql) throws ConexaoException, ClassNotFoundException {
         ArrayList dados = new ArrayList();
         String[] colunas = new String[]{"Produto", "Sub Produto", "Ativo", "Produto em Garantia", "Data Vencimento", "NET", "Classificacao"};
 
@@ -243,7 +249,7 @@ public class TelaAjusteVenda extends javax.swing.JFrame {
             conex.rs.first();
             do {
                 Object[] tabela = new Object[]{conex.rs.getString("produto"), conex.rs.getString("sub_produto"),
-                    conex.rs.getString("ativo"), conex.rs.getString("garantia_produto"),
+                    conex.rs.getString("ativo"), conex.rs.getString("garantia"),
                     conex.rs.getDate("data_vencimento"), conex.rs.getFloat("NET"), conex.rs.getString("classificacao")
                 };
                 dados.add(tabela);
