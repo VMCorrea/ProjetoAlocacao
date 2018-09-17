@@ -11,31 +11,29 @@ import javax.swing.JOptionPane;
 
 public class ConexaoBD {
 
-    private String driver = "com.mysql.jdbc.Driver";
-    private String caminho = "jdbc:mysql://192.168.1.4:3306/alocacao";
-    private String usuario = "alocacao";
-    private String senha = "alocacao@2018";
 
-    public static ResultSet rs = null;
-    public static Statement statement = null;
-    public static Connection con = null;
+    private String driver = "com.mysql.jdbc.Driver";
+
+    public ResultSet rs = null;
+    public Statement statement = null;
+    public Connection con = null;
 
     public ConexaoBD() {
     }
+    
+    public void open() throws ConexaoException, ClassNotFoundException {
 
-    public void open() throws ConexaoException {
-
-        System.setProperty("jdbc.Drivers", driver);
         if (con == null) {
             try {
-                con = DriverManager.getConnection(caminho, usuario, senha);
+                Class.forName("com.mysql.jdbc.Driver");
+                con = DriverManager.getConnection("jdbc:mysql://192.168.1.4:3306/alocacao?useTimezone=true&serverTimezone=UTC", "alocacao", "alocacao@2018");
                 JOptionPane.showMessageDialog(null, "Conexao efetuada com sucesso.");
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Erro conexao: " + ex.getMessage());
             }
         }
     }
-
+    
     public void executaSql(String sql) {
         if(con ==null){
             try {

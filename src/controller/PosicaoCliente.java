@@ -36,14 +36,15 @@ public class PosicaoCliente{
         	
   }
     
-    public Posicao buscaPosicaoCliente(Posicao mod) throws ConexaoException, SQLException{
+    public Posicao buscaPosicaoCliente(Posicao mod) throws ConexaoException, SQLException, ClassNotFoundException{
     	/* Param: access_token do Sugar (assumindo que o Login foi feito com sucesso)
          se cliente nao tiver Posicao usa metodo CriaPosicaoCliente e retorna a Posicao Zerada
          */
   
-        conex.open();
-        conex.executaSql("SELECT classificacao, garantia_produto, ativo, data_vencimento, NET FROM catalogo_op WHERE id LIKE '%"+mod.getPesquisa()+"%'");
         try {
+            conex.open();
+            conex.executaSql("SELECT classificacao, garantia_produto, ativo, data_vencimento, NET FROM catalogo_op WHERE id LIKE '%"+mod.getPesquisa()+"%'");
+        
             conex.rs.first();
             mod.setClassificacao(conex.rs.getString("classificacao"));
             //PRODUTO GARANTIA = TIPO FISCAL ?
@@ -61,7 +62,7 @@ public class PosicaoCliente{
         return mod;
     }
 
-    public void atualizaPosicaoCliente() throws ConexaoException, SQLException {
+    public void atualizaPosicaoCliente() throws ConexaoException, SQLException, ClassNotFoundException {
    	conex.open();
         
         String query = "UPDATE catalogo_op SET classificacao=?, garantia_produto=?, ativo=?, data_vencimento=?, NET=? INNER JOIN clientes AS client ON client.id = id WHERE id= ?";
@@ -77,7 +78,7 @@ public class PosicaoCliente{
 	conex.close();
         }
 	
-	public void deletaPosicaoCliente() throws ConexaoException, SQLException{
+	public void deletaPosicaoCliente() throws ConexaoException, SQLException, ClassNotFoundException{
 	    conex.open();
             
             String query = "DELETE FROM alocacoes WHERE id=?";
