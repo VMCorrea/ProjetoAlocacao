@@ -30,7 +30,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        buttonMenu = new javax.swing.JButton();
         jLabel40 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         aporteFinal = new javax.swing.JTextField();
@@ -222,40 +221,54 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel32 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuSair = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jCompra = new javax.swing.JMenuItem();
+        jVenda = new javax.swing.JMenuItem();
+        jMenu6 = new javax.swing.JMenu();
+        jConsulta = new javax.swing.JMenuItem();
+        jAlocacao = new javax.swing.JMenu();
+        jMenuItem = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Tela Principal");
+        getContentPane().setLayout(null);
 
         jLabel17.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel17.setForeground(java.awt.Color.red);
         jLabel17.setText("XXXXX XXXXX 99999");
+        getContentPane().add(jLabel17);
+        jLabel17.setBounds(184, 0, 150, 17);
 
         jLabel24.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel24.setForeground(java.awt.Color.red);
         jLabel24.setText("Data Nasc. DD/MM/AAAA");
+        getContentPane().add(jLabel24);
+        jLabel24.setBounds(447, 0, 170, 17);
 
         jLabel18.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel18.setForeground(java.awt.Color.red);
         jLabel18.setText("Data DD/MM/AAAA");
-
-        buttonMenu.setText("Config.");
-        buttonMenu.setToolTipText("");
-        buttonMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonMenuActionPerformed(evt);
-            }
-        });
+        getContentPane().add(jLabel18);
+        jLabel18.setBounds(710, 0, 155, 17);
 
         jLabel40.setBackground(new java.awt.Color(153, 153, 153));
         jLabel40.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         jLabel40.setForeground(new java.awt.Color(255, 255, 255));
         jLabel40.setText("Alocação");
         jLabel40.setOpaque(true);
+        getContentPane().add(jLabel40);
+        jLabel40.setBounds(920, 23, 100, 20);
 
         jLabel22.setBackground(new java.awt.Color(153, 153, 153));
         jLabel22.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(255, 255, 255));
         jLabel22.setText("   Final R$");
         jLabel22.setOpaque(true);
+        getContentPane().add(jLabel22);
+        jLabel22.setBounds(910, 43, 110, 20);
 
         aporteFinal.setBackground(java.awt.Color.yellow);
         aporteFinal.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -264,6 +277,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 aporteFinalActionPerformed(evt);
             }
         });
+        getContentPane().add(aporteFinal);
+        aporteFinal.setBounds(910, 63, 110, 30);
 
         aporteAjuste.setBackground(java.awt.Color.yellow);
         aporteAjuste.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -272,6 +287,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 aporteAjusteActionPerformed(evt);
             }
         });
+        getContentPane().add(aporteAjuste);
+        aporteAjuste.setBounds(810, 63, 100, 30);
 
         aporteFinalPerc.setBackground(java.awt.Color.yellow);
         aporteFinalPerc.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -280,42 +297,56 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 aporteFinalPercActionPerformed(evt);
             }
         });
+        getContentPane().add(aporteFinalPerc);
+        aporteFinalPerc.setBounds(720, 63, 90, 30);
 
         jLabel19.setBackground(new java.awt.Color(153, 153, 153));
         jLabel19.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
         jLabel19.setText("Assessor R$");
         jLabel19.setOpaque(true);
+        getContentPane().add(jLabel19);
+        jLabel19.setBounds(820, 43, 90, 20);
 
         jLabel21.setBackground(new java.awt.Color(153, 153, 153));
         jLabel21.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(255, 255, 255));
         jLabel21.setText("Ajuste ");
         jLabel21.setOpaque(true);
+        getContentPane().add(jLabel21);
+        jLabel21.setBounds(820, 23, 100, 20);
 
         jLabel29.setBackground(new java.awt.Color(153, 153, 153));
         jLabel29.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         jLabel29.setForeground(new java.awt.Color(255, 255, 255));
         jLabel29.setText("   Final %");
         jLabel29.setOpaque(true);
+        getContentPane().add(jLabel29);
+        jLabel29.setBounds(710, 43, 110, 20);
 
         jLabel39.setBackground(new java.awt.Color(153, 153, 153));
         jLabel39.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         jLabel39.setForeground(new java.awt.Color(255, 255, 255));
         jLabel39.setText(" Alocação");
         jLabel39.setOpaque(true);
+        getContentPane().add(jLabel39);
+        jLabel39.setBounds(710, 23, 110, 20);
 
         jLabel38.setBackground(new java.awt.Color(153, 153, 153));
         jLabel38.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         jLabel38.setForeground(new java.awt.Color(255, 255, 255));
         jLabel38.setText("    Ajuste");
         jLabel38.setOpaque(true);
+        getContentPane().add(jLabel38);
+        jLabel38.setBounds(620, 23, 90, 20);
 
         lblAssessorPerc.setBackground(new java.awt.Color(153, 153, 153));
         lblAssessorPerc.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         lblAssessorPerc.setForeground(new java.awt.Color(255, 255, 255));
         lblAssessorPerc.setText("Assessor %");
         lblAssessorPerc.setOpaque(true);
+        getContentPane().add(lblAssessorPerc);
+        lblAssessorPerc.setBounds(620, 43, 90, 20);
 
         aporteAjustePerc.setBackground(java.awt.Color.yellow);
         aporteAjustePerc.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -324,33 +355,45 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 aporteAjustePercActionPerformed(evt);
             }
         });
+        getContentPane().add(aporteAjustePerc);
+        aporteAjustePerc.setBounds(620, 63, 100, 30);
 
         aportePerfil.setBackground(java.awt.Color.yellow);
         aportePerfil.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        getContentPane().add(aportePerfil);
+        aportePerfil.setBounds(540, 63, 80, 30);
 
         jLabel27.setBackground(new java.awt.Color(153, 153, 153));
         jLabel27.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(255, 255, 255));
         jLabel27.setText("para Perfil");
         jLabel27.setOpaque(true);
+        getContentPane().add(jLabel27);
+        jLabel27.setBounds(540, 43, 80, 20);
 
         jLabel36.setBackground(new java.awt.Color(153, 153, 153));
         jLabel36.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         jLabel36.setForeground(new java.awt.Color(255, 255, 255));
         jLabel36.setText(" Sugestão");
         jLabel36.setOpaque(true);
+        getContentPane().add(jLabel36);
+        jLabel36.setBounds(540, 23, 80, 20);
 
         jLabel37.setBackground(new java.awt.Color(153, 153, 153));
         jLabel37.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         jLabel37.setForeground(new java.awt.Color(255, 255, 255));
         jLabel37.setText(" Alocação");
         jLabel37.setOpaque(true);
+        getContentPane().add(jLabel37);
+        jLabel37.setBounds(460, 23, 80, 20);
 
         atualPerc.setBackground(new java.awt.Color(153, 153, 153));
         atualPerc.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         atualPerc.setForeground(new java.awt.Color(255, 255, 255));
         atualPerc.setText("   Atual %");
         atualPerc.setOpaque(true);
+        getContentPane().add(atualPerc);
+        atualPerc.setBounds(460, 43, 80, 20);
 
         aporteAtualPerc.setBackground(java.awt.Color.yellow);
         aporteAtualPerc.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -359,6 +402,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 aporteAtualPercActionPerformed(evt);
             }
         });
+        getContentPane().add(aporteAtualPerc);
+        aporteAtualPerc.setBounds(460, 63, 80, 30);
 
         aporteAtual.setBackground(java.awt.Color.yellow);
         aporteAtual.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -367,24 +412,32 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 aporteAtualActionPerformed(evt);
             }
         });
+        getContentPane().add(aporteAtual);
+        aporteAtual.setBounds(380, 63, 80, 30);
 
         jLabel34.setBackground(new java.awt.Color(153, 153, 153));
         jLabel34.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         jLabel34.setForeground(new java.awt.Color(255, 255, 255));
         jLabel34.setText(" Atual R$");
         jLabel34.setOpaque(true);
+        getContentPane().add(jLabel34);
+        jLabel34.setBounds(380, 43, 80, 20);
 
         jLabel35.setBackground(new java.awt.Color(153, 153, 153));
         jLabel35.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         jLabel35.setForeground(new java.awt.Color(255, 255, 255));
         jLabel35.setText(" Alocação");
         jLabel35.setOpaque(true);
+        getContentPane().add(jLabel35);
+        jLabel35.setBounds(380, 23, 80, 20);
 
         jLabel25.setBackground(new java.awt.Color(153, 153, 153));
         jLabel25.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(255, 255, 255));
         jLabel25.setText(" PERFIL MODERADO");
         jLabel25.setOpaque(true);
+        getContentPane().add(jLabel25);
+        jLabel25.setBounds(10, 23, 370, 40);
 
         jLabel3.setBackground(new java.awt.Color(25, 137, 25));
         jLabel3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -394,12 +447,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel3.setMinimumSize(new java.awt.Dimension(101, 15));
         jLabel3.setOpaque(true);
         jLabel3.setPreferredSize(new java.awt.Dimension(101, 15));
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(10, 93, 370, 30);
 
         jLabel23.setBackground(java.awt.Color.yellow);
         jLabel23.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel23.setText(" Conta Corrente/Aporte");
         jLabel23.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jLabel23.setOpaque(true);
+        getContentPane().add(jLabel23);
+        jLabel23.setBounds(10, 63, 370, 30);
 
         alocacaoAtual1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual1.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -410,6 +467,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 alocacaoAtual1ActionPerformed(evt);
             }
         });
+        getContentPane().add(alocacaoAtual1);
+        alocacaoAtual1.setBounds(380, 93, 80, 30);
 
         alocacaoPerc1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoPerc1.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -420,12 +479,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 alocacaoPerc1ActionPerformed(evt);
             }
         });
+        getContentPane().add(alocacaoPerc1);
+        alocacaoPerc1.setBounds(460, 93, 80, 30);
 
         perfil1.setBackground(new java.awt.Color(129, 167, 71));
         perfil1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         perfil1.setMaximumSize(new java.awt.Dimension(101, 15));
         perfil1.setMinimumSize(new java.awt.Dimension(101, 15));
         perfil1.setPreferredSize(new java.awt.Dimension(101, 15));
+        getContentPane().add(perfil1);
+        perfil1.setBounds(540, 93, 80, 30);
 
         ajustePerc1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajustePerc1.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -436,6 +499,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 ajustePerc1ActionPerformed(evt);
             }
         });
+        getContentPane().add(ajustePerc1);
+        ajustePerc1.setBounds(620, 93, 100, 30);
 
         finalPerc1.setBackground(new java.awt.Color(129, 167, 71));
         finalPerc1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -447,6 +512,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 finalPerc1ActionPerformed(evt);
             }
         });
+        getContentPane().add(finalPerc1);
+        finalPerc1.setBounds(720, 93, 90, 30);
 
         ajuste1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajuste1.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -457,6 +524,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 ajuste1ActionPerformed(evt);
             }
         });
+        getContentPane().add(ajuste1);
+        ajuste1.setBounds(809, 93, 101, 30);
 
         final1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         final1.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -467,6 +536,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 final1ActionPerformed(evt);
             }
         });
+        getContentPane().add(final1);
+        final1.setBounds(910, 93, 110, 30);
 
         final2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         final2.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -477,6 +548,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 final2ActionPerformed(evt);
             }
         });
+        getContentPane().add(final2);
+        final2.setBounds(910, 123, 110, 30);
 
         ajuste3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajuste3.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -487,6 +560,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 ajuste3ActionPerformed(evt);
             }
         });
+        getContentPane().add(ajuste3);
+        ajuste3.setBounds(809, 153, 101, 30);
 
         ajuste2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajuste2.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -497,6 +572,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 ajuste2ActionPerformed(evt);
             }
         });
+        getContentPane().add(ajuste2);
+        ajuste2.setBounds(809, 123, 101, 30);
 
         final3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         final3.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -507,6 +584,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 final3ActionPerformed(evt);
             }
         });
+        getContentPane().add(final3);
+        final3.setBounds(910, 153, 110, 30);
 
         finalPerc3.setBackground(new java.awt.Color(129, 167, 71));
         finalPerc3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -518,6 +597,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 finalPerc3ActionPerformed(evt);
             }
         });
+        getContentPane().add(finalPerc3);
+        finalPerc3.setBounds(720, 153, 90, 30);
 
         finalPerc2.setBackground(new java.awt.Color(129, 167, 71));
         finalPerc2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -529,6 +610,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 finalPerc2ActionPerformed(evt);
             }
         });
+        getContentPane().add(finalPerc2);
+        finalPerc2.setBounds(720, 123, 90, 30);
 
         ajustePerc2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajustePerc2.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -539,6 +622,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 ajustePerc2ActionPerformed(evt);
             }
         });
+        getContentPane().add(ajustePerc2);
+        ajustePerc2.setBounds(620, 123, 100, 30);
 
         ajustePerc3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajustePerc3.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -549,18 +634,24 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 ajustePerc3ActionPerformed(evt);
             }
         });
+        getContentPane().add(ajustePerc3);
+        ajustePerc3.setBounds(620, 153, 100, 30);
 
         perfil3.setBackground(new java.awt.Color(129, 167, 71));
         perfil3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         perfil3.setMaximumSize(new java.awt.Dimension(101, 15));
         perfil3.setMinimumSize(new java.awt.Dimension(101, 15));
         perfil3.setPreferredSize(new java.awt.Dimension(101, 15));
+        getContentPane().add(perfil3);
+        perfil3.setBounds(540, 153, 80, 30);
 
         perfil2.setBackground(new java.awt.Color(129, 167, 71));
         perfil2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         perfil2.setMaximumSize(new java.awt.Dimension(101, 15));
         perfil2.setMinimumSize(new java.awt.Dimension(101, 15));
         perfil2.setPreferredSize(new java.awt.Dimension(101, 15));
+        getContentPane().add(perfil2);
+        perfil2.setBounds(540, 123, 80, 30);
 
         alocacaoPerc2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoPerc2.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -571,6 +662,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 alocacaoPerc2ActionPerformed(evt);
             }
         });
+        getContentPane().add(alocacaoPerc2);
+        alocacaoPerc2.setBounds(460, 123, 80, 30);
 
         alocacaoPerc3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoPerc3.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -581,6 +674,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 alocacaoPerc3ActionPerformed(evt);
             }
         });
+        getContentPane().add(alocacaoPerc3);
+        alocacaoPerc3.setBounds(460, 153, 80, 30);
 
         alocacaoAtual3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual3.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -591,6 +686,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 alocacaoAtual3ActionPerformed(evt);
             }
         });
+        getContentPane().add(alocacaoAtual3);
+        alocacaoAtual3.setBounds(380, 153, 80, 30);
 
         alocacaoAtual2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual2.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -601,6 +698,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 alocacaoAtual2ActionPerformed(evt);
             }
         });
+        getContentPane().add(alocacaoAtual2);
+        alocacaoAtual2.setBounds(380, 123, 80, 30);
 
         jLabel1.setBackground(new java.awt.Color(25, 137, 25));
         jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -611,6 +710,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel1.setOpaque(true);
         jLabel1.setPreferredSize(new java.awt.Dimension(101, 15));
         jLabel1.setRequestFocusEnabled(false);
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(10, 123, 370, 30);
 
         jLabel4.setBackground(new java.awt.Color(25, 137, 25));
         jLabel4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -620,6 +721,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel4.setMinimumSize(new java.awt.Dimension(101, 15));
         jLabel4.setOpaque(true);
         jLabel4.setPreferredSize(new java.awt.Dimension(101, 15));
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(10, 153, 370, 30);
 
         jLabel5.setBackground(java.awt.Color.green);
         jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -628,6 +731,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel5.setMaximumSize(new java.awt.Dimension(101, 15));
         jLabel5.setMinimumSize(new java.awt.Dimension(101, 15));
         jLabel5.setOpaque(true);
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(10, 183, 370, 30);
 
         alocacaoAtual4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual4.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -638,6 +743,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 alocacaoAtual4ActionPerformed(evt);
             }
         });
+        getContentPane().add(alocacaoAtual4);
+        alocacaoAtual4.setBounds(380, 183, 80, 30);
 
         alocacaoPerc4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoPerc4.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -648,12 +755,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 alocacaoPerc4ActionPerformed(evt);
             }
         });
+        getContentPane().add(alocacaoPerc4);
+        alocacaoPerc4.setBounds(460, 183, 80, 30);
 
         perfil4.setBackground(new java.awt.Color(129, 167, 71));
         perfil4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         perfil4.setMaximumSize(new java.awt.Dimension(101, 15));
         perfil4.setMinimumSize(new java.awt.Dimension(101, 15));
         perfil4.setPreferredSize(new java.awt.Dimension(101, 15));
+        getContentPane().add(perfil4);
+        perfil4.setBounds(540, 183, 80, 30);
 
         ajustePerc4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajustePerc4.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -664,6 +775,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 ajustePerc4ActionPerformed(evt);
             }
         });
+        getContentPane().add(ajustePerc4);
+        ajustePerc4.setBounds(620, 183, 100, 30);
 
         finalPerc4.setBackground(new java.awt.Color(129, 167, 71));
         finalPerc4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -675,6 +788,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 finalPerc4ActionPerformed(evt);
             }
         });
+        getContentPane().add(finalPerc4);
+        finalPerc4.setBounds(720, 183, 90, 30);
 
         ajuste4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajuste4.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -685,6 +800,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 ajuste4ActionPerformed(evt);
             }
         });
+        getContentPane().add(ajuste4);
+        ajuste4.setBounds(809, 183, 101, 30);
 
         final4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         final4.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -695,6 +812,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 final4ActionPerformed(evt);
             }
         });
+        getContentPane().add(final4);
+        final4.setBounds(910, 183, 110, 30);
 
         final5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         final5.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -705,6 +824,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 final5ActionPerformed(evt);
             }
         });
+        getContentPane().add(final5);
+        final5.setBounds(910, 213, 110, 30);
 
         ajuste5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajuste5.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -715,6 +836,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 ajuste5ActionPerformed(evt);
             }
         });
+        getContentPane().add(ajuste5);
+        ajuste5.setBounds(809, 213, 101, 30);
 
         finalPerc5.setBackground(new java.awt.Color(129, 167, 71));
         finalPerc5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -726,6 +849,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 finalPerc5ActionPerformed(evt);
             }
         });
+        getContentPane().add(finalPerc5);
+        finalPerc5.setBounds(720, 213, 90, 30);
 
         ajustePerc5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajustePerc5.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -736,6 +861,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 ajustePerc5ActionPerformed(evt);
             }
         });
+        getContentPane().add(ajustePerc5);
+        ajustePerc5.setBounds(620, 213, 100, 30);
 
         perfil5.setBackground(new java.awt.Color(129, 167, 71));
         perfil5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -747,6 +874,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 perfil5ActionPerformed(evt);
             }
         });
+        getContentPane().add(perfil5);
+        perfil5.setBounds(540, 213, 80, 30);
 
         alocacaoPerc5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoPerc5.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -757,6 +886,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 alocacaoPerc5ActionPerformed(evt);
             }
         });
+        getContentPane().add(alocacaoPerc5);
+        alocacaoPerc5.setBounds(460, 213, 80, 30);
 
         alocacaoAtual5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual5.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -767,6 +898,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 alocacaoAtual5ActionPerformed(evt);
             }
         });
+        getContentPane().add(alocacaoAtual5);
+        alocacaoAtual5.setBounds(380, 213, 80, 30);
 
         jLabel6.setBackground(java.awt.Color.green);
         jLabel6.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -776,6 +909,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel6.setMinimumSize(new java.awt.Dimension(101, 15));
         jLabel6.setOpaque(true);
         jLabel6.setPreferredSize(new java.awt.Dimension(101, 15));
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(10, 213, 370, 30);
 
         jLabel7.setBackground(java.awt.Color.green);
         jLabel7.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -785,6 +920,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel7.setMinimumSize(new java.awt.Dimension(101, 15));
         jLabel7.setOpaque(true);
         jLabel7.setPreferredSize(new java.awt.Dimension(101, 15));
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(10, 243, 370, 30);
 
         alocacaoAtual6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual6.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -795,6 +932,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 alocacaoAtual6ActionPerformed(evt);
             }
         });
+        getContentPane().add(alocacaoAtual6);
+        alocacaoAtual6.setBounds(380, 243, 80, 30);
 
         alocacaoPerc6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoPerc6.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -805,6 +944,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 alocacaoPerc6ActionPerformed(evt);
             }
         });
+        getContentPane().add(alocacaoPerc6);
+        alocacaoPerc6.setBounds(460, 243, 80, 30);
 
         perfil6.setBackground(new java.awt.Color(129, 167, 71));
         perfil6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -816,6 +957,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 perfil6ActionPerformed(evt);
             }
         });
+        getContentPane().add(perfil6);
+        perfil6.setBounds(540, 243, 80, 30);
 
         ajustePerc6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajustePerc6.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -826,6 +969,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 ajustePerc6ActionPerformed(evt);
             }
         });
+        getContentPane().add(ajustePerc6);
+        ajustePerc6.setBounds(620, 243, 100, 30);
 
         finalPerc6.setBackground(new java.awt.Color(129, 167, 71));
         finalPerc6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -837,6 +982,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 finalPerc6ActionPerformed(evt);
             }
         });
+        getContentPane().add(finalPerc6);
+        finalPerc6.setBounds(720, 243, 90, 30);
 
         ajuste6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajuste6.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -847,6 +994,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 ajuste6ActionPerformed(evt);
             }
         });
+        getContentPane().add(ajuste6);
+        ajuste6.setBounds(809, 243, 101, 30);
 
         final6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         final6.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -857,6 +1006,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 final6ActionPerformed(evt);
             }
         });
+        getContentPane().add(final6);
+        final6.setBounds(910, 243, 110, 30);
 
         final7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         final7.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -867,6 +1018,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 final7ActionPerformed(evt);
             }
         });
+        getContentPane().add(final7);
+        final7.setBounds(910, 273, 110, 30);
 
         ajuste7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajuste7.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -877,6 +1030,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 ajuste7ActionPerformed(evt);
             }
         });
+        getContentPane().add(ajuste7);
+        ajuste7.setBounds(809, 273, 101, 30);
 
         finalPerc7.setBackground(new java.awt.Color(129, 167, 71));
         finalPerc7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -888,6 +1043,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 finalPerc7ActionPerformed(evt);
             }
         });
+        getContentPane().add(finalPerc7);
+        finalPerc7.setBounds(720, 273, 90, 30);
 
         ajustePerc7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajustePerc7.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -898,6 +1055,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 ajustePerc7ActionPerformed(evt);
             }
         });
+        getContentPane().add(ajustePerc7);
+        ajustePerc7.setBounds(620, 273, 100, 30);
 
         perfil7.setBackground(new java.awt.Color(129, 167, 71));
         perfil7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -909,6 +1068,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 perfil7ActionPerformed(evt);
             }
         });
+        getContentPane().add(perfil7);
+        perfil7.setBounds(540, 273, 80, 30);
 
         alocacaoPerc7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoPerc7.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -919,6 +1080,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 alocacaoPerc7ActionPerformed(evt);
             }
         });
+        getContentPane().add(alocacaoPerc7);
+        alocacaoPerc7.setBounds(460, 273, 80, 30);
 
         alocacaoAtual7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual7.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -929,6 +1092,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 alocacaoAtual7ActionPerformed(evt);
             }
         });
+        getContentPane().add(alocacaoAtual7);
+        alocacaoAtual7.setBounds(380, 273, 80, 30);
 
         jLabel8.setBackground(java.awt.Color.green);
         jLabel8.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -938,6 +1103,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel8.setMinimumSize(new java.awt.Dimension(101, 15));
         jLabel8.setOpaque(true);
         jLabel8.setPreferredSize(new java.awt.Dimension(101, 15));
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(10, 273, 370, 30);
 
         jLabel9.setBackground(java.awt.Color.green);
         jLabel9.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -947,6 +1114,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel9.setMinimumSize(new java.awt.Dimension(101, 15));
         jLabel9.setOpaque(true);
         jLabel9.setPreferredSize(new java.awt.Dimension(101, 15));
+        getContentPane().add(jLabel9);
+        jLabel9.setBounds(10, 303, 370, 30);
 
         alocacaoAtual8.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual8.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -957,6 +1126,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 alocacaoAtual8ActionPerformed(evt);
             }
         });
+        getContentPane().add(alocacaoAtual8);
+        alocacaoAtual8.setBounds(380, 303, 80, 30);
 
         alocacaoPerc8.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoPerc8.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -967,6 +1138,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 alocacaoPerc8ActionPerformed(evt);
             }
         });
+        getContentPane().add(alocacaoPerc8);
+        alocacaoPerc8.setBounds(460, 303, 80, 30);
 
         perfil8.setBackground(new java.awt.Color(129, 167, 71));
         perfil8.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -978,6 +1151,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 perfil8ActionPerformed(evt);
             }
         });
+        getContentPane().add(perfil8);
+        perfil8.setBounds(540, 303, 80, 30);
 
         ajustePerc8.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajustePerc8.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -988,6 +1163,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 ajustePerc8ActionPerformed(evt);
             }
         });
+        getContentPane().add(ajustePerc8);
+        ajustePerc8.setBounds(620, 303, 100, 30);
 
         finalPerc8.setBackground(new java.awt.Color(129, 167, 71));
         finalPerc8.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -999,6 +1176,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 finalPerc8ActionPerformed(evt);
             }
         });
+        getContentPane().add(finalPerc8);
+        finalPerc8.setBounds(720, 303, 90, 30);
 
         ajuste8.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajuste8.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1009,6 +1188,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 ajuste8ActionPerformed(evt);
             }
         });
+        getContentPane().add(ajuste8);
+        ajuste8.setBounds(809, 303, 101, 30);
 
         final8.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         final8.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1019,6 +1200,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 final8ActionPerformed(evt);
             }
         });
+        getContentPane().add(final8);
+        final8.setBounds(910, 303, 110, 30);
 
         final9.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         final9.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1029,6 +1212,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 final9ActionPerformed(evt);
             }
         });
+        getContentPane().add(final9);
+        final9.setBounds(910, 333, 110, 30);
 
         ajuste9.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajuste9.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1039,6 +1224,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 ajuste9ActionPerformed(evt);
             }
         });
+        getContentPane().add(ajuste9);
+        ajuste9.setBounds(809, 333, 101, 30);
 
         finalPerc9.setBackground(new java.awt.Color(129, 167, 71));
         finalPerc9.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1050,6 +1237,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 finalPerc9ActionPerformed(evt);
             }
         });
+        getContentPane().add(finalPerc9);
+        finalPerc9.setBounds(720, 333, 90, 30);
 
         ajustePerc9.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajustePerc9.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1060,6 +1249,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 ajustePerc9ActionPerformed(evt);
             }
         });
+        getContentPane().add(ajustePerc9);
+        ajustePerc9.setBounds(620, 333, 100, 30);
 
         perfil9.setBackground(new java.awt.Color(129, 167, 71));
         perfil9.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1071,6 +1262,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 perfil9ActionPerformed(evt);
             }
         });
+        getContentPane().add(perfil9);
+        perfil9.setBounds(540, 333, 80, 30);
 
         alocacaoPerc9.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoPerc9.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1081,6 +1274,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 alocacaoPerc9ActionPerformed(evt);
             }
         });
+        getContentPane().add(alocacaoPerc9);
+        alocacaoPerc9.setBounds(460, 333, 80, 30);
 
         alocacaoAtual9.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual9.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1091,6 +1286,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 alocacaoAtual9ActionPerformed(evt);
             }
         });
+        getContentPane().add(alocacaoAtual9);
+        alocacaoAtual9.setBounds(380, 333, 80, 30);
 
         jLabel10.setBackground(java.awt.Color.green);
         jLabel10.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -1100,11 +1297,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel10.setMinimumSize(new java.awt.Dimension(101, 15));
         jLabel10.setOpaque(true);
         jLabel10.setPreferredSize(new java.awt.Dimension(101, 15));
+        getContentPane().add(jLabel10);
+        jLabel10.setBounds(10, 333, 370, 30);
 
         jLabel11.setBackground(java.awt.Color.gray);
         jLabel11.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel11.setText(" Renda Fixa TOTAL");
         jLabel11.setOpaque(true);
+        getContentPane().add(jLabel11);
+        jLabel11.setBounds(10, 363, 370, 20);
 
         rendaFixaAtual.setBackground(java.awt.Color.gray);
         rendaFixaAtual.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1113,6 +1314,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 rendaFixaAtualActionPerformed(evt);
             }
         });
+        getContentPane().add(rendaFixaAtual);
+        rendaFixaAtual.setBounds(380, 363, 80, 20);
 
         rendaFixaAtualPerc.setBackground(java.awt.Color.gray);
         rendaFixaAtualPerc.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1121,6 +1324,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 rendaFixaAtualPercActionPerformed(evt);
             }
         });
+        getContentPane().add(rendaFixaAtualPerc);
+        rendaFixaAtualPerc.setBounds(460, 363, 80, 20);
 
         rendaFixaPerfil.setBackground(java.awt.Color.gray);
         rendaFixaPerfil.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1129,6 +1334,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 rendaFixaPerfilActionPerformed(evt);
             }
         });
+        getContentPane().add(rendaFixaPerfil);
+        rendaFixaPerfil.setBounds(540, 363, 80, 20);
 
         rendaFixaAjustePerc.setBackground(java.awt.Color.gray);
         rendaFixaAjustePerc.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1137,6 +1344,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 rendaFixaAjustePercActionPerformed(evt);
             }
         });
+        getContentPane().add(rendaFixaAjustePerc);
+        rendaFixaAjustePerc.setBounds(620, 363, 100, 20);
 
         rendaFixaFinalPerc.setBackground(java.awt.Color.gray);
         rendaFixaFinalPerc.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1145,6 +1354,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 rendaFixaFinalPercActionPerformed(evt);
             }
         });
+        getContentPane().add(rendaFixaFinalPerc);
+        rendaFixaFinalPerc.setBounds(720, 363, 90, 20);
 
         rendaFixaAjuste.setBackground(java.awt.Color.gray);
         rendaFixaAjuste.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1153,6 +1364,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 rendaFixaAjusteActionPerformed(evt);
             }
         });
+        getContentPane().add(rendaFixaAjuste);
+        rendaFixaAjuste.setBounds(810, 363, 100, 20);
 
         rendaFixaFinal.setBackground(java.awt.Color.gray);
         rendaFixaFinal.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1161,6 +1374,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 rendaFixaFinalActionPerformed(evt);
             }
         });
+        getContentPane().add(rendaFixaFinal);
+        rendaFixaFinal.setBounds(910, 363, 110, 20);
 
         final10.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         final10.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1171,6 +1386,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 final10ActionPerformed(evt);
             }
         });
+        getContentPane().add(final10);
+        final10.setBounds(910, 383, 110, 20);
 
         final11.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         final11.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1181,6 +1398,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 final11ActionPerformed(evt);
             }
         });
+        getContentPane().add(final11);
+        final11.setBounds(910, 403, 110, 20);
 
         final12.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         final12.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1191,6 +1410,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 final12ActionPerformed(evt);
             }
         });
+        getContentPane().add(final12);
+        final12.setBounds(910, 423, 110, 20);
 
         ajuste12.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajuste12.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1201,6 +1422,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 ajuste12ActionPerformed(evt);
             }
         });
+        getContentPane().add(ajuste12);
+        ajuste12.setBounds(809, 423, 101, 20);
 
         ajuste11.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajuste11.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1211,6 +1434,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 ajuste11ActionPerformed(evt);
             }
         });
+        getContentPane().add(ajuste11);
+        ajuste11.setBounds(809, 403, 101, 20);
 
         ajuste10.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajuste10.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1221,6 +1446,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 ajuste10ActionPerformed(evt);
             }
         });
+        getContentPane().add(ajuste10);
+        ajuste10.setBounds(809, 383, 101, 20);
 
         finalPerc11.setBackground(new java.awt.Color(129, 167, 71));
         finalPerc11.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1232,6 +1459,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 finalPerc11ActionPerformed(evt);
             }
         });
+        getContentPane().add(finalPerc11);
+        finalPerc11.setBounds(720, 403, 90, 20);
 
         finalPerc10.setBackground(new java.awt.Color(129, 167, 71));
         finalPerc10.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1243,6 +1472,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 finalPerc10ActionPerformed(evt);
             }
         });
+        getContentPane().add(finalPerc10);
+        finalPerc10.setBounds(720, 383, 90, 20);
 
         finalPerc12.setBackground(new java.awt.Color(129, 167, 71));
         finalPerc12.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1254,6 +1485,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 finalPerc12ActionPerformed(evt);
             }
         });
+        getContentPane().add(finalPerc12);
+        finalPerc12.setBounds(720, 423, 90, 20);
 
         jTextField125.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jTextField125.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1264,6 +1497,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 jTextField125ActionPerformed(evt);
             }
         });
+        getContentPane().add(jTextField125);
+        jTextField125.setBounds(620, 423, 100, 20);
 
         jTextField131.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jTextField131.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1274,6 +1509,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 jTextField131ActionPerformed(evt);
             }
         });
+        getContentPane().add(jTextField131);
+        jTextField131.setBounds(620, 403, 100, 20);
 
         ajustePerc10.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajustePerc10.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1284,6 +1521,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 ajustePerc10ActionPerformed(evt);
             }
         });
+        getContentPane().add(ajustePerc10);
+        ajustePerc10.setBounds(620, 383, 100, 20);
 
         perfil11.setBackground(new java.awt.Color(129, 167, 71));
         perfil11.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1295,6 +1534,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 perfil11ActionPerformed(evt);
             }
         });
+        getContentPane().add(perfil11);
+        perfil11.setBounds(540, 403, 80, 20);
 
         perfil12.setBackground(new java.awt.Color(129, 167, 71));
         perfil12.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1306,6 +1547,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 perfil12ActionPerformed(evt);
             }
         });
+        getContentPane().add(perfil12);
+        perfil12.setBounds(540, 423, 80, 20);
 
         perfil10.setBackground(new java.awt.Color(129, 167, 71));
         perfil10.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1317,6 +1560,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 perfil10ActionPerformed(evt);
             }
         });
+        getContentPane().add(perfil10);
+        perfil10.setBounds(540, 383, 80, 20);
 
         alocacaoPerc10.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoPerc10.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1327,6 +1572,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 alocacaoPerc10ActionPerformed(evt);
             }
         });
+        getContentPane().add(alocacaoPerc10);
+        alocacaoPerc10.setBounds(460, 383, 80, 20);
 
         alocacaoPerc12.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoPerc12.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1337,6 +1584,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 alocacaoPerc12ActionPerformed(evt);
             }
         });
+        getContentPane().add(alocacaoPerc12);
+        alocacaoPerc12.setBounds(460, 423, 80, 20);
 
         alocacaoPerc11.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoPerc11.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1347,6 +1596,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 alocacaoPerc11ActionPerformed(evt);
             }
         });
+        getContentPane().add(alocacaoPerc11);
+        alocacaoPerc11.setBounds(460, 403, 80, 20);
 
         alocacaoAtual10.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual10.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1357,6 +1608,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 alocacaoAtual10ActionPerformed(evt);
             }
         });
+        getContentPane().add(alocacaoAtual10);
+        alocacaoAtual10.setBounds(380, 383, 80, 20);
 
         alocacaoAtual11.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual11.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1367,6 +1620,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 alocacaoAtual11ActionPerformed(evt);
             }
         });
+        getContentPane().add(alocacaoAtual11);
+        alocacaoAtual11.setBounds(380, 403, 80, 20);
 
         alocacaoAtual12.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual12.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1377,6 +1632,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 alocacaoAtual12ActionPerformed(evt);
             }
         });
+        getContentPane().add(alocacaoAtual12);
+        alocacaoAtual12.setBounds(380, 423, 80, 20);
 
         jLabel14.setBackground(java.awt.Color.orange);
         jLabel14.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -1385,12 +1642,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel14.setMaximumSize(new java.awt.Dimension(230, 15));
         jLabel14.setMinimumSize(new java.awt.Dimension(230, 15));
         jLabel14.setOpaque(true);
+        getContentPane().add(jLabel14);
+        jLabel14.setBounds(10, 423, 370, 20);
 
         jLabel13.setBackground(java.awt.Color.green);
         jLabel13.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel13.setText(" Multimercado Média Vol (de 1.5% até 4%)");
         jLabel13.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jLabel13.setOpaque(true);
+        getContentPane().add(jLabel13);
+        jLabel13.setBounds(10, 403, 370, 20);
 
         jLabel12.setBackground(new java.awt.Color(25, 137, 25));
         jLabel12.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -1399,12 +1660,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel12.setMaximumSize(new java.awt.Dimension(230, 15));
         jLabel12.setMinimumSize(new java.awt.Dimension(230, 15));
         jLabel12.setOpaque(true);
+        getContentPane().add(jLabel12);
+        jLabel12.setBounds(10, 383, 370, 20);
 
         jLabel15.setBackground(java.awt.Color.gray);
         jLabel15.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel15.setText(" Multimercado TOTAL");
         jLabel15.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jLabel15.setOpaque(true);
+        getContentPane().add(jLabel15);
+        jLabel15.setBounds(10, 443, 370, 30);
 
         multimercadoAtual.setBackground(java.awt.Color.gray);
         multimercadoAtual.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1413,6 +1678,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 multimercadoAtualActionPerformed(evt);
             }
         });
+        getContentPane().add(multimercadoAtual);
+        multimercadoAtual.setBounds(380, 443, 80, 30);
 
         multimercadoAtualPerc.setBackground(java.awt.Color.gray);
         multimercadoAtualPerc.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1421,6 +1688,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 multimercadoAtualPercActionPerformed(evt);
             }
         });
+        getContentPane().add(multimercadoAtualPerc);
+        multimercadoAtualPerc.setBounds(460, 443, 80, 30);
 
         multimercadoPerfil.setBackground(java.awt.Color.gray);
         multimercadoPerfil.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1429,6 +1698,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 multimercadoPerfilActionPerformed(evt);
             }
         });
+        getContentPane().add(multimercadoPerfil);
+        multimercadoPerfil.setBounds(540, 443, 80, 30);
 
         multimercadoAjustePerc.setBackground(java.awt.Color.gray);
         multimercadoAjustePerc.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1437,6 +1708,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 multimercadoAjustePercActionPerformed(evt);
             }
         });
+        getContentPane().add(multimercadoAjustePerc);
+        multimercadoAjustePerc.setBounds(620, 443, 100, 30);
 
         multimercadoFinalPerc.setBackground(java.awt.Color.gray);
         multimercadoFinalPerc.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1445,6 +1718,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 multimercadoFinalPercActionPerformed(evt);
             }
         });
+        getContentPane().add(multimercadoFinalPerc);
+        multimercadoFinalPerc.setBounds(720, 443, 90, 30);
 
         multimercadoAjuste.setBackground(java.awt.Color.gray);
         multimercadoAjuste.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1453,6 +1728,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 multimercadoAjusteActionPerformed(evt);
             }
         });
+        getContentPane().add(multimercadoAjuste);
+        multimercadoAjuste.setBounds(810, 443, 100, 30);
 
         multimercadoFinal.setBackground(java.awt.Color.gray);
         multimercadoFinal.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1461,6 +1738,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 multimercadoFinalActionPerformed(evt);
             }
         });
+        getContentPane().add(multimercadoFinal);
+        multimercadoFinal.setBounds(910, 443, 110, 30);
 
         final13.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         final13.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1471,6 +1750,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 final13ActionPerformed(evt);
             }
         });
+        getContentPane().add(final13);
+        final13.setBounds(910, 473, 110, 30);
 
         finalPerc13.setBackground(new java.awt.Color(129, 167, 71));
         finalPerc13.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1482,6 +1763,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 finalPerc13ActionPerformed(evt);
             }
         });
+        getContentPane().add(finalPerc13);
+        finalPerc13.setBounds(720, 473, 90, 30);
 
         ajuste13.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajuste13.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1492,6 +1775,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 ajuste13ActionPerformed(evt);
             }
         });
+        getContentPane().add(ajuste13);
+        ajuste13.setBounds(809, 473, 101, 30);
 
         ajustePerc13.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajustePerc13.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1502,6 +1787,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 ajustePerc13ActionPerformed(evt);
             }
         });
+        getContentPane().add(ajustePerc13);
+        ajustePerc13.setBounds(620, 473, 100, 30);
 
         perfil13.setBackground(new java.awt.Color(129, 167, 71));
         perfil13.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1513,6 +1800,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 perfil13ActionPerformed(evt);
             }
         });
+        getContentPane().add(perfil13);
+        perfil13.setBounds(540, 473, 80, 30);
 
         alocacaoPerc13.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoPerc13.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1523,6 +1812,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 alocacaoPerc13ActionPerformed(evt);
             }
         });
+        getContentPane().add(alocacaoPerc13);
+        alocacaoPerc13.setBounds(460, 473, 80, 30);
 
         alocacaoAtual14.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual14.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1533,6 +1824,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 alocacaoAtual14ActionPerformed(evt);
             }
         });
+        getContentPane().add(alocacaoAtual14);
+        alocacaoAtual14.setBounds(380, 473, 80, 30);
 
         jLabel16.setBackground(java.awt.Color.orange);
         jLabel16.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -1542,12 +1835,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel16.setMinimumSize(new java.awt.Dimension(101, 15));
         jLabel16.setOpaque(true);
         jLabel16.setPreferredSize(new java.awt.Dimension(101, 15));
+        getContentPane().add(jLabel16);
+        jLabel16.setBounds(10, 473, 370, 30);
 
         jLabel31.setBackground(java.awt.Color.red);
         jLabel31.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel31.setText(" Carteira de Ações");
         jLabel31.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jLabel31.setOpaque(true);
+        getContentPane().add(jLabel31);
+        jLabel31.setBounds(10, 503, 370, 30);
 
         alocacaoAtual15.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual15.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1558,6 +1855,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 alocacaoAtual15ActionPerformed(evt);
             }
         });
+        getContentPane().add(alocacaoAtual15);
+        alocacaoAtual15.setBounds(380, 503, 80, 30);
 
         alocacaoPerc14.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoPerc14.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1568,6 +1867,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 alocacaoPerc14ActionPerformed(evt);
             }
         });
+        getContentPane().add(alocacaoPerc14);
+        alocacaoPerc14.setBounds(460, 503, 80, 30);
 
         perfil14.setBackground(new java.awt.Color(129, 167, 71));
         perfil14.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1579,6 +1880,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 perfil14ActionPerformed(evt);
             }
         });
+        getContentPane().add(perfil14);
+        perfil14.setBounds(540, 503, 80, 30);
 
         ajustePerc14.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajustePerc14.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1589,6 +1892,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 ajustePerc14ActionPerformed(evt);
             }
         });
+        getContentPane().add(ajustePerc14);
+        ajustePerc14.setBounds(620, 503, 100, 30);
 
         finalPerc14.setBackground(new java.awt.Color(129, 167, 71));
         finalPerc14.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1600,6 +1905,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 finalPerc14ActionPerformed(evt);
             }
         });
+        getContentPane().add(finalPerc14);
+        finalPerc14.setBounds(720, 503, 90, 30);
 
         ajuste14.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajuste14.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1610,6 +1917,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 ajuste14ActionPerformed(evt);
             }
         });
+        getContentPane().add(ajuste14);
+        ajuste14.setBounds(809, 503, 101, 30);
 
         final14.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         final14.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1620,6 +1929,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 final14ActionPerformed(evt);
             }
         });
+        getContentPane().add(final14);
+        final14.setBounds(910, 503, 110, 30);
 
         final15.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         final15.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1630,6 +1941,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 final15ActionPerformed(evt);
             }
         });
+        getContentPane().add(final15);
+        final15.setBounds(910, 533, 110, 30);
 
         ajuste15.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajuste15.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1640,6 +1953,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 ajuste15ActionPerformed(evt);
             }
         });
+        getContentPane().add(ajuste15);
+        ajuste15.setBounds(809, 533, 101, 30);
 
         finalPerc15.setBackground(new java.awt.Color(129, 167, 71));
         finalPerc15.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1651,6 +1966,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 finalPerc15ActionPerformed(evt);
             }
         });
+        getContentPane().add(finalPerc15);
+        finalPerc15.setBounds(720, 533, 90, 30);
 
         ajustePerc15.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajustePerc15.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1661,6 +1978,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 ajustePerc15ActionPerformed(evt);
             }
         });
+        getContentPane().add(ajustePerc15);
+        ajustePerc15.setBounds(620, 533, 100, 30);
 
         perfil15.setBackground(new java.awt.Color(129, 167, 71));
         perfil15.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1672,6 +1991,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 perfil15ActionPerformed(evt);
             }
         });
+        getContentPane().add(perfil15);
+        perfil15.setBounds(540, 533, 80, 30);
 
         alocacaoPerc15.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoPerc15.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1682,6 +2003,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 alocacaoPerc15ActionPerformed(evt);
             }
         });
+        getContentPane().add(alocacaoPerc15);
+        alocacaoPerc15.setBounds(460, 533, 80, 30);
 
         alocacaoAtual16.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual16.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1692,6 +2015,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 alocacaoAtual16ActionPerformed(evt);
             }
         });
+        getContentPane().add(alocacaoAtual16);
+        alocacaoAtual16.setBounds(380, 533, 80, 30);
 
         jLabel33.setBackground(java.awt.Color.red);
         jLabel33.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -1701,12 +2026,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel33.setMinimumSize(new java.awt.Dimension(101, 15));
         jLabel33.setOpaque(true);
         jLabel33.setPreferredSize(new java.awt.Dimension(101, 15));
+        getContentPane().add(jLabel33);
+        jLabel33.setBounds(10, 533, 370, 30);
 
         jLabel30.setBackground(java.awt.Color.gray);
         jLabel30.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel30.setText(" Renda Variável TOTAL");
         jLabel30.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jLabel30.setOpaque(true);
+        getContentPane().add(jLabel30);
+        jLabel30.setBounds(10, 563, 370, 30);
 
         rendaVariavelAloc.setBackground(java.awt.Color.gray);
         rendaVariavelAloc.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1715,6 +2044,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 rendaVariavelAlocActionPerformed(evt);
             }
         });
+        getContentPane().add(rendaVariavelAloc);
+        rendaVariavelAloc.setBounds(380, 563, 80, 30);
 
         rendaVariavelAlocPerc.setBackground(java.awt.Color.gray);
         rendaVariavelAlocPerc.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1723,6 +2054,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 rendaVariavelAlocPercActionPerformed(evt);
             }
         });
+        getContentPane().add(rendaVariavelAlocPerc);
+        rendaVariavelAlocPerc.setBounds(460, 563, 80, 30);
 
         rendaVariavelPerfil.setBackground(java.awt.Color.gray);
         rendaVariavelPerfil.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1731,6 +2064,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 rendaVariavelPerfilActionPerformed(evt);
             }
         });
+        getContentPane().add(rendaVariavelPerfil);
+        rendaVariavelPerfil.setBounds(540, 563, 80, 30);
 
         rendaVariavelAjustePerc.setBackground(java.awt.Color.gray);
         rendaVariavelAjustePerc.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1739,6 +2074,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 rendaVariavelAjustePercActionPerformed(evt);
             }
         });
+        getContentPane().add(rendaVariavelAjustePerc);
+        rendaVariavelAjustePerc.setBounds(620, 563, 100, 30);
 
         rendaVariavelFinalPerc.setBackground(java.awt.Color.gray);
         rendaVariavelFinalPerc.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1747,6 +2084,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 rendaVariavelFinalPercActionPerformed(evt);
             }
         });
+        getContentPane().add(rendaVariavelFinalPerc);
+        rendaVariavelFinalPerc.setBounds(720, 563, 90, 30);
 
         rendaVariavelAjuste.setBackground(java.awt.Color.gray);
         rendaVariavelAjuste.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1755,6 +2094,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 rendaVariavelAjusteActionPerformed(evt);
             }
         });
+        getContentPane().add(rendaVariavelAjuste);
+        rendaVariavelAjuste.setBounds(810, 563, 100, 30);
 
         rendaVariavelFinal.setBackground(java.awt.Color.gray);
         rendaVariavelFinal.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1763,6 +2104,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 rendaVariavelFinalActionPerformed(evt);
             }
         });
+        getContentPane().add(rendaVariavelFinal);
+        rendaVariavelFinal.setBounds(910, 563, 110, 30);
 
         final16.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         final16.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1773,6 +2116,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 final16ActionPerformed(evt);
             }
         });
+        getContentPane().add(final16);
+        final16.setBounds(910, 593, 110, 30);
 
         final17.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         final17.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1783,6 +2128,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 final17ActionPerformed(evt);
             }
         });
+        getContentPane().add(final17);
+        final17.setBounds(910, 623, 110, 30);
 
         totalFinal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         totalFinal.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1793,6 +2140,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 totalFinalActionPerformed(evt);
             }
         });
+        getContentPane().add(totalFinal);
+        totalFinal.setBounds(910, 653, 110, 20);
 
         totalAjuste.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         totalAjuste.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1803,6 +2152,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 totalAjusteActionPerformed(evt);
             }
         });
+        getContentPane().add(totalAjuste);
+        totalAjuste.setBounds(809, 653, 101, 20);
 
         ajuste17.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajuste17.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1813,6 +2164,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 ajuste17ActionPerformed(evt);
             }
         });
+        getContentPane().add(ajuste17);
+        ajuste17.setBounds(809, 623, 101, 30);
 
         ajuste16.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajuste16.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1823,6 +2176,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 ajuste16ActionPerformed(evt);
             }
         });
+        getContentPane().add(ajuste16);
+        ajuste16.setBounds(809, 593, 101, 30);
 
         totalFinalPerc.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         totalFinalPerc.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1833,6 +2188,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 totalFinalPercActionPerformed(evt);
             }
         });
+        getContentPane().add(totalFinalPerc);
+        totalFinalPerc.setBounds(720, 653, 90, 20);
 
         finalPerc17.setBackground(new java.awt.Color(129, 167, 71));
         finalPerc17.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1844,6 +2201,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 finalPerc17ActionPerformed(evt);
             }
         });
+        getContentPane().add(finalPerc17);
+        finalPerc17.setBounds(720, 623, 90, 30);
 
         finalPerc16.setBackground(new java.awt.Color(129, 167, 71));
         finalPerc16.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1855,6 +2214,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 finalPerc16ActionPerformed(evt);
             }
         });
+        getContentPane().add(finalPerc16);
+        finalPerc16.setBounds(720, 593, 90, 30);
 
         ajustePerc16.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajustePerc16.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1865,6 +2226,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 ajustePerc16ActionPerformed(evt);
             }
         });
+        getContentPane().add(ajustePerc16);
+        ajustePerc16.setBounds(620, 593, 100, 30);
 
         ajustePerc17.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajustePerc17.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1875,6 +2238,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 ajustePerc17ActionPerformed(evt);
             }
         });
+        getContentPane().add(ajustePerc17);
+        ajustePerc17.setBounds(620, 623, 100, 30);
 
         totalAjustePerc.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         totalAjustePerc.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1885,6 +2250,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 totalAjustePercActionPerformed(evt);
             }
         });
+        getContentPane().add(totalAjustePerc);
+        totalAjustePerc.setBounds(620, 653, 100, 20);
 
         totalPerfil.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         totalPerfil.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1895,6 +2262,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 totalPerfilActionPerformed(evt);
             }
         });
+        getContentPane().add(totalPerfil);
+        totalPerfil.setBounds(540, 653, 80, 20);
 
         perfil17.setBackground(new java.awt.Color(129, 167, 71));
         perfil17.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1906,6 +2275,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 perfil17ActionPerformed(evt);
             }
         });
+        getContentPane().add(perfil17);
+        perfil17.setBounds(540, 623, 80, 30);
 
         perfil16.setBackground(new java.awt.Color(129, 167, 71));
         perfil16.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1917,6 +2288,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 perfil16ActionPerformed(evt);
             }
         });
+        getContentPane().add(perfil16);
+        perfil16.setBounds(540, 593, 80, 30);
 
         alocacaoPerc16.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoPerc16.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1927,6 +2300,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 alocacaoPerc16ActionPerformed(evt);
             }
         });
+        getContentPane().add(alocacaoPerc16);
+        alocacaoPerc16.setBounds(460, 593, 80, 30);
 
         alocacaoPerc17.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoPerc17.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1937,6 +2312,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 alocacaoPerc17ActionPerformed(evt);
             }
         });
+        getContentPane().add(alocacaoPerc17);
+        alocacaoPerc17.setBounds(460, 623, 80, 30);
 
         totalAtualPerc.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         totalAtualPerc.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1947,6 +2324,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 totalAtualPercActionPerformed(evt);
             }
         });
+        getContentPane().add(totalAtualPerc);
+        totalAtualPerc.setBounds(460, 653, 80, 20);
 
         totalAtual.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         totalAtual.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1957,6 +2336,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 totalAtualActionPerformed(evt);
             }
         });
+        getContentPane().add(totalAtual);
+        totalAtual.setBounds(380, 653, 80, 20);
 
         alocacaoAtual18.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual18.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1967,6 +2348,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 alocacaoAtual18ActionPerformed(evt);
             }
         });
+        getContentPane().add(alocacaoAtual18);
+        alocacaoAtual18.setBounds(380, 623, 80, 30);
 
         alocacaoAtual17.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual17.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1977,668 +2360,99 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 alocacaoAtual17ActionPerformed(evt);
             }
         });
+        getContentPane().add(alocacaoAtual17);
+        alocacaoAtual17.setBounds(380, 593, 80, 30);
 
         jLabel32.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel32.setText(" Proteção (Seguro Vida)");
         jLabel32.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        getContentPane().add(jLabel32);
+        jLabel32.setBounds(10, 593, 370, 30);
 
         jLabel20.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel20.setText(" Carteira Offshore (FX)");
         jLabel20.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        getContentPane().add(jLabel20);
+        jLabel20.setBounds(10, 623, 370, 30);
 
         jLabel2.setBackground(java.awt.Color.white);
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setText(" CARTEIRA INVESTIMENTOS TOTAL");
         jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jLabel2.setOpaque(true);
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(10, 653, 370, 20);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1010, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(120, 120, 120)
-                            .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(140, 140, 140)
-                            .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(130, 130, 130)
-                            .addComponent(buttonMenu))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(atualPerc, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblAssessorPerc, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(0, 0, 0)
-                                    .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(0, 0, 0)
-                                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(aporteAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(aporteAtualPerc, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(aportePerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(aporteAjustePerc, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(aporteFinalPerc, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(aporteAjuste, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(aporteFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(alocacaoAtual1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(alocacaoPerc1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(perfil1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(ajustePerc1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(finalPerc1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(89, 89, 89)
-                                    .addComponent(ajuste1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(final1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(alocacaoAtual2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(alocacaoPerc2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(perfil2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(ajustePerc2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(89, 89, 89)
-                                    .addComponent(ajuste2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(finalPerc2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(final2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(alocacaoAtual3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(alocacaoPerc3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(perfil3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(ajustePerc3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(finalPerc3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(89, 89, 89)
-                                    .addComponent(ajuste3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(final3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(alocacaoAtual4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(alocacaoPerc4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(perfil4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(ajustePerc4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(finalPerc4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(89, 89, 89)
-                                    .addComponent(ajuste4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(final4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(alocacaoAtual5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(alocacaoPerc5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(perfil5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(ajustePerc5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(89, 89, 89)
-                                    .addComponent(ajuste5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(finalPerc5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(final5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(alocacaoAtual6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(alocacaoPerc6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(perfil6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(ajustePerc6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(89, 89, 89)
-                                    .addComponent(ajuste6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(finalPerc6, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(final6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(alocacaoAtual7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(alocacaoPerc7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(perfil7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(ajustePerc7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(finalPerc7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(89, 89, 89)
-                                    .addComponent(ajuste7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(final7, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(alocacaoAtual8, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(alocacaoPerc8, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(perfil8, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(ajustePerc8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(89, 89, 89)
-                                    .addComponent(ajuste8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(finalPerc8, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(final8, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(alocacaoAtual9, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(alocacaoPerc9, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(perfil9, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(ajustePerc9, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(89, 89, 89)
-                                    .addComponent(ajuste9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(finalPerc9, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(final9, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(rendaFixaAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(rendaFixaAtualPerc, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(rendaFixaPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(rendaFixaAjustePerc, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(rendaFixaFinalPerc, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(rendaFixaAjuste, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(rendaFixaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(alocacaoAtual10, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(alocacaoPerc10, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(perfil10, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(ajustePerc10, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(89, 89, 89)
-                                    .addComponent(ajuste10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(finalPerc10, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(final10, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(alocacaoAtual11, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(alocacaoPerc11, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(perfil11, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(jTextField131, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(finalPerc11, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(89, 89, 89)
-                                    .addComponent(ajuste11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(final11, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(alocacaoAtual12, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(alocacaoPerc12, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(perfil12, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(jTextField125, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(finalPerc12, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(89, 89, 89)
-                                    .addComponent(ajuste12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(final12, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(multimercadoAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(multimercadoAtualPerc, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(multimercadoPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(multimercadoAjustePerc, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(multimercadoFinalPerc, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(multimercadoAjuste, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(multimercadoFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(alocacaoAtual14, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(alocacaoPerc13, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(perfil13, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(ajustePerc13, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(finalPerc13, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(89, 89, 89)
-                                    .addComponent(ajuste13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(final13, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(alocacaoAtual15, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(alocacaoPerc14, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(perfil14, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(ajustePerc14, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(89, 89, 89)
-                                    .addComponent(ajuste14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(finalPerc14, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(final14, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(alocacaoAtual16, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(alocacaoPerc15, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(perfil15, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(ajustePerc15, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(finalPerc15, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(89, 89, 89)
-                                    .addComponent(ajuste15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(final15, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(rendaVariavelAloc, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(rendaVariavelAlocPerc, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(rendaVariavelPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(rendaVariavelAjustePerc, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(rendaVariavelFinalPerc, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(rendaVariavelAjuste, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(rendaVariavelFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(alocacaoAtual17, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(alocacaoPerc16, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(perfil16, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(ajustePerc16, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(89, 89, 89)
-                                    .addComponent(ajuste16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(finalPerc16, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(final16, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(alocacaoAtual18, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(alocacaoPerc17, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(perfil17, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(ajustePerc17, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(finalPerc17, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(89, 89, 89)
-                                    .addComponent(ajuste17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(final17, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(totalAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(totalAtualPerc, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(totalPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(totalAjustePerc, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(totalFinalPerc, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(89, 89, 89)
-                                    .addComponent(totalAjuste, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(totalFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 680, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(buttonMenu))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(atualPerc, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(lblAssessorPerc, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(aporteAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(aporteAtualPerc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(aportePerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(aporteAjustePerc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(aporteFinalPerc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(aporteAjuste, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(aporteFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(alocacaoAtual1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(alocacaoPerc1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(perfil1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ajustePerc1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(finalPerc1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ajuste1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(final1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(alocacaoAtual2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(alocacaoPerc2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(perfil2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ajustePerc2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ajuste2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(finalPerc2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(final2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(alocacaoAtual3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(alocacaoPerc3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(perfil3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ajustePerc3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(finalPerc3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ajuste3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(final3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(alocacaoAtual4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(alocacaoPerc4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(perfil4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ajustePerc4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(finalPerc4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ajuste4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(final4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(alocacaoAtual5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(alocacaoPerc5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(perfil5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ajustePerc5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ajuste5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(finalPerc5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(final5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(alocacaoAtual6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(alocacaoPerc6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(perfil6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ajustePerc6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ajuste6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(finalPerc6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(final6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(alocacaoAtual7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(alocacaoPerc7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(perfil7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ajustePerc7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(finalPerc7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ajuste7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(final7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(alocacaoAtual8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(alocacaoPerc8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(perfil8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ajustePerc8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ajuste8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(finalPerc8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(final8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(alocacaoAtual9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(alocacaoPerc9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(perfil9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ajustePerc9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ajuste9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(finalPerc9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(final9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(rendaFixaAtual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(rendaFixaAtualPerc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(rendaFixaPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(rendaFixaAjustePerc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(rendaFixaFinalPerc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(rendaFixaAjuste, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(rendaFixaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(alocacaoAtual10, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(alocacaoPerc10, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(perfil10, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ajustePerc10, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ajuste10, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(finalPerc10, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(final10, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(alocacaoAtual11, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(alocacaoPerc11, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(perfil11, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField131, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(finalPerc11, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ajuste11, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(final11, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(alocacaoAtual12, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(alocacaoPerc12, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(perfil12, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField125, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(finalPerc12, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ajuste12, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(final12, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(multimercadoAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(multimercadoAtualPerc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(multimercadoPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(multimercadoAjustePerc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(multimercadoFinalPerc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(multimercadoAjuste, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(multimercadoFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(alocacaoAtual14, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(alocacaoPerc13, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(perfil13, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ajustePerc13, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(finalPerc13, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ajuste13, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(final13, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(alocacaoAtual15, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(alocacaoPerc14, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(perfil14, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ajustePerc14, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ajuste14, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(finalPerc14, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(final14, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(alocacaoAtual16, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(alocacaoPerc15, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(perfil15, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ajustePerc15, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(finalPerc15, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ajuste15, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(final15, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(rendaVariavelAloc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(rendaVariavelAlocPerc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(rendaVariavelPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(rendaVariavelAjustePerc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(rendaVariavelFinalPerc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(rendaVariavelAjuste, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(rendaVariavelFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(alocacaoAtual17, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(alocacaoPerc16, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(perfil16, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ajustePerc16, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ajuste16, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(finalPerc16, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(final16, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(alocacaoAtual18, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(alocacaoPerc17, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(perfil17, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ajustePerc17, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(finalPerc17, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ajuste17, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(final17, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(totalAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(totalAtualPerc, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(totalPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(totalAjustePerc, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(totalFinalPerc, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(totalAjuste, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(totalFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+        jMenu1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\page.png")); // NOI18N
+        jMenu1.setText("Arquivo");
 
-        pack();
+        jMenuSair.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\door_out.png")); // NOI18N
+        jMenuSair.setText("Sair");
+        jMenuSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuSairActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuSair);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\wrench_orange.png")); // NOI18N
+        jMenu2.setText("Ajuste");
+
+        jCompra.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\user_add.png")); // NOI18N
+        jCompra.setText("Compra");
+        jCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCompraActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jCompra);
+
+        jVenda.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\user_delete.png")); // NOI18N
+        jVenda.setText("Venda");
+        jVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jVendaActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jVenda);
+
+        jMenuBar1.add(jMenu2);
+
+        jMenu6.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\group.png")); // NOI18N
+        jMenu6.setText("Clientes");
+
+        jConsulta.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\zoom.png")); // NOI18N
+        jConsulta.setText("Consulta");
+        jConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jConsultaActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jConsulta);
+
+        jMenuBar1.add(jMenu6);
+
+        jAlocacao.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\information.png")); // NOI18N
+        jAlocacao.setText("Menu");
+
+        jMenuItem.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\page.png")); // NOI18N
+        jMenuItem.setText("Alocação");
+        jMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemActionPerformed(evt);
+            }
+        });
+        jAlocacao.add(jMenuItem);
+
+        jMenuBar1.add(jAlocacao);
+
+        setJMenuBar(jMenuBar1);
+
+        setSize(new java.awt.Dimension(1038, 725));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void buttonMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMenuActionPerformed
-        TelaMenu menu = new TelaMenu();
-        menu.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_buttonMenuActionPerformed
 
     private void aporteFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aporteFinalActionPerformed
         // TODO add your handling code here:
@@ -3236,6 +3050,30 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoAtual17ActionPerformed
 
+    private void jMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSairActionPerformed
+        dispose();
+    }//GEN-LAST:event_jMenuSairActionPerformed
+
+    private void jCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCompraActionPerformed
+        TelaCompra telaCompra = new TelaCompra();
+        telaCompra.setVisible(true);
+    }//GEN-LAST:event_jCompraActionPerformed
+
+    private void jConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsultaActionPerformed
+        TelaConsulta telaConsulta = new TelaConsulta();
+        telaConsulta.setVisible(true);
+    }//GEN-LAST:event_jConsultaActionPerformed
+
+    private void jVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVendaActionPerformed
+        TelaVenda telaVenda = new TelaVenda();
+        telaVenda.setVisible(true);
+    }//GEN-LAST:event_jVendaActionPerformed
+
+    private void jMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemActionPerformed
+        TelaPrincipal menu = new TelaPrincipal();
+        menu.setVisible(true);
+    }//GEN-LAST:event_jMenuItemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3347,7 +3185,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField aporteFinalPerc;
     private javax.swing.JTextField aportePerfil;
     private javax.swing.JLabel atualPerc;
-    private javax.swing.JButton buttonMenu;
     private javax.swing.JTextField final1;
     private javax.swing.JTextField final10;
     private javax.swing.JTextField final11;
@@ -3382,6 +3219,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField finalPerc7;
     private javax.swing.JTextField finalPerc8;
     private javax.swing.JTextField finalPerc9;
+    private javax.swing.JMenu jAlocacao;
+    private javax.swing.JMenuItem jCompra;
+    private javax.swing.JMenuItem jConsulta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -3420,8 +3260,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem;
+    private javax.swing.JMenuItem jMenuSair;
     private javax.swing.JTextField jTextField125;
     private javax.swing.JTextField jTextField131;
+    private javax.swing.JMenuItem jVenda;
     private javax.swing.JLabel lblAssessorPerc;
     private javax.swing.JTextField multimercadoAjuste;
     private javax.swing.JTextField multimercadoAjustePerc;
