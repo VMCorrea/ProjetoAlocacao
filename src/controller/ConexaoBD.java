@@ -7,9 +7,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-public class ConexaoBD {
+
+public class ConexaoBD{
 
 
     private String driver = "com.mysql.jdbc.Driver";
@@ -18,9 +21,17 @@ public class ConexaoBD {
     public Statement statement = null;
     public Connection con = null;
 
-    public ConexaoBD() {
-    }
+    public ConexaoBD(){}
     
+    
+    public void first(){
+        try {
+            rs.first();
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexaoBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public void open() throws ConexaoException, ClassNotFoundException {
 
         if (con == null) {
@@ -35,22 +46,23 @@ public class ConexaoBD {
     }
     
     public void executaSql(String sql) {
-        if(con ==null){
-            try {
+         try {
                 statement = con.createStatement(rs.TYPE_SCROLL_INSENSITIVE, rs.CONCUR_READ_ONLY);
+                //JOptionPane.showMessageDialog(null, sql);
                 rs = statement.executeQuery(sql);
 
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Erro sql: " + ex.getMessage());
             }
-        }
+         
     }
 
     public void close() throws ConexaoException {
         if (con == null) {
             try {
                 con.close();
-
+                statement.close();
+                rs.close();
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Erro ao fechar conexao.");
             }
