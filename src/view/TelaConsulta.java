@@ -64,6 +64,7 @@ public class TelaConsulta extends javax.swing.JFrame {
         jAlocacao2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(null);
 
         jPanel1.setLayout(new javax.swing.OverlayLayout(jPanel1));
@@ -103,7 +104,7 @@ public class TelaConsulta extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "CLASSIFICACAO", "TIPO FISCAL", "NOME ATIVO", "VENCIMENTO", "VALOR"
+                "CLASSIFICACAO", "TIPO FISCAL", "NOME ATIVO", "VENCIMENTO", "VALOR"
             }
         ));
         jTableConsulta.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -121,10 +122,8 @@ public class TelaConsulta extends javax.swing.JFrame {
         jFrameConsulta.getContentPane().add(jLabelResultado);
         jLabelResultado.setBounds(30, 80, 71, 17);
 
-        jMenu1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\page.png")); // NOI18N
         jMenu1.setText("Arquivo");
 
-        jMenuSair2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\door_out.png")); // NOI18N
         jMenuSair2.setText("Sair");
         jMenuSair2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,10 +134,8 @@ public class TelaConsulta extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\wrench_orange.png")); // NOI18N
         jMenu2.setText("Ajuste");
 
-        jCompra2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\user_add.png")); // NOI18N
         jCompra2.setText("Compra");
         jCompra2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,7 +144,6 @@ public class TelaConsulta extends javax.swing.JFrame {
         });
         jMenu2.add(jCompra2);
 
-        jVenda2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\user_delete.png")); // NOI18N
         jVenda2.setText("Venda");
         jVenda2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,10 +154,8 @@ public class TelaConsulta extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
-        jMenu4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\group.png")); // NOI18N
         jMenu4.setText("Clientes");
 
-        jConsulta2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\zoom.png")); // NOI18N
         jConsulta2.setText("Consulta");
         jConsulta2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,10 +166,8 @@ public class TelaConsulta extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu4);
 
-        jMenu3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\information.png")); // NOI18N
         jMenu3.setText("Menu");
 
-        jAlocacao2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\page.png")); // NOI18N
         jAlocacao2.setText("Alocação");
         jAlocacao2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -189,9 +181,9 @@ public class TelaConsulta extends javax.swing.JFrame {
         jFrameConsulta.setJMenuBar(jMenuBar1);
 
         getContentPane().add(jFrameConsulta);
-        jFrameConsulta.setBounds(0, 0, 943, 480);
+        jFrameConsulta.setBounds(0, 0, 943, 470);
 
-        setSize(new java.awt.Dimension(951, 505));
+        setSize(new java.awt.Dimension(951, 509));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -199,24 +191,16 @@ public class TelaConsulta extends javax.swing.JFrame {
         
          mod.setPesquisa(txtFieldPesquisa.getText());
         try {
-            Posicao model = control.buscaPosicaoCliente(mod);
-            //classificacao, garantia_produto, ativo, data_vencimento, NET
+            //Posicao model = control.buscaPosicaoCliente(mod);
+         
+            preencherTabela("SELECT cat.classificacao, cat.garantia, cat.ativo, cat.data_vencimento, aloc.NET \n"
+                    + "FROM alocacao.catalogo_op AS cat JOIN alocacao.alocacoes AS aloc\n"
+                    + "ON cat.id = aloc.id\n"
+                    + "WHERE aloc.cliente_id = '" + mod.getPesquisa() + "'");
         } catch (ConexaoException ex) {
-            JOptionPane.showMessageDialog(null, "Erro.");
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro.");
-        } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, "Erro.");
         }catch (NullPointerException ex){
                 JOptionPane.showMessageDialog(null, "Erro. " + ex);
-            }
-        
-        try {
-            preencherTabela("SELECT classificacao, garantia_produto, ativo, data_vencimento, NET FROM alocacao.catalogo_op WHERE id = '"+mod.getPesquisa()+"'");
-        } catch (ConexaoException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: "+ex);
-        }catch (NullPointerException ex){
-            JOptionPane.showMessageDialog(null, "Erro... " + ex);
             }
     }//GEN-LAST:event_buttonPesquisaActionPerformed
 
@@ -254,7 +238,7 @@ public class TelaConsulta extends javax.swing.JFrame {
 
      public void preencherTabela(String sql) throws ConexaoException{
         ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"id", "Classificacao", "Tipo Fiscal", "Nome Ativo", "Vencimento", "Valor"};
+        String[] colunas = new String[]{"Classificacao", "Tipo Fiscal", "Nome Ativo", "Vencimento", "Valor"};
         try {
             conex.open();
         } catch (ClassNotFoundException ex) {
@@ -265,31 +249,29 @@ public class TelaConsulta extends javax.swing.JFrame {
         try{
             conex.rs.first();
             do{
-                Object[] tabela = new Object[]{conex.rs.getInt("id"), conex.rs.getString("classificacao"), conex.rs.getString("sub_produto"), 
-                    conex.rs.getString("ativo"), conex.rs.getDate("data_vencimento"), conex.rs.getFloat("NET")
+                Object[] tabela = new Object[]{conex.rs.getString("classificacao"), conex.rs.getString("sub_produto"), 
+                    conex.rs.getString("ativo"), conex.rs.getString("data_vencimento"), conex.rs.getFloat("NET")
                 };
                 dados.add(tabela);
             }while(conex.rs.next());
             
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(rootPane, "Erro ao preencher.");
+            JOptionPane.showMessageDialog(rootPane, "Erro ao obter dados.");
         }
         
         ModeloTabela modelo = new ModeloTabela(dados, colunas);
         
         jTableConsulta.setModel(modelo);
-        jTableConsulta.getColumnModel().getColumn(0).setPreferredWidth(80);
+        jTableConsulta.getColumnModel().getColumn(0).setPreferredWidth(110);
         jTableConsulta.getColumnModel().getColumn(0).setResizable(false);
-        jTableConsulta.getColumnModel().getColumn(1).setPreferredWidth(300);
+        jTableConsulta.getColumnModel().getColumn(1).setPreferredWidth(80);
         jTableConsulta.getColumnModel().getColumn(1).setResizable(false);
         jTableConsulta.getColumnModel().getColumn(2).setPreferredWidth(80);
         jTableConsulta.getColumnModel().getColumn(2).setResizable(false);
-        jTableConsulta.getColumnModel().getColumn(3).setPreferredWidth(100);
+        jTableConsulta.getColumnModel().getColumn(3).setPreferredWidth(80);
         jTableConsulta.getColumnModel().getColumn(3).setResizable(false);  
         jTableConsulta.getColumnModel().getColumn(4).setPreferredWidth(80);
-        jTableConsulta.getColumnModel().getColumn(4).setResizable(false);   
-        jTableConsulta.getColumnModel().getColumn(5).setPreferredWidth(80);
-        jTableConsulta.getColumnModel().getColumn(5).setResizable(false);         
+        jTableConsulta.getColumnModel().getColumn(4).setResizable(false);          
         jTableConsulta.getTableHeader().setReorderingAllowed(false);
         jTableConsulta.setAutoResizeMode(jTableConsulta.AUTO_RESIZE_OFF);
         jTableConsulta.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

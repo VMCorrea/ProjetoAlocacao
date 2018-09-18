@@ -27,6 +27,12 @@ public class TelaAjuste extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabelQtd = new javax.swing.JLabel();
+        jTextFieldQtd = new javax.swing.JTextField();
+        jButtonConf = new javax.swing.JButton();
+        jButtonCancel = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableAjuste = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuSair4 = new javax.swing.JMenuItem();
@@ -41,10 +47,56 @@ public class TelaAjuste extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        jMenu1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\page.png")); // NOI18N
+        jLabelQtd.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabelQtd.setText("Quantidade");
+        getContentPane().add(jLabelQtd);
+        jLabelQtd.setBounds(10, 290, 90, 40);
+
+        jTextFieldQtd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldQtdActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jTextFieldQtd);
+        jTextFieldQtd.setBounds(110, 290, 160, 40);
+
+        jButtonConf.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jButtonConf.setText("Confirmar");
+        getContentPane().add(jButtonConf);
+        jButtonConf.setBounds(290, 290, 100, 40);
+
+        jButtonCancel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jButtonCancel.setText("Cancelar");
+        jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonCancel);
+        jButtonCancel.setBounds(400, 290, 100, 40);
+
+        jTableAjuste.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jTableAjuste.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        jTableAjuste.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Produto", "Sub Produto", "CNPJ Fundo", "Ativo", "Emissor", "Data Vencimento"
+            }
+        ));
+        jTableAjuste.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableAjusteMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jTableAjuste);
+
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(10, 20, 710, 230);
+
         jMenu1.setText("Arquivo");
 
-        jMenuSair4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\door_out.png")); // NOI18N
         jMenuSair4.setText("Sair");
         jMenuSair4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -55,10 +107,8 @@ public class TelaAjuste extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\wrench_orange.png")); // NOI18N
         jMenu2.setText("Ajuste");
 
-        jCompra4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\user_add.png")); // NOI18N
         jCompra4.setText("Compra");
         jCompra4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,7 +117,6 @@ public class TelaAjuste extends javax.swing.JFrame {
         });
         jMenu2.add(jCompra4);
 
-        jVenda4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\user_delete.png")); // NOI18N
         jVenda4.setText("Venda");
         jVenda4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,10 +127,8 @@ public class TelaAjuste extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
-        jMenu4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\group.png")); // NOI18N
         jMenu4.setText("Clientes");
 
-        jConsulta4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\zoom.png")); // NOI18N
         jConsulta4.setText("Consulta");
         jConsulta4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,10 +139,8 @@ public class TelaAjuste extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu4);
 
-        jAlocacao3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\information.png")); // NOI18N
         jAlocacao3.setText("Menu");
 
-        jMenuItem4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\page.png")); // NOI18N
         jMenuItem4.setText("Alocação");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,7 +153,7 @@ public class TelaAjuste extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        setSize(new java.awt.Dimension(408, 331));
+        setSize(new java.awt.Dimension(744, 412));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -135,6 +180,20 @@ public class TelaAjuste extends javax.swing.JFrame {
         TelaPrincipal menu = new TelaPrincipal();
         menu.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jTextFieldQtdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldQtdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldQtdActionPerformed
+
+    private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonCancelActionPerformed
+
+    private void jTableAjusteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAjusteMouseClicked
+        TelaAjuste ajuste = new TelaAjuste();
+        ajuste.setVisible(true);
+
+    }//GEN-LAST:event_jTableAjusteMouseClicked
 
     /**
      * @param args the command line arguments
@@ -173,14 +232,20 @@ public class TelaAjuste extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jAlocacao3;
+    private javax.swing.JButton jButtonCancel;
+    private javax.swing.JButton jButtonConf;
     private javax.swing.JMenuItem jCompra4;
     private javax.swing.JMenuItem jConsulta4;
+    private javax.swing.JLabel jLabelQtd;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuSair4;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTableAjuste;
+    private javax.swing.JTextField jTextFieldQtd;
     private javax.swing.JMenuItem jVenda4;
     // End of variables declaration//GEN-END:variables
 }
