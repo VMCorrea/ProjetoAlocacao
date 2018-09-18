@@ -213,7 +213,7 @@ public class TelaConsulta extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuSair2ActionPerformed
 
     private void jCompra2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCompra2ActionPerformed
-        TelaAjusteCompra telaCompra = new TelaAjusteCompra();
+        TelaCompra telaCompra = new TelaCompra();
         telaCompra.setVisible(true);
     }//GEN-LAST:event_jCompra2ActionPerformed
 
@@ -223,7 +223,7 @@ public class TelaConsulta extends javax.swing.JFrame {
     }//GEN-LAST:event_jConsulta2ActionPerformed
 
     private void jVenda2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVenda2ActionPerformed
-        TelaAjusteVenda telaVenda = new TelaAjusteVenda();
+        TelaVenda telaVenda = new TelaVenda();
         telaVenda.setVisible(true);
     }//GEN-LAST:event_jVenda2ActionPerformed
 

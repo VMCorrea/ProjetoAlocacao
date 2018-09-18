@@ -5,28 +5,14 @@
  */
 package view;
 
-import controller.ConexaoBD;
-import controller.ConexaoException;
-import controller.PosicaoCliente;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import javax.swing.JOptionPane;
-import javax.swing.ListSelectionModel;
-import model.ModeloTabela;
-import model.Posicao;
-
 /**
  *
  * @author Beatriz.aurelio
  */
 public class TelaAjusteCompra extends javax.swing.JFrame {
 
-    Posicao mod = new Posicao();
-    PosicaoCliente control = new PosicaoCliente();
-    ConexaoBD conex = new ConexaoBD();
-
     /**
-     * Creates new form TelaCompra
+     * Creates new form TelaAjuste
      */
     public TelaAjusteCompra() {
         initComponents();
@@ -40,10 +26,14 @@ public class TelaAjusteCompra extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        jComboBoxItens = new javax.swing.JComboBox<>();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTableCompra = new javax.swing.JTable();
+        jLabelQtd = new javax.swing.JLabel();
+        jTextFieldQtd = new javax.swing.JTextField();
+        jButtonConf = new javax.swing.JButton();
+        jButtonCancel = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuSair4 = new javax.swing.JMenuItem();
@@ -56,53 +46,66 @@ public class TelaAjusteCompra extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Compra");
-        setResizable(false);
         getContentPane().setLayout(null);
 
-        jComboBoxItens.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jComboBoxItens.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "< Selecione uma das opções >", "Renda Fixa Pós com liquidez (LFT, CDBs, Fundos DI, Poupança)", "Renda Fixa Pós sem liquidez (LC, LCIs, LCAs, CDB longo)", "Renda Fixa Pós Crédito Privado (sem FGC - CRI, CRA, Deb)", "Renda Fixa Pré com liquidez (LTNs, NTN-F)", "Renda Fixa Pré sem liquidez (CDBs, LCs)", "Renda Fixa Pré Crédito Privado (LF, Debentures)", "Renda Fixa IPCA com liquidez (NTN-B)", "Renda Fixa IPCA sem liquidez (CDBs, LCs)", "Renda Fixa IPCA Crédito Privado (CRI, CRA, Debentures)", "Multimercado Baixa Vol (até 1.5%)", "Multimercado Média Vol (de 1.5% até 4%)", "Multimercado Alta Vol (acima de 4%)", "Fundos Imobiliários", "Carteira de Ações", "Fundos Internacionas sem hedge", "Proteção (Seguro Vida)", "Carteira Offshore (FX)" }));
-        jComboBoxItens.setToolTipText("Opções Compra");
-        jComboBoxItens.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jComboBoxItens.addActionListener(new java.awt.event.ActionListener() {
+        jLabelQtd.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabelQtd.setText("Quantidade");
+        getContentPane().add(jLabelQtd);
+        jLabelQtd.setBounds(10, 290, 90, 40);
+
+        jTextFieldQtd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxItensActionPerformed(evt);
+                jTextFieldQtdActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboBoxItens);
-        jComboBoxItens.setBounds(200, 20, 385, 30);
+        getContentPane().add(jTextFieldQtd);
+        jTextFieldQtd.setBounds(110, 290, 160, 40);
 
-        jTableCompra.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jTableCompra.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        jTableCompra.setModel(new javax.swing.table.DefaultTableModel(
+        jButtonConf.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jButtonConf.setText("Confirmar");
+        jButtonConf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonConf);
+        jButtonConf.setBounds(290, 290, 100, 40);
+
+        jButtonCancel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jButtonCancel.setText("Cancelar");
+        jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonCancel);
+        jButtonCancel.setBounds(400, 290, 100, 40);
+
+        jTable1.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
                 "Produto", "Sub Produto", "CNPJ", "Ativo", "Emissor", "Data Vencimento"
             }
-        ));
-        jTableCompra.setColumnSelectionAllowed(true);
-        jTableCompra.setEnabled(false);
-        jTableCompra.setPreferredSize(new java.awt.Dimension(250, 0));
-        jTableCompra.getTableHeader().setReorderingAllowed(false);
-        jTableCompra.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableCompraMouseClicked(evt);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTableCompra);
-        jTableCompra.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        if (jTableCompra.getColumnModel().getColumnCount() > 0) {
-            jTableCompra.getColumnModel().getColumn(0).setResizable(false);
-            jTableCompra.getColumnModel().getColumn(1).setResizable(false);
-            jTableCompra.getColumnModel().getColumn(2).setResizable(false);
-            jTableCompra.getColumnModel().getColumn(3).setResizable(false);
-            jTableCompra.getColumnModel().getColumn(4).setResizable(false);
-        }
 
-        getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(10, 250, 820, 300);
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jButtonConf, org.jdesktop.beansbinding.ObjectProperty.create(), jTable1, org.jdesktop.beansbinding.BeanProperty.create("elements"));
+        bindingGroup.addBinding(binding);
+        binding.bind();
+        jScrollPane1.setViewportView(jTable1);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(10, 30, 700, 80);
 
         jMenu1.setText("Arquivo");
 
@@ -162,7 +165,9 @@ public class TelaAjusteCompra extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        setSize(new java.awt.Dimension(852, 622));
+        bindingGroup.bind();
+
+        setSize(new java.awt.Dimension(744, 412));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -171,12 +176,12 @@ public class TelaAjusteCompra extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuSair4ActionPerformed
 
     private void jCompra4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCompra4ActionPerformed
-        TelaAjusteCompra telaCompra = new TelaAjusteCompra();
+        TelaCompra telaCompra = new TelaCompra();
         telaCompra.setVisible(true);
     }//GEN-LAST:event_jCompra4ActionPerformed
 
     private void jVenda4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVenda4ActionPerformed
-        TelaAjusteVenda telaVenda = new TelaAjusteVenda();
+        TelaVenda telaVenda = new TelaVenda();
         telaVenda.setVisible(true);
     }//GEN-LAST:event_jVenda4ActionPerformed
 
@@ -190,95 +195,28 @@ public class TelaAjusteCompra extends javax.swing.JFrame {
         menu.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
-    private void jComboBoxItensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxItensActionPerformed
-        String[] selecao = {"< Selecione uma das opções >",
-            "Renda Fixa Pós com liquidez (LFT, CDBs, Fundos DI, Poupança)",
-            "Renda Fixa Pós sem liquidez (LC, LCIs, LCAs, CDB longo)",
-            "Renda Fixa Pós Crédito Privado (sem FGC - CRI, CRA, Deb)",
-            "Renda Fixa Pré com liquidez (LTNs, NTN-F)",
-            "Renda Fixa Pré sem liquidez (CDBs, LCs)",
-            "Renda Fixa Pré Crédito Privado (LF, Debentures)",
-            "Renda Fixa IPCA com liquidez (NTN-B)",
-            "Renda Fixa IPCA sem liquidez (CDBs, LCs)",
-            "Renda Fixa IPCA Crédito Privado (CRI, CRA, Debentures)",
-            "Multimercado Baixa Vol (até 1.5%)",
-            "Multimercado Média Vol (de 1.5% até 4%)",
-            "Multimercado Alta Vol (acima de 4%)",
-            "Fundos Imobiliários",
-            "Carteira de Ações",
-            "Fundos Internacionas sem hedge",
-            "Proteção (Seguro Vida)",
-            "Carteira Offshore (FX)"};
-       
-        if(jComboBoxItens.getSelectedItem() == selecao[0]){
-            JOptionPane.showMessageDialog(null, "Selecione uma das opções.");
-        }
-        else if (jComboBoxItens.getSelectedItem() == selecao[jComboBoxItens.getSelectedIndex()]){
-            try {
-                    preencherTabela("SELECT produto, sub_produto, cnpj, ativo, emissor, data_vencimento FROM alocacao.catalogo_op WHERE classificacao = '"+selecao[jComboBoxItens.getSelectedIndex()]+"'");
-                } catch (ConexaoException ex) {
-                    JOptionPane.showMessageDialog(null, "Erro ao selecionar dados. " + ex);
-                } catch (ClassNotFoundException ex) {
-                JOptionPane.showMessageDialog(null, "Erro: " + ex);
-                }catch (NullPointerException ex){
-                JOptionPane.showMessageDialog(null, "Erro... " + ex);
-            }
-        }
+    private void jTextFieldQtdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldQtdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldQtdActionPerformed
 
+    private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
+        
+        dispose();
+    }//GEN-LAST:event_jButtonCancelActionPerformed
 
-    }//GEN-LAST:event_jComboBoxItensActionPerformed
+    private void jButtonConfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfActionPerformed
+        
+        /*
+        JConsultaProfissao frm = new JConsultaProfissao(new JFrame(), true);
+	frm.setVisible(true);
 
-    private void jTableCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableCompraMouseClicked
-        TelaAjuste ajuste = new TelaAjuste();
-        ajuste.setVisible(true);
-       
-    }//GEN-LAST:event_jTableCompraMouseClicked
-
-    public void preencherTabela(String sql) throws ConexaoException, ClassNotFoundException {
-        ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"Produto", "Sub Produto", "CNPJ Fundo", "Ativo", "Emissor", "Vencimento"};
-
-        conex.open();
-        conex.executaSql(sql);
-
-        try {
-            
-            conex.rs.first();
-            do {
-                Object[] tabela = new Object[]{conex.rs.getString("produto"), conex.rs.getString("sub_produto"),
-                    conex.rs.getInt("cnpj"), conex.rs.getString("ativo"), conex.rs.getString("emissor"),
-                    conex.rs.getString("data_vencimento")
-                };
-                dados.add(tabela);
-            } while (conex.rs.next());
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(rootPane, "Erro ao obter dados.");
-        }
-
-        ModeloTabela modelo = new ModeloTabela(dados, colunas);
-
-        jTableCompra.setModel(modelo);
-        jTableCompra.getColumnModel().getColumn(0).setPreferredWidth(250);
-        jTableCompra.getColumnModel().getColumn(0).setResizable(false);
-        jTableCompra.getColumnModel().getColumn(1).setPreferredWidth(250);
-        jTableCompra.getColumnModel().getColumn(1).setResizable(false);
-        jTableCompra.getColumnModel().getColumn(2).setPreferredWidth(250);
-        jTableCompra.getColumnModel().getColumn(2).setResizable(false);
-        jTableCompra.getColumnModel().getColumn(3).setPreferredWidth(250);
-        jTableCompra.getColumnModel().getColumn(3).setResizable(false);
-        jTableCompra.getColumnModel().getColumn(4).setPreferredWidth(250);
-        jTableCompra.getColumnModel().getColumn(4).setResizable(false);
-        jTableCompra.getColumnModel().getColumn(5).setPreferredWidth(250);
-        jTableCompra.getColumnModel().getColumn(5).setResizable(false);
-
-        jTableCompra.getTableHeader().setReorderingAllowed(false);
-        jTableCompra.setAutoResizeMode(jTableCompra.AUTO_RESIZE_OFF);
-        jTableCompra.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-        conex.close();
-
-    }
+	if(frm.isConfirmado){
+		Profissao p = frm.getProfissao();
+		jComboBox3;setSelectedItem(p);
+	}
+*/
+        
+    }//GEN-LAST:event_jButtonConfActionPerformed
 
     /**
      * @param args the command line arguments
@@ -318,17 +256,21 @@ public class TelaAjusteCompra extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jAlocacao3;
-    private javax.swing.JComboBox<String> jComboBoxItens;
+    private javax.swing.JButton jButtonCancel;
+    private javax.swing.JButton jButtonConf;
     private javax.swing.JMenuItem jCompra4;
     private javax.swing.JMenuItem jConsulta4;
+    private javax.swing.JLabel jLabelQtd;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuSair4;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTableCompra;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextFieldQtd;
     private javax.swing.JMenuItem jVenda4;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

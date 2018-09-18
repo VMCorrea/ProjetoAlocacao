@@ -3055,7 +3055,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuSairActionPerformed
 
     private void jCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCompraActionPerformed
-        TelaAjusteCompra telaCompra = new TelaAjusteCompra();
+        TelaCompra telaCompra = new TelaCompra();
         telaCompra.setVisible(true);
     }//GEN-LAST:event_jCompraActionPerformed
 
@@ -3065,7 +3065,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jConsultaActionPerformed
 
     private void jVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVendaActionPerformed
-        TelaAjusteVenda telaVenda = new TelaAjusteVenda();
+        TelaVenda telaVenda = new TelaVenda();
         telaVenda.setVisible(true);
     }//GEN-LAST:event_jVendaActionPerformed
 
