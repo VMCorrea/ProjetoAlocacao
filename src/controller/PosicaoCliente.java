@@ -2,68 +2,88 @@ package controller;
 
 import model.Posicao;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Logger;
-
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.PreparedStatement;
+import java.sql.*;
+import java.util.*;
+import javax.swing.JOptionPane;
 
 public class PosicaoCliente{
-
-    private Connection conn;
-    private Statement statement;
-    private ConexaoInterface conexao;
+	
+    private Connection con;
+    private Statement statement; 
+    private PreparedStatement pst;
+    ConexaoBD conex = new ConexaoBD();
+    Posicao pos = new Posicao();
     
-
-            
-    public void inserePosicaoCliente(Posicao posicao) throws ConexaoException{
-    	/*Param: ?
-           Cria o Cliente no Banco (mySQL)
-          retorna Objeto de Model com Posicao vazia*/
-	   
-    	//Connection con = conexao.getConnection();
-    	
-    	String query = "INSERT INTO posicaoCliente (classificacao, tipo fiscal, nomeativo, vencimento, taxa, valor) VALUES (?,?,?,?,?,?)";
-    	stmInserir = conexao.prepareStatement(query);
-    	
+ 
+        
+    public void inserePosicaoCliente(Posicao posicao) throws ConexaoException, SQLException{
+       
+    	String query = "INSERT INTO alocacao.catalogo_op (classificacao, garantia, ativo, data_vencimento) VALUES (?,?,?,?)";
+        pst = conex.con.prepareStatement(query);
+        
+        pst.setString(1, pos.getClassificacao());
+        pst.setString(2, pos.getProdutoGarantia());
+        pst.setString(3, pos.getAtivo());
+        pst.setDate(4, pos.getDataVencimento());
+       
+        
+        pst.execute();
+        	
   }
     
-    public void buscaPosicaoCliente() throws ConexaoException{
-    	/* Param: access_token do Sugar (assumindo que o Login foi feito com sucesso)
-        Verifica se o Cliente existe no Sugar para o usu�rio
-         se existir procurar no banco (mySQL) a posi��o do Cliente
-         Armazenar em Objeto de Model ou retornar um objeto com informa��es
-         se cliente n�o tiver Posicao usa metodo CriaPosicaoCliente e retorna a Posicao Zerada
-         se n�o existir enviar mensagem 
-          "Cliente n�o existe / sem acesso ao Cliente"*/
-
-    	String query ="SELECT posicao FROM posicaoCliente WHERE codigoCliente=?";
-        stmObterPosicao = conexao.prepareStatement(query);
- 
-    	
+    public Posicao buscaPosicaoCliente(Posicao mod) throws ConexaoException, SQLException, ClassNotFoundException{
+        try {
+            conex.open();
+            conex.executaSql("SELECT cat.classificacao, cat.garantia, cat.ativo, cat.data_vencimento, al.NET\n"
+                    + "FROM alocacao.catalogo_op AS cat\n"
+                    + "INNER JOIN alocacao.alocacoes AS al\n"
+                    + "ON cat.id = al.catalogo_id \n"
+                    + "WHERE al.cliente_id LIKE '%" + mod.getPesquisa() + "%'");
+            conex.rs.first();
+            mod.setClassificacao(conex.rs.getString("classificacao"));
+            mod.setProdutoGarantia(conex.rs.getString("garantia")); 
+            mod.setAtivo(conex.rs.getString("ativo"));
+            mod.setDataVencimento(conex.rs.getDate("data_vencimento"));
+            mod.setNet(conex.rs.getFloat("NET"));
+            
+             
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Cliente não existe / Sem acesso ao cliente.");
+        }
+                
+        conex.close();
+        return mod;
     }
 
-
-	public void atualizaPosicaoCliente() throws ConexaoException {
-		/*
-		 *  Param: objeto de Model com informacoees atualizadas de Poscao do Cliente
-                   Atualiza Cliente com base no objeto
-		 * */
-    	
-		String query = "UPDATE posicaoCliente SET (classificacao, tipo fiscal, nomeativo, vencimento, taxa, valor) VALUES (?,?,?,?,?,?) WHERE codigoCliente=?";
-        stmAtualizar = conexao.prepareStatement(query);
-		
-	}
+    public void atualizaPosicaoCliente() throws ConexaoException, SQLException, ClassNotFoundException {
+   	conex.open();
+        
+        String query = "UPDATE alocacao.catalogo_op SET ativo=?, "
+                + "data_vencimento=?, classificacao=?, garantia=?, quantidade=? "
+                + "INNER JOIN alocacos AS al ON al.id = id WHERE id=?";
+        pst = conex.con.prepareStatement(query);
+        
+        pst.setString(1, pos.getClassificacao());
+        pst.setString(2, pos.getSubproduto());
+        pst.setString(3, pos.getAtivo());
+        pst.setDate(4, pos.getDataVencimento());
+        pst.setFloat(5, pos.getNet());
+        
+        pst.execute();	
+	conex.close();
+        }
 	
-	public void deletaPosicaoCliente() throws ConexaoException{
-	    			
-		String query = "DELETE FROM posicaoCliente WHERE codigoCliente=?";
-        stmApagar = conexao.prepareStatement(query);
+	public void deletaPosicaoCliente() throws ConexaoException, SQLException, ClassNotFoundException{
+	    conex.open();
+            
+            String query = "DELETE FROM alocacao.alocacoes WHERE cliente_id=?";
+            pst = conex.con.prepareStatement(query);
+            pst.execute(query);
+            
+            conex.close();
 	}
-			
+       
+	
 }
