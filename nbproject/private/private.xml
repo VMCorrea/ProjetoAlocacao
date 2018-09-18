@@ -3,12 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Beatriz.aurelio/Documents/NetBeansProjects/ProjetoAlocacao/src/view/TelaResumo.java</file>
-            <file>file:/C:/Users/Beatriz.aurelio/Documents/NetBeansProjects/ProjetoAlocacao/src/view/TelaAjuste.java</file>
-            <file>file:/C:/Users/Beatriz.aurelio/Documents/NetBeansProjects/ProjetoAlocacao/src/view/TelaLogin.java</file>
-            <file>file:/C:/Users/Beatriz.aurelio/Documents/NetBeansProjects/ProjetoAlocacao/src/controller/ProdutosDB.java</file>
-            <file>file:/C:/Users/Beatriz.aurelio/Documents/NetBeansProjects/ProjetoAlocacao/src/controller/PosicaoCliente.java</file>
-            <file>file:/C:/Users/Beatriz.aurelio/Documents/NetBeansProjects/ProjetoAlocacao/src/view/TelaMenu.java</file>
+            <file>file:/C:/Users/User/Documents/Projetos%20NetBeans/ProjetoAlocacao/src/view/TelaConsulta.java</file>
+            <file>file:/C:/Users/User/Documents/Projetos%20NetBeans/ProjetoAlocacao/src/view/TelaAjusteCompra.java</file>
+            <file>file:/C:/Users/User/Documents/Projetos%20NetBeans/ProjetoAlocacao/src/view/TelaAjusteVenda.java</file>
         </group>
     </open-files>
 </project-private>
