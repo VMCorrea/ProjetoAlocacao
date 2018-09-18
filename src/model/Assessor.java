@@ -14,34 +14,12 @@ public class Assessor {
     }
 
 
+    public void AjustaCliente() {    }
 
+    public void LiberaCompra() {    }
 
-    /**
-     * 
-     */
-    public void AjustaCliente() {
-        // TODO implement here
-    }
+    public void DefineAtivo() {    }
 
-    /**
-     * 
-     */
-    public void LiberaCompra() {
-        // TODO implement here
-    }
-
-    /**
-     * 
-     */
-    public void DefineAtivo() {
-        // TODO implement here
-    }
-
-    /**
-     * 
-     */
-    public void LiberaVenda() {
-        // TODO implement here
-    }
+    public void LiberaVenda() {    }
 
 }
