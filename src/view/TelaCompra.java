@@ -102,7 +102,7 @@ public class TelaCompra extends javax.swing.JFrame {
         }
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(10, 250, 820, 300);
+        jScrollPane2.setBounds(10, 250, 960, 300);
 
         jMenu1.setText("Arquivo");
 
@@ -162,7 +162,7 @@ public class TelaCompra extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        setSize(new java.awt.Dimension(852, 622));
+        setSize(new java.awt.Dimension(992, 622));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -279,17 +279,17 @@ public class TelaCompra extends javax.swing.JFrame {
         ModeloTabela modelo = new ModeloTabela(dados, colunas);
 
         jTableCompra.setModel(modelo);
-        jTableCompra.getColumnModel().getColumn(0).setPreferredWidth(250);
+        jTableCompra.getColumnModel().getColumn(0).setPreferredWidth(150);
         jTableCompra.getColumnModel().getColumn(0).setResizable(false);
-        jTableCompra.getColumnModel().getColumn(1).setPreferredWidth(250);
+        jTableCompra.getColumnModel().getColumn(1).setPreferredWidth(150);
         jTableCompra.getColumnModel().getColumn(1).setResizable(false);
-        jTableCompra.getColumnModel().getColumn(2).setPreferredWidth(250);
+        jTableCompra.getColumnModel().getColumn(2).setPreferredWidth(100);
         jTableCompra.getColumnModel().getColumn(2).setResizable(false);
-        jTableCompra.getColumnModel().getColumn(3).setPreferredWidth(250);
+        jTableCompra.getColumnModel().getColumn(3).setPreferredWidth(150);
         jTableCompra.getColumnModel().getColumn(3).setResizable(false);
-        jTableCompra.getColumnModel().getColumn(4).setPreferredWidth(250);
+        jTableCompra.getColumnModel().getColumn(4).setPreferredWidth(150);
         jTableCompra.getColumnModel().getColumn(4).setResizable(false);
-        jTableCompra.getColumnModel().getColumn(5).setPreferredWidth(250);
+        jTableCompra.getColumnModel().getColumn(5).setPreferredWidth(100);
         jTableCompra.getColumnModel().getColumn(5).setResizable(false);
 
         jTableCompra.getTableHeader().setReorderingAllowed(false);

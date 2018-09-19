@@ -86,7 +86,7 @@ public class TelaVenda extends javax.swing.JFrame {
         }
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(10, 210, 700, 280);
+        jScrollPane2.setBounds(10, 210, 970, 280);
 
         jComboBoxItens.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jComboBoxItens.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "< Selecione uma das opções >", "Renda Fixa Pós com liquidez (LFT, CDBs, Fundos DI, Poupança)", "Renda Fixa Pós sem liquidez (LC, LCIs, LCAs, CDB longo)", "Renda Fixa Pós Crédito Privado (sem FGC - CRI, CRA, Deb)", "Renda Fixa Pré com liquidez (LTNs, NTN-F)", "Renda Fixa Pré sem liquidez (CDBs, LCs)", "Renda Fixa Pré Crédito Privado (LF, Debentures)", "Renda Fixa IPCA com liquidez (NTN-B)", "Renda Fixa IPCA sem liquidez (CDBs, LCs)", "Renda Fixa IPCA Crédito Privado (CRI, CRA, Debentures)", "Multimercado Baixa Vol (até 1.5%)", "Multimercado Média Vol (de 1.5% até 4%)", "Multimercado Alta Vol (acima de 4%)", "Fundos Imobiliários", "Carteira de Ações", "Fundos Internacionas sem hedge", "Proteção (Seguro Vida)", "Carteira Offshore (FX)" }));
@@ -98,7 +98,7 @@ public class TelaVenda extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jComboBoxItens);
-        jComboBoxItens.setBounds(130, 20, 385, 30);
+        jComboBoxItens.setBounds(250, 30, 385, 30);
 
         jMenu1.setText("Arquivo");
 
@@ -158,7 +158,7 @@ public class TelaVenda extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        setSize(new java.awt.Dimension(732, 569));
+        setSize(new java.awt.Dimension(1003, 569));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -217,7 +217,7 @@ public class TelaVenda extends javax.swing.JFrame {
             try {
                 
                 preencherTabela("SELECT cat.produto, cat.sub_produto, cat.ativo, cat.garantia, cat.data_vencimento, al.net\n"
-                        + "FROM alocacao.catalogo_op AS cat JOIN alocacao.alocacoes AS al\n"
+                        + "FROM alocacao.catalogo_op AS cat INNER JOIN alocacao.alocacoes AS al\n"
                         + "ON al.catalogo_id = cat.id\n"
                         + "WHERE cat.classificacao = '" + mensagem[jComboBoxItens.getSelectedIndex()] + "'");
             
@@ -256,17 +256,17 @@ public class TelaVenda extends javax.swing.JFrame {
         ModeloTabela modelo = new ModeloTabela(dados, colunas);
 
         jTableVenda.setModel(modelo);
-        jTableVenda.getColumnModel().getColumn(0).setPreferredWidth(200);
+        jTableVenda.getColumnModel().getColumn(0).setPreferredWidth(150);
         jTableVenda.getColumnModel().getColumn(0).setResizable(false);
-        jTableVenda.getColumnModel().getColumn(1).setPreferredWidth(200);
+        jTableVenda.getColumnModel().getColumn(1).setPreferredWidth(150);
         jTableVenda.getColumnModel().getColumn(1).setResizable(false);
         jTableVenda.getColumnModel().getColumn(2).setPreferredWidth(200);
         jTableVenda.getColumnModel().getColumn(2).setResizable(false);
         jTableVenda.getColumnModel().getColumn(3).setPreferredWidth(150);
         jTableVenda.getColumnModel().getColumn(3).setResizable(false);
-        jTableVenda.getColumnModel().getColumn(4).setPreferredWidth(30);
+        jTableVenda.getColumnModel().getColumn(4).setPreferredWidth(150);
         jTableVenda.getColumnModel().getColumn(4).setResizable(false);
-        jTableVenda.getColumnModel().getColumn(5).setPreferredWidth(30);
+        jTableVenda.getColumnModel().getColumn(5).setPreferredWidth(150);
         jTableVenda.getColumnModel().getColumn(5).setResizable(false);
 
         jTableVenda.getTableHeader().setReorderingAllowed(false);
