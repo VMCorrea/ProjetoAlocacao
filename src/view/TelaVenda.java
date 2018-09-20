@@ -63,17 +63,9 @@ public class TelaVenda extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Produto", "Sub Produto", "Ativo", "Produto em Garantia", "Data Vencimento", "NET"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
-        });
+        ));
         jTableVenda.getTableHeader().setReorderingAllowed(false);
         jTableVenda.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -163,7 +155,11 @@ public class TelaVenda extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuSair4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSair4ActionPerformed
-        dispose();
+        int sair = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair?");
+        if(sair == JOptionPane.YES_OPTION){
+            dispose();
+            //System.exit(0);
+        }
     }//GEN-LAST:event_jMenuSair4ActionPerformed
 
     private void jCompra4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCompra4ActionPerformed
@@ -236,10 +232,11 @@ public class TelaVenda extends javax.swing.JFrame {
         ArrayList dados = new ArrayList();
         String[] colunas = new String[]{"Produto", "Sub Produto", "Ativo","Produto em Garantia", "Data Vencimento", "NET"};
 
-        conex.open();
-        conex.executaSql(sql);
-
         try {
+            conex.open();
+
+            conex.executaSql(sql);
+
             conex.rs.first();
             do {
                 Object[] tabela = new Object[]{conex.rs.getString("produto"), conex.rs.getString("sub_produto"),
@@ -249,8 +246,12 @@ public class TelaVenda extends javax.swing.JFrame {
                 dados.add(tabela);
             } while (conex.rs.next());
 
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(rootPane, "Erro ao preencher.");
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(rootPane, "Erro ao obter dados.");
+        }catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }finally{
+            conex.close();
         }
 
         ModeloTabela modelo = new ModeloTabela(dados, colunas);
@@ -273,8 +274,7 @@ public class TelaVenda extends javax.swing.JFrame {
         jTableVenda.setAutoResizeMode(jTableVenda.AUTO_RESIZE_OFF);
         jTableVenda.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-        conex.close();
-
+    
     }
 
     /**

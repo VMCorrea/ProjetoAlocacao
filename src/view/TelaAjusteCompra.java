@@ -5,6 +5,8 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Beatriz.aurelio
@@ -172,7 +174,11 @@ public class TelaAjusteCompra extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuSair4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSair4ActionPerformed
-        dispose();
+        int sair = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair?");
+        if(sair == JOptionPane.YES_OPTION){
+            dispose();
+            //System.exit(0);
+        }
     }//GEN-LAST:event_jMenuSair4ActionPerformed
 
     private void jCompra4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCompra4ActionPerformed

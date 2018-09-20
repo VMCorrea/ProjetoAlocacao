@@ -11,8 +11,6 @@ import controller.ConexaoException;
 import controller.PosicaoCliente;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
@@ -44,6 +42,7 @@ public class TelaConsulta extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jFrameConsulta = new javax.swing.JInternalFrame();
         lblCodigo = new javax.swing.JLabel();
@@ -51,7 +50,6 @@ public class TelaConsulta extends javax.swing.JFrame {
         buttonPesquisa = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableConsulta = new javax.swing.JTable();
-        jLabelResultado = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuSair2 = new javax.swing.JMenuItem();
@@ -62,6 +60,8 @@ public class TelaConsulta extends javax.swing.JFrame {
         jConsulta2 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jAlocacao2 = new javax.swing.JMenuItem();
+
+        jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -77,8 +77,11 @@ public class TelaConsulta extends javax.swing.JFrame {
 
         lblCodigo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lblCodigo.setText("Codigo Cliente");
+        lblCodigo.setMaximumSize(new java.awt.Dimension(90, 20));
+        lblCodigo.setMinimumSize(new java.awt.Dimension(90, 20));
+        lblCodigo.setPreferredSize(new java.awt.Dimension(90, 30));
         jFrameConsulta.getContentPane().add(lblCodigo);
-        lblCodigo.setBounds(20, 20, 81, 15);
+        lblCodigo.setBounds(20, 20, 90, 30);
 
         txtFieldPesquisa.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         txtFieldPesquisa.addActionListener(new java.awt.event.ActionListener() {
@@ -89,22 +92,26 @@ public class TelaConsulta extends javax.swing.JFrame {
         jFrameConsulta.getContentPane().add(txtFieldPesquisa);
         txtFieldPesquisa.setBounds(130, 20, 240, 30);
 
-        buttonPesquisa.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        buttonPesquisa.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         buttonPesquisa.setText("Pesquisa");
+        buttonPesquisa.setMaximumSize(new java.awt.Dimension(100, 40));
+        buttonPesquisa.setMinimumSize(new java.awt.Dimension(100, 40));
+        buttonPesquisa.setPreferredSize(new java.awt.Dimension(90, 35));
+        buttonPesquisa.setVerifyInputWhenFocusTarget(false);
         buttonPesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonPesquisaActionPerformed(evt);
             }
         });
         jFrameConsulta.getContentPane().add(buttonPesquisa);
-        buttonPesquisa.setBounds(390, 20, 77, 23);
+        buttonPesquisa.setBounds(390, 20, 90, 35);
 
         jTableConsulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "CLASSIFICACAO", "TIPO FISCAL", "NOME ATIVO", "VENCIMENTO", "VALOR"
+
             }
         ));
         jTableConsulta.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -116,11 +123,6 @@ public class TelaConsulta extends javax.swing.JFrame {
 
         jFrameConsulta.getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(10, 110, 910, 290);
-
-        jLabelResultado.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabelResultado.setText("Resultado");
-        jFrameConsulta.getContentPane().add(jLabelResultado);
-        jLabelResultado.setBounds(30, 80, 71, 17);
 
         jMenu1.setText("Arquivo");
 
@@ -181,9 +183,9 @@ public class TelaConsulta extends javax.swing.JFrame {
         jFrameConsulta.setJMenuBar(jMenuBar1);
 
         getContentPane().add(jFrameConsulta);
-        jFrameConsulta.setBounds(0, 0, 943, 470);
+        jFrameConsulta.setBounds(0, 0, 910, 470);
 
-        setSize(new java.awt.Dimension(951, 509));
+        setSize(new java.awt.Dimension(922, 509));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -192,8 +194,7 @@ public class TelaConsulta extends javax.swing.JFrame {
          mod.setPesquisa(txtFieldPesquisa.getText());
         try {
             //Posicao model = control.buscaPosicaoCliente(mod);
-         
-            preencherTabela("SELECT cat.classificacao, cat.garantia, cat.ativo, cat.data_vencimento, aloc.NET \n"
+            preencherTabela("SELECT cat.classificacao, cat.sub_produto, cat.ativo, cat.data_vencimento, aloc.NET \n"
                     + "FROM alocacao.catalogo_op AS cat JOIN alocacao.alocacoes AS aloc\n"
                     + "ON cat.id = aloc.id\n"
                     + "WHERE aloc.cliente_id = '" + mod.getPesquisa() + "'");
@@ -209,7 +210,11 @@ public class TelaConsulta extends javax.swing.JFrame {
     }//GEN-LAST:event_txtFieldPesquisaActionPerformed
 
     private void jMenuSair2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSair2ActionPerformed
-        dispose();
+         int sair = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair?");
+        if(sair == JOptionPane.YES_OPTION){
+            dispose();
+            //System.exit(0);
+        }
     }//GEN-LAST:event_jMenuSair2ActionPerformed
 
     private void jCompra2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCompra2ActionPerformed
@@ -238,45 +243,47 @@ public class TelaConsulta extends javax.swing.JFrame {
 
      public void preencherTabela(String sql) throws ConexaoException{
         ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"Classificacao", "Tipo Fiscal", "Nome Ativo", "Vencimento", "Valor"};
+        String[] colunas = new String[]{"Classificacao", "Tipo Fiscal", "Nome Ativo", "Data Vencimento", "Valor"};
+        
         try {
             conex.open();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaConsulta.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        conex.executaSql(sql);
-        
-        try{
+
+            conex.executaSql(sql);
+
             conex.rs.first();
-            do{
-                Object[] tabela = new Object[]{conex.rs.getString("classificacao"), conex.rs.getString("sub_produto"), 
-                    conex.rs.getString("ativo"), conex.rs.getString("data_vencimento"), conex.rs.getFloat("NET")
+            do {
+                Object[] tabela = new Object[]{conex.rs.getString("classificacao"), conex.rs.getString("sub_produto"),
+                    conex.rs.getString("ativo"), conex.rs.getString("data_vencimento"), conex.rs.getString("NET")
                 };
                 dados.add(tabela);
-            }while(conex.rs.next());
-            
-        }catch(SQLException ex){
+            } while (conex.rs.next());
+
+        }catch (SQLException ex) {
             JOptionPane.showMessageDialog(rootPane, "Erro ao obter dados.");
+        }catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }finally{
+            conex.close();
         }
         
         ModeloTabela modelo = new ModeloTabela(dados, colunas);
         
         jTableConsulta.setModel(modelo);
-        jTableConsulta.getColumnModel().getColumn(0).setPreferredWidth(110);
+        jTableConsulta.getColumnModel().getColumn(0).setPreferredWidth(360);
         jTableConsulta.getColumnModel().getColumn(0).setResizable(false);
-        jTableConsulta.getColumnModel().getColumn(1).setPreferredWidth(80);
+        jTableConsulta.getColumnModel().getColumn(1).setPreferredWidth(100);
         jTableConsulta.getColumnModel().getColumn(1).setResizable(false);
-        jTableConsulta.getColumnModel().getColumn(2).setPreferredWidth(80);
+        jTableConsulta.getColumnModel().getColumn(2).setPreferredWidth(200);
         jTableConsulta.getColumnModel().getColumn(2).setResizable(false);
-        jTableConsulta.getColumnModel().getColumn(3).setPreferredWidth(80);
+        jTableConsulta.getColumnModel().getColumn(3).setPreferredWidth(110);
         jTableConsulta.getColumnModel().getColumn(3).setResizable(false);  
-        jTableConsulta.getColumnModel().getColumn(4).setPreferredWidth(80);
+        jTableConsulta.getColumnModel().getColumn(4).setPreferredWidth(100);
         jTableConsulta.getColumnModel().getColumn(4).setResizable(false);          
         jTableConsulta.getTableHeader().setReorderingAllowed(false);
         jTableConsulta.setAutoResizeMode(jTableConsulta.AUTO_RESIZE_OFF);
         jTableConsulta.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         
-        conex.close();
+        
         
     }
     
@@ -321,10 +328,10 @@ public class TelaConsulta extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonPesquisa;
     private javax.swing.JMenuItem jAlocacao2;
+    private javax.swing.JButton jButton1;
     private javax.swing.JMenuItem jCompra2;
     private javax.swing.JMenuItem jConsulta2;
     private javax.swing.JInternalFrame jFrameConsulta;
-    private javax.swing.JLabel jLabelResultado;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

@@ -5,6 +5,8 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Beatriz.aurelio
@@ -3051,7 +3053,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_alocacaoAtual17ActionPerformed
 
     private void jMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSairActionPerformed
-        dispose();
+         int sair = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair?");
+        if(sair == JOptionPane.YES_OPTION){
+            dispose();
+            //System.exit(0);
+        }
     }//GEN-LAST:event_jMenuSairActionPerformed
 
     private void jCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCompraActionPerformed
