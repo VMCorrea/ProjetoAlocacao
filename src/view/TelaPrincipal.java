@@ -28,26 +28,32 @@ public class TelaPrincipal extends javax.swing.JFrame {
         initComponents();
     }
     
-    private void preencherColunas() throws ConexaoException, ClassNotFoundException {
-        String mensagem = "Carteira de Ações";    
-        String sql = "SELECT cat.classificacao, al.NET FROM alocacao.catalogo_op AS cat INNER JOIN alocacao.alocacoes AS al ON al.catalogo_id = cat.id GROUP BY cat.classificacao  WHERE cat.classificacao= '" + mensagem + "'";
-            try {
-                conex.open();
-                conex.executaSql(sql);
-                conex.rs.first();
-                
-                //do{
-                    double soma = conex.rs.getDouble(1);
-                    alocacaoAtual1.setText(String.valueOf(soma));
-                //} while (conex.rs.next());
-                
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(rootPane, "Erro ao obter dados.");
-            } catch (ClassNotFoundException ex) {
-                JOptionPane.showMessageDialog(null, ex);
-            } finally {
-                conex.close();
-            } 
+    void preencherColunas(String pesquisa) throws ConexaoException, ClassNotFoundException {    
+        
+        String sql = "SELECT cat.classificacao, SUM(al.NET) \n"
+                + "FROM alocacao.catalogo_op AS cat \n"
+                + "INNER JOIN alocacao.alocacoes AS al ON al.catalogo_id = cat.id \n"
+                + "INNER JOIN alocacao.clientes AS cl ON cl.id = al.cliente_id\n"
+                + "WHERE cl.codCorretora = \"'" + pesquisa + "'\"\n"
+                + "GROUP BY cat.classificacao";
+        try {
+            conex.open();
+            conex.executaSql(sql);
+            conex.rs.first();
+
+            do {
+                Object[] label = new Object[]{conex.rs.getString("NET")};
+                alocacaoAtual1.setText(String.valueOf(label));
+                JOptionPane.showMessageDialog(null, label);
+            } while (conex.rs.next());
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(rootPane, "Erro ao obter dados.");
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        } finally {
+            conex.close();
+        }
  /* 
     PRIMEIRA COLUNA TELA PRINCIPAL
         total: soma todas as linhas da 1a coluna            
@@ -275,11 +281,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setTitle("Tela Principal");
         getContentPane().setLayout(null);
 
-        jNomeCliente.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jNomeCliente.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jNomeCliente.setForeground(java.awt.Color.red);
         jNomeCliente.setText("XXXXX XXXXX 99999");
         getContentPane().add(jNomeCliente);
-        jNomeCliente.setBounds(184, 0, 150, 17);
+        jNomeCliente.setBounds(10, 10, 270, 50);
 
         jLabel40.setBackground(new java.awt.Color(153, 153, 153));
         jLabel40.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
@@ -287,7 +293,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel40.setText("Alocação");
         jLabel40.setOpaque(true);
         getContentPane().add(jLabel40);
-        jLabel40.setBounds(920, 23, 100, 20);
+        jLabel40.setBounds(920, 70, 100, 20);
 
         jLabel22.setBackground(new java.awt.Color(153, 153, 153));
         jLabel22.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
@@ -295,7 +301,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel22.setText("   Final R$");
         jLabel22.setOpaque(true);
         getContentPane().add(jLabel22);
-        jLabel22.setBounds(910, 43, 110, 20);
+        jLabel22.setBounds(910, 90, 110, 20);
 
         aporteFinal.setBackground(java.awt.Color.yellow);
         aporteFinal.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -305,7 +311,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(aporteFinal);
-        aporteFinal.setBounds(910, 63, 110, 30);
+        aporteFinal.setBounds(910, 110, 110, 30);
 
         aporteAjuste.setBackground(java.awt.Color.yellow);
         aporteAjuste.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -315,7 +321,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(aporteAjuste);
-        aporteAjuste.setBounds(810, 63, 100, 30);
+        aporteAjuste.setBounds(810, 110, 100, 30);
 
         aporteFinalPerc.setBackground(java.awt.Color.yellow);
         aporteFinalPerc.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -325,7 +331,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(aporteFinalPerc);
-        aporteFinalPerc.setBounds(720, 63, 90, 30);
+        aporteFinalPerc.setBounds(720, 110, 90, 30);
 
         jLabel19.setBackground(new java.awt.Color(153, 153, 153));
         jLabel19.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
@@ -333,7 +339,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel19.setText("Assessor R$");
         jLabel19.setOpaque(true);
         getContentPane().add(jLabel19);
-        jLabel19.setBounds(820, 43, 90, 20);
+        jLabel19.setBounds(820, 90, 90, 20);
 
         jLabel21.setBackground(new java.awt.Color(153, 153, 153));
         jLabel21.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
@@ -341,7 +347,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel21.setText("Ajuste ");
         jLabel21.setOpaque(true);
         getContentPane().add(jLabel21);
-        jLabel21.setBounds(820, 23, 100, 20);
+        jLabel21.setBounds(820, 70, 100, 20);
 
         jLabel29.setBackground(new java.awt.Color(153, 153, 153));
         jLabel29.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
@@ -349,7 +355,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel29.setText("   Final %");
         jLabel29.setOpaque(true);
         getContentPane().add(jLabel29);
-        jLabel29.setBounds(710, 43, 110, 20);
+        jLabel29.setBounds(710, 90, 110, 20);
 
         jLabel39.setBackground(new java.awt.Color(153, 153, 153));
         jLabel39.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
@@ -357,7 +363,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel39.setText(" Alocação");
         jLabel39.setOpaque(true);
         getContentPane().add(jLabel39);
-        jLabel39.setBounds(710, 23, 110, 20);
+        jLabel39.setBounds(710, 70, 110, 20);
 
         jLabel38.setBackground(new java.awt.Color(153, 153, 153));
         jLabel38.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
@@ -365,7 +371,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel38.setText("    Ajuste");
         jLabel38.setOpaque(true);
         getContentPane().add(jLabel38);
-        jLabel38.setBounds(620, 23, 90, 20);
+        jLabel38.setBounds(620, 70, 90, 20);
 
         lblAssessorPerc.setBackground(new java.awt.Color(153, 153, 153));
         lblAssessorPerc.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
@@ -373,7 +379,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         lblAssessorPerc.setText("Assessor %");
         lblAssessorPerc.setOpaque(true);
         getContentPane().add(lblAssessorPerc);
-        lblAssessorPerc.setBounds(620, 43, 90, 20);
+        lblAssessorPerc.setBounds(620, 90, 90, 20);
 
         aporteAjustePerc.setBackground(java.awt.Color.yellow);
         aporteAjustePerc.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -383,12 +389,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(aporteAjustePerc);
-        aporteAjustePerc.setBounds(620, 63, 100, 30);
+        aporteAjustePerc.setBounds(620, 110, 100, 30);
 
         aportePerfil.setBackground(java.awt.Color.yellow);
         aportePerfil.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         getContentPane().add(aportePerfil);
-        aportePerfil.setBounds(540, 63, 80, 30);
+        aportePerfil.setBounds(540, 110, 80, 30);
 
         jLabel27.setBackground(new java.awt.Color(153, 153, 153));
         jLabel27.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
@@ -396,7 +402,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel27.setText("para Perfil");
         jLabel27.setOpaque(true);
         getContentPane().add(jLabel27);
-        jLabel27.setBounds(540, 43, 80, 20);
+        jLabel27.setBounds(540, 90, 80, 20);
 
         jLabel36.setBackground(new java.awt.Color(153, 153, 153));
         jLabel36.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
@@ -404,7 +410,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel36.setText(" Sugestão");
         jLabel36.setOpaque(true);
         getContentPane().add(jLabel36);
-        jLabel36.setBounds(540, 23, 80, 20);
+        jLabel36.setBounds(540, 70, 80, 20);
 
         jLabel37.setBackground(new java.awt.Color(153, 153, 153));
         jLabel37.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
@@ -412,7 +418,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel37.setText(" Alocação");
         jLabel37.setOpaque(true);
         getContentPane().add(jLabel37);
-        jLabel37.setBounds(460, 23, 80, 20);
+        jLabel37.setBounds(460, 70, 80, 20);
 
         atualPerc.setBackground(new java.awt.Color(153, 153, 153));
         atualPerc.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
@@ -420,7 +426,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         atualPerc.setText("   Atual %");
         atualPerc.setOpaque(true);
         getContentPane().add(atualPerc);
-        atualPerc.setBounds(460, 43, 80, 20);
+        atualPerc.setBounds(460, 90, 80, 20);
 
         aporteAtualPerc.setBackground(java.awt.Color.yellow);
         aporteAtualPerc.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -430,7 +436,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(aporteAtualPerc);
-        aporteAtualPerc.setBounds(460, 63, 80, 30);
+        aporteAtualPerc.setBounds(460, 110, 80, 30);
 
         aporteAtual.setBackground(java.awt.Color.yellow);
         aporteAtual.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -440,7 +446,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(aporteAtual);
-        aporteAtual.setBounds(380, 63, 80, 30);
+        aporteAtual.setBounds(380, 110, 80, 30);
 
         jLabel34.setBackground(new java.awt.Color(153, 153, 153));
         jLabel34.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
@@ -448,7 +454,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel34.setText(" Atual R$");
         jLabel34.setOpaque(true);
         getContentPane().add(jLabel34);
-        jLabel34.setBounds(380, 43, 80, 20);
+        jLabel34.setBounds(380, 90, 80, 20);
 
         jLabel35.setBackground(new java.awt.Color(153, 153, 153));
         jLabel35.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
@@ -456,7 +462,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel35.setText(" Alocação");
         jLabel35.setOpaque(true);
         getContentPane().add(jLabel35);
-        jLabel35.setBounds(380, 23, 80, 20);
+        jLabel35.setBounds(380, 70, 80, 20);
 
         jLabel25.setBackground(new java.awt.Color(153, 153, 153));
         jLabel25.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -464,7 +470,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel25.setText(" PERFIL MODERADO");
         jLabel25.setOpaque(true);
         getContentPane().add(jLabel25);
-        jLabel25.setBounds(10, 23, 370, 40);
+        jLabel25.setBounds(10, 70, 370, 40);
 
         jLabel3.setBackground(new java.awt.Color(25, 137, 25));
         jLabel3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -475,7 +481,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel3.setOpaque(true);
         jLabel3.setPreferredSize(new java.awt.Dimension(101, 15));
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(10, 93, 370, 30);
+        jLabel3.setBounds(10, 140, 370, 30);
 
         jLabel23.setBackground(java.awt.Color.yellow);
         jLabel23.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -483,7 +489,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel23.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jLabel23.setOpaque(true);
         getContentPane().add(jLabel23);
-        jLabel23.setBounds(10, 63, 370, 30);
+        jLabel23.setBounds(10, 110, 370, 30);
 
         alocacaoAtual1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual1.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -495,7 +501,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(alocacaoAtual1);
-        alocacaoAtual1.setBounds(380, 93, 80, 30);
+        alocacaoAtual1.setBounds(380, 140, 80, 30);
 
         alocacaoPerc1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoPerc1.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -507,7 +513,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(alocacaoPerc1);
-        alocacaoPerc1.setBounds(460, 93, 80, 30);
+        alocacaoPerc1.setBounds(460, 140, 80, 30);
 
         perfil1.setBackground(new java.awt.Color(129, 167, 71));
         perfil1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -515,7 +521,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         perfil1.setMinimumSize(new java.awt.Dimension(101, 15));
         perfil1.setPreferredSize(new java.awt.Dimension(101, 15));
         getContentPane().add(perfil1);
-        perfil1.setBounds(540, 93, 80, 30);
+        perfil1.setBounds(540, 140, 80, 30);
 
         ajustePerc1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajustePerc1.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -527,7 +533,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ajustePerc1);
-        ajustePerc1.setBounds(620, 93, 100, 30);
+        ajustePerc1.setBounds(620, 140, 100, 30);
 
         finalPerc1.setBackground(new java.awt.Color(129, 167, 71));
         finalPerc1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -540,7 +546,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(finalPerc1);
-        finalPerc1.setBounds(720, 93, 90, 30);
+        finalPerc1.setBounds(720, 140, 90, 30);
 
         ajuste1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajuste1.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -552,7 +558,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ajuste1);
-        ajuste1.setBounds(809, 93, 101, 30);
+        ajuste1.setBounds(810, 140, 101, 30);
 
         final1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         final1.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -564,7 +570,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(final1);
-        final1.setBounds(910, 93, 110, 30);
+        final1.setBounds(910, 140, 110, 30);
 
         final2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         final2.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -576,7 +582,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(final2);
-        final2.setBounds(910, 123, 110, 30);
+        final2.setBounds(910, 170, 110, 30);
 
         ajuste3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajuste3.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -588,7 +594,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ajuste3);
-        ajuste3.setBounds(809, 153, 101, 30);
+        ajuste3.setBounds(810, 200, 101, 30);
 
         ajuste2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajuste2.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -600,7 +606,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ajuste2);
-        ajuste2.setBounds(809, 123, 101, 30);
+        ajuste2.setBounds(810, 170, 101, 30);
 
         final3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         final3.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -612,7 +618,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(final3);
-        final3.setBounds(910, 153, 110, 30);
+        final3.setBounds(910, 200, 110, 30);
 
         finalPerc3.setBackground(new java.awt.Color(129, 167, 71));
         finalPerc3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -625,7 +631,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(finalPerc3);
-        finalPerc3.setBounds(720, 153, 90, 30);
+        finalPerc3.setBounds(720, 200, 90, 30);
 
         finalPerc2.setBackground(new java.awt.Color(129, 167, 71));
         finalPerc2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -638,7 +644,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(finalPerc2);
-        finalPerc2.setBounds(720, 123, 90, 30);
+        finalPerc2.setBounds(720, 170, 90, 30);
 
         ajustePerc2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajustePerc2.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -650,7 +656,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ajustePerc2);
-        ajustePerc2.setBounds(620, 123, 100, 30);
+        ajustePerc2.setBounds(620, 170, 100, 30);
 
         ajustePerc3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajustePerc3.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -662,7 +668,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ajustePerc3);
-        ajustePerc3.setBounds(620, 153, 100, 30);
+        ajustePerc3.setBounds(620, 200, 100, 30);
 
         perfil3.setBackground(new java.awt.Color(129, 167, 71));
         perfil3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -670,7 +676,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         perfil3.setMinimumSize(new java.awt.Dimension(101, 15));
         perfil3.setPreferredSize(new java.awt.Dimension(101, 15));
         getContentPane().add(perfil3);
-        perfil3.setBounds(540, 153, 80, 30);
+        perfil3.setBounds(540, 200, 80, 30);
 
         perfil2.setBackground(new java.awt.Color(129, 167, 71));
         perfil2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -678,7 +684,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         perfil2.setMinimumSize(new java.awt.Dimension(101, 15));
         perfil2.setPreferredSize(new java.awt.Dimension(101, 15));
         getContentPane().add(perfil2);
-        perfil2.setBounds(540, 123, 80, 30);
+        perfil2.setBounds(540, 170, 80, 30);
 
         alocacaoPerc2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoPerc2.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -690,7 +696,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(alocacaoPerc2);
-        alocacaoPerc2.setBounds(460, 123, 80, 30);
+        alocacaoPerc2.setBounds(460, 170, 80, 30);
 
         alocacaoPerc3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoPerc3.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -702,7 +708,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(alocacaoPerc3);
-        alocacaoPerc3.setBounds(460, 153, 80, 30);
+        alocacaoPerc3.setBounds(460, 200, 80, 30);
 
         alocacaoAtual3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual3.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -714,7 +720,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(alocacaoAtual3);
-        alocacaoAtual3.setBounds(380, 153, 80, 30);
+        alocacaoAtual3.setBounds(380, 200, 80, 30);
 
         alocacaoAtual2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual2.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -726,7 +732,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(alocacaoAtual2);
-        alocacaoAtual2.setBounds(380, 123, 80, 30);
+        alocacaoAtual2.setBounds(380, 170, 80, 30);
 
         jLabel1.setBackground(new java.awt.Color(25, 137, 25));
         jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -738,7 +744,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel1.setPreferredSize(new java.awt.Dimension(101, 15));
         jLabel1.setRequestFocusEnabled(false);
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(10, 123, 370, 30);
+        jLabel1.setBounds(10, 170, 370, 30);
 
         jLabel4.setBackground(new java.awt.Color(25, 137, 25));
         jLabel4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -749,7 +755,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel4.setOpaque(true);
         jLabel4.setPreferredSize(new java.awt.Dimension(101, 15));
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(10, 153, 370, 30);
+        jLabel4.setBounds(10, 200, 370, 30);
 
         jLabel5.setBackground(java.awt.Color.green);
         jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -759,7 +765,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel5.setMinimumSize(new java.awt.Dimension(101, 15));
         jLabel5.setOpaque(true);
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(10, 183, 370, 30);
+        jLabel5.setBounds(10, 230, 370, 30);
 
         alocacaoAtual4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual4.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -771,7 +777,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(alocacaoAtual4);
-        alocacaoAtual4.setBounds(380, 183, 80, 30);
+        alocacaoAtual4.setBounds(380, 230, 80, 30);
 
         alocacaoPerc4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoPerc4.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -783,7 +789,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(alocacaoPerc4);
-        alocacaoPerc4.setBounds(460, 183, 80, 30);
+        alocacaoPerc4.setBounds(460, 230, 80, 30);
 
         perfil4.setBackground(new java.awt.Color(129, 167, 71));
         perfil4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -791,7 +797,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         perfil4.setMinimumSize(new java.awt.Dimension(101, 15));
         perfil4.setPreferredSize(new java.awt.Dimension(101, 15));
         getContentPane().add(perfil4);
-        perfil4.setBounds(540, 183, 80, 30);
+        perfil4.setBounds(540, 230, 80, 30);
 
         ajustePerc4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajustePerc4.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -803,7 +809,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ajustePerc4);
-        ajustePerc4.setBounds(620, 183, 100, 30);
+        ajustePerc4.setBounds(620, 230, 100, 30);
 
         finalPerc4.setBackground(new java.awt.Color(129, 167, 71));
         finalPerc4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -816,7 +822,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(finalPerc4);
-        finalPerc4.setBounds(720, 183, 90, 30);
+        finalPerc4.setBounds(720, 230, 90, 30);
 
         ajuste4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajuste4.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -828,7 +834,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ajuste4);
-        ajuste4.setBounds(809, 183, 101, 30);
+        ajuste4.setBounds(810, 230, 101, 30);
 
         final4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         final4.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -840,7 +846,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(final4);
-        final4.setBounds(910, 183, 110, 30);
+        final4.setBounds(910, 230, 110, 30);
 
         final5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         final5.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -852,7 +858,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(final5);
-        final5.setBounds(910, 213, 110, 30);
+        final5.setBounds(910, 260, 110, 30);
 
         ajuste5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajuste5.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -864,7 +870,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ajuste5);
-        ajuste5.setBounds(809, 213, 101, 30);
+        ajuste5.setBounds(810, 260, 101, 30);
 
         finalPerc5.setBackground(new java.awt.Color(129, 167, 71));
         finalPerc5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -877,7 +883,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(finalPerc5);
-        finalPerc5.setBounds(720, 213, 90, 30);
+        finalPerc5.setBounds(720, 260, 90, 30);
 
         ajustePerc5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajustePerc5.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -889,7 +895,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ajustePerc5);
-        ajustePerc5.setBounds(620, 213, 100, 30);
+        ajustePerc5.setBounds(620, 260, 100, 30);
 
         perfil5.setBackground(new java.awt.Color(129, 167, 71));
         perfil5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -902,7 +908,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(perfil5);
-        perfil5.setBounds(540, 213, 80, 30);
+        perfil5.setBounds(540, 260, 80, 30);
 
         alocacaoPerc5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoPerc5.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -914,7 +920,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(alocacaoPerc5);
-        alocacaoPerc5.setBounds(460, 213, 80, 30);
+        alocacaoPerc5.setBounds(460, 260, 80, 30);
 
         alocacaoAtual5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual5.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -926,7 +932,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(alocacaoAtual5);
-        alocacaoAtual5.setBounds(380, 213, 80, 30);
+        alocacaoAtual5.setBounds(380, 260, 80, 30);
 
         jLabel6.setBackground(java.awt.Color.green);
         jLabel6.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -937,7 +943,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel6.setOpaque(true);
         jLabel6.setPreferredSize(new java.awt.Dimension(101, 15));
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(10, 213, 370, 30);
+        jLabel6.setBounds(10, 260, 370, 30);
 
         jLabel7.setBackground(java.awt.Color.green);
         jLabel7.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -948,7 +954,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel7.setOpaque(true);
         jLabel7.setPreferredSize(new java.awt.Dimension(101, 15));
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(10, 243, 370, 30);
+        jLabel7.setBounds(10, 290, 370, 30);
 
         alocacaoAtual6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual6.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -960,7 +966,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(alocacaoAtual6);
-        alocacaoAtual6.setBounds(380, 243, 80, 30);
+        alocacaoAtual6.setBounds(380, 290, 80, 30);
 
         alocacaoPerc6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoPerc6.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -972,7 +978,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(alocacaoPerc6);
-        alocacaoPerc6.setBounds(460, 243, 80, 30);
+        alocacaoPerc6.setBounds(460, 290, 80, 30);
 
         perfil6.setBackground(new java.awt.Color(129, 167, 71));
         perfil6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -985,7 +991,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(perfil6);
-        perfil6.setBounds(540, 243, 80, 30);
+        perfil6.setBounds(540, 290, 80, 30);
 
         ajustePerc6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajustePerc6.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -997,7 +1003,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ajustePerc6);
-        ajustePerc6.setBounds(620, 243, 100, 30);
+        ajustePerc6.setBounds(620, 290, 100, 30);
 
         finalPerc6.setBackground(new java.awt.Color(129, 167, 71));
         finalPerc6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1010,7 +1016,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(finalPerc6);
-        finalPerc6.setBounds(720, 243, 90, 30);
+        finalPerc6.setBounds(720, 290, 90, 30);
 
         ajuste6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajuste6.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1022,7 +1028,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ajuste6);
-        ajuste6.setBounds(809, 243, 101, 30);
+        ajuste6.setBounds(810, 290, 101, 30);
 
         final6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         final6.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1034,7 +1040,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(final6);
-        final6.setBounds(910, 243, 110, 30);
+        final6.setBounds(910, 290, 110, 30);
 
         final7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         final7.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1046,7 +1052,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(final7);
-        final7.setBounds(910, 273, 110, 30);
+        final7.setBounds(910, 320, 110, 30);
 
         ajuste7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajuste7.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1058,7 +1064,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ajuste7);
-        ajuste7.setBounds(809, 273, 101, 30);
+        ajuste7.setBounds(810, 320, 101, 30);
 
         finalPerc7.setBackground(new java.awt.Color(129, 167, 71));
         finalPerc7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1071,7 +1077,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(finalPerc7);
-        finalPerc7.setBounds(720, 273, 90, 30);
+        finalPerc7.setBounds(720, 320, 90, 30);
 
         ajustePerc7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajustePerc7.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1083,7 +1089,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ajustePerc7);
-        ajustePerc7.setBounds(620, 273, 100, 30);
+        ajustePerc7.setBounds(620, 320, 100, 30);
 
         perfil7.setBackground(new java.awt.Color(129, 167, 71));
         perfil7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1096,7 +1102,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(perfil7);
-        perfil7.setBounds(540, 273, 80, 30);
+        perfil7.setBounds(540, 320, 80, 30);
 
         alocacaoPerc7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoPerc7.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1108,7 +1114,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(alocacaoPerc7);
-        alocacaoPerc7.setBounds(460, 273, 80, 30);
+        alocacaoPerc7.setBounds(460, 320, 80, 30);
 
         alocacaoAtual7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual7.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1120,7 +1126,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(alocacaoAtual7);
-        alocacaoAtual7.setBounds(380, 273, 80, 30);
+        alocacaoAtual7.setBounds(380, 320, 80, 30);
 
         jLabel8.setBackground(java.awt.Color.green);
         jLabel8.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -1131,7 +1137,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel8.setOpaque(true);
         jLabel8.setPreferredSize(new java.awt.Dimension(101, 15));
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(10, 273, 370, 30);
+        jLabel8.setBounds(10, 320, 370, 30);
 
         jLabel9.setBackground(java.awt.Color.green);
         jLabel9.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -1142,7 +1148,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel9.setOpaque(true);
         jLabel9.setPreferredSize(new java.awt.Dimension(101, 15));
         getContentPane().add(jLabel9);
-        jLabel9.setBounds(10, 303, 370, 30);
+        jLabel9.setBounds(10, 350, 370, 30);
 
         alocacaoAtual8.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual8.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1154,7 +1160,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(alocacaoAtual8);
-        alocacaoAtual8.setBounds(380, 303, 80, 30);
+        alocacaoAtual8.setBounds(380, 350, 80, 30);
 
         alocacaoPerc8.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoPerc8.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1166,7 +1172,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(alocacaoPerc8);
-        alocacaoPerc8.setBounds(460, 303, 80, 30);
+        alocacaoPerc8.setBounds(460, 350, 80, 30);
 
         perfil8.setBackground(new java.awt.Color(129, 167, 71));
         perfil8.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1179,7 +1185,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(perfil8);
-        perfil8.setBounds(540, 303, 80, 30);
+        perfil8.setBounds(540, 350, 80, 30);
 
         ajustePerc8.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajustePerc8.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1191,7 +1197,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ajustePerc8);
-        ajustePerc8.setBounds(620, 303, 100, 30);
+        ajustePerc8.setBounds(620, 350, 100, 30);
 
         finalPerc8.setBackground(new java.awt.Color(129, 167, 71));
         finalPerc8.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1204,7 +1210,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(finalPerc8);
-        finalPerc8.setBounds(720, 303, 90, 30);
+        finalPerc8.setBounds(720, 350, 90, 30);
 
         ajuste8.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajuste8.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1216,7 +1222,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ajuste8);
-        ajuste8.setBounds(809, 303, 101, 30);
+        ajuste8.setBounds(810, 350, 101, 30);
 
         final8.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         final8.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1228,7 +1234,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(final8);
-        final8.setBounds(910, 303, 110, 30);
+        final8.setBounds(910, 350, 110, 30);
 
         final9.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         final9.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1240,7 +1246,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(final9);
-        final9.setBounds(910, 333, 110, 30);
+        final9.setBounds(910, 380, 110, 30);
 
         ajuste9.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajuste9.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1252,7 +1258,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ajuste9);
-        ajuste9.setBounds(809, 333, 101, 30);
+        ajuste9.setBounds(810, 380, 101, 30);
 
         finalPerc9.setBackground(new java.awt.Color(129, 167, 71));
         finalPerc9.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1265,7 +1271,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(finalPerc9);
-        finalPerc9.setBounds(720, 333, 90, 30);
+        finalPerc9.setBounds(720, 380, 90, 30);
 
         ajustePerc9.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajustePerc9.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1277,7 +1283,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ajustePerc9);
-        ajustePerc9.setBounds(620, 333, 100, 30);
+        ajustePerc9.setBounds(620, 380, 100, 30);
 
         perfil9.setBackground(new java.awt.Color(129, 167, 71));
         perfil9.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1290,7 +1296,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(perfil9);
-        perfil9.setBounds(540, 333, 80, 30);
+        perfil9.setBounds(540, 380, 80, 30);
 
         alocacaoPerc9.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoPerc9.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1302,7 +1308,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(alocacaoPerc9);
-        alocacaoPerc9.setBounds(460, 333, 80, 30);
+        alocacaoPerc9.setBounds(460, 380, 80, 30);
 
         alocacaoAtual9.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual9.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1314,7 +1320,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(alocacaoAtual9);
-        alocacaoAtual9.setBounds(380, 333, 80, 30);
+        alocacaoAtual9.setBounds(380, 380, 80, 30);
 
         jLabel10.setBackground(java.awt.Color.green);
         jLabel10.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -1325,14 +1331,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel10.setOpaque(true);
         jLabel10.setPreferredSize(new java.awt.Dimension(101, 15));
         getContentPane().add(jLabel10);
-        jLabel10.setBounds(10, 333, 370, 30);
+        jLabel10.setBounds(10, 380, 370, 30);
 
         jLabel11.setBackground(java.awt.Color.gray);
         jLabel11.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel11.setText(" Renda Fixa TOTAL");
+        jLabel11.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jLabel11.setOpaque(true);
         getContentPane().add(jLabel11);
-        jLabel11.setBounds(10, 363, 370, 20);
+        jLabel11.setBounds(10, 410, 370, 30);
 
         rendaFixaAtual.setBackground(java.awt.Color.gray);
         rendaFixaAtual.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1342,7 +1349,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(rendaFixaAtual);
-        rendaFixaAtual.setBounds(380, 363, 80, 20);
+        rendaFixaAtual.setBounds(380, 410, 80, 30);
 
         rendaFixaAtualPerc.setBackground(java.awt.Color.gray);
         rendaFixaAtualPerc.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1352,7 +1359,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(rendaFixaAtualPerc);
-        rendaFixaAtualPerc.setBounds(460, 363, 80, 20);
+        rendaFixaAtualPerc.setBounds(460, 410, 80, 30);
 
         rendaFixaPerfil.setBackground(java.awt.Color.gray);
         rendaFixaPerfil.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1362,7 +1369,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(rendaFixaPerfil);
-        rendaFixaPerfil.setBounds(540, 363, 80, 20);
+        rendaFixaPerfil.setBounds(540, 410, 80, 30);
 
         rendaFixaAjustePerc.setBackground(java.awt.Color.gray);
         rendaFixaAjustePerc.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1372,7 +1379,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(rendaFixaAjustePerc);
-        rendaFixaAjustePerc.setBounds(620, 363, 100, 20);
+        rendaFixaAjustePerc.setBounds(620, 410, 100, 30);
 
         rendaFixaFinalPerc.setBackground(java.awt.Color.gray);
         rendaFixaFinalPerc.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1382,7 +1389,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(rendaFixaFinalPerc);
-        rendaFixaFinalPerc.setBounds(720, 363, 90, 20);
+        rendaFixaFinalPerc.setBounds(720, 410, 90, 30);
 
         rendaFixaAjuste.setBackground(java.awt.Color.gray);
         rendaFixaAjuste.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1392,7 +1399,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(rendaFixaAjuste);
-        rendaFixaAjuste.setBounds(810, 363, 100, 20);
+        rendaFixaAjuste.setBounds(810, 410, 100, 30);
 
         rendaFixaFinal.setBackground(java.awt.Color.gray);
         rendaFixaFinal.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1402,7 +1409,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(rendaFixaFinal);
-        rendaFixaFinal.setBounds(910, 363, 110, 20);
+        rendaFixaFinal.setBounds(910, 410, 110, 30);
 
         final10.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         final10.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1414,7 +1421,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(final10);
-        final10.setBounds(910, 383, 110, 20);
+        final10.setBounds(910, 440, 110, 30);
 
         final11.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         final11.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1426,7 +1433,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(final11);
-        final11.setBounds(910, 403, 110, 20);
+        final11.setBounds(910, 470, 110, 30);
 
         final12.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         final12.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1438,7 +1445,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(final12);
-        final12.setBounds(910, 423, 110, 20);
+        final12.setBounds(910, 500, 110, 30);
 
         ajuste12.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajuste12.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1450,7 +1457,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ajuste12);
-        ajuste12.setBounds(809, 423, 101, 20);
+        ajuste12.setBounds(810, 500, 101, 30);
 
         ajuste11.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajuste11.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1462,7 +1469,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ajuste11);
-        ajuste11.setBounds(809, 403, 101, 20);
+        ajuste11.setBounds(810, 470, 101, 30);
 
         ajuste10.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajuste10.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1474,7 +1481,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ajuste10);
-        ajuste10.setBounds(809, 383, 101, 20);
+        ajuste10.setBounds(810, 440, 101, 30);
 
         finalPerc11.setBackground(new java.awt.Color(129, 167, 71));
         finalPerc11.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1487,7 +1494,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(finalPerc11);
-        finalPerc11.setBounds(720, 403, 90, 20);
+        finalPerc11.setBounds(720, 470, 90, 30);
 
         finalPerc10.setBackground(new java.awt.Color(129, 167, 71));
         finalPerc10.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1500,7 +1507,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(finalPerc10);
-        finalPerc10.setBounds(720, 383, 90, 20);
+        finalPerc10.setBounds(720, 440, 90, 30);
 
         finalPerc12.setBackground(new java.awt.Color(129, 167, 71));
         finalPerc12.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1513,7 +1520,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(finalPerc12);
-        finalPerc12.setBounds(720, 423, 90, 20);
+        finalPerc12.setBounds(720, 500, 90, 30);
 
         jTextField125.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jTextField125.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1525,7 +1532,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jTextField125);
-        jTextField125.setBounds(620, 423, 100, 20);
+        jTextField125.setBounds(620, 500, 100, 30);
 
         jTextField131.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jTextField131.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1537,7 +1544,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jTextField131);
-        jTextField131.setBounds(620, 403, 100, 20);
+        jTextField131.setBounds(620, 470, 100, 30);
 
         ajustePerc10.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajustePerc10.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1549,7 +1556,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ajustePerc10);
-        ajustePerc10.setBounds(620, 383, 100, 20);
+        ajustePerc10.setBounds(620, 440, 100, 30);
 
         perfil11.setBackground(new java.awt.Color(129, 167, 71));
         perfil11.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1562,7 +1569,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(perfil11);
-        perfil11.setBounds(540, 403, 80, 20);
+        perfil11.setBounds(540, 470, 80, 30);
 
         perfil12.setBackground(new java.awt.Color(129, 167, 71));
         perfil12.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1575,7 +1582,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(perfil12);
-        perfil12.setBounds(540, 423, 80, 20);
+        perfil12.setBounds(540, 500, 80, 30);
 
         perfil10.setBackground(new java.awt.Color(129, 167, 71));
         perfil10.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1588,7 +1595,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(perfil10);
-        perfil10.setBounds(540, 383, 80, 20);
+        perfil10.setBounds(540, 440, 80, 30);
 
         alocacaoPerc10.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoPerc10.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1600,7 +1607,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(alocacaoPerc10);
-        alocacaoPerc10.setBounds(460, 383, 80, 20);
+        alocacaoPerc10.setBounds(460, 440, 80, 30);
 
         alocacaoPerc12.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoPerc12.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1612,7 +1619,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(alocacaoPerc12);
-        alocacaoPerc12.setBounds(460, 423, 80, 20);
+        alocacaoPerc12.setBounds(460, 500, 80, 30);
 
         alocacaoPerc11.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoPerc11.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1624,7 +1631,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(alocacaoPerc11);
-        alocacaoPerc11.setBounds(460, 403, 80, 20);
+        alocacaoPerc11.setBounds(460, 470, 80, 30);
 
         alocacaoAtual10.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual10.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1636,7 +1643,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(alocacaoAtual10);
-        alocacaoAtual10.setBounds(380, 383, 80, 20);
+        alocacaoAtual10.setBounds(380, 440, 80, 30);
 
         alocacaoAtual11.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual11.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1648,7 +1655,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(alocacaoAtual11);
-        alocacaoAtual11.setBounds(380, 403, 80, 20);
+        alocacaoAtual11.setBounds(380, 470, 80, 30);
 
         alocacaoAtual12.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual12.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1660,7 +1667,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(alocacaoAtual12);
-        alocacaoAtual12.setBounds(380, 423, 80, 20);
+        alocacaoAtual12.setBounds(380, 500, 80, 30);
 
         jLabel14.setBackground(java.awt.Color.orange);
         jLabel14.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -1670,7 +1677,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel14.setMinimumSize(new java.awt.Dimension(230, 15));
         jLabel14.setOpaque(true);
         getContentPane().add(jLabel14);
-        jLabel14.setBounds(10, 423, 370, 20);
+        jLabel14.setBounds(10, 500, 370, 30);
 
         jLabel13.setBackground(java.awt.Color.green);
         jLabel13.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -1678,7 +1685,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel13.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jLabel13.setOpaque(true);
         getContentPane().add(jLabel13);
-        jLabel13.setBounds(10, 403, 370, 20);
+        jLabel13.setBounds(10, 470, 370, 30);
 
         jLabel12.setBackground(new java.awt.Color(25, 137, 25));
         jLabel12.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -1688,7 +1695,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel12.setMinimumSize(new java.awt.Dimension(230, 15));
         jLabel12.setOpaque(true);
         getContentPane().add(jLabel12);
-        jLabel12.setBounds(10, 383, 370, 20);
+        jLabel12.setBounds(10, 440, 370, 30);
 
         jLabel15.setBackground(java.awt.Color.gray);
         jLabel15.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -1696,7 +1703,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel15.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jLabel15.setOpaque(true);
         getContentPane().add(jLabel15);
-        jLabel15.setBounds(10, 443, 370, 30);
+        jLabel15.setBounds(10, 530, 370, 30);
 
         multimercadoAtual.setBackground(java.awt.Color.gray);
         multimercadoAtual.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1706,7 +1713,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(multimercadoAtual);
-        multimercadoAtual.setBounds(380, 443, 80, 30);
+        multimercadoAtual.setBounds(380, 530, 80, 30);
 
         multimercadoAtualPerc.setBackground(java.awt.Color.gray);
         multimercadoAtualPerc.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1716,7 +1723,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(multimercadoAtualPerc);
-        multimercadoAtualPerc.setBounds(460, 443, 80, 30);
+        multimercadoAtualPerc.setBounds(460, 530, 80, 30);
 
         multimercadoPerfil.setBackground(java.awt.Color.gray);
         multimercadoPerfil.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1726,7 +1733,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(multimercadoPerfil);
-        multimercadoPerfil.setBounds(540, 443, 80, 30);
+        multimercadoPerfil.setBounds(540, 530, 80, 30);
 
         multimercadoAjustePerc.setBackground(java.awt.Color.gray);
         multimercadoAjustePerc.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1736,7 +1743,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(multimercadoAjustePerc);
-        multimercadoAjustePerc.setBounds(620, 443, 100, 30);
+        multimercadoAjustePerc.setBounds(620, 530, 100, 30);
 
         multimercadoFinalPerc.setBackground(java.awt.Color.gray);
         multimercadoFinalPerc.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1746,7 +1753,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(multimercadoFinalPerc);
-        multimercadoFinalPerc.setBounds(720, 443, 90, 30);
+        multimercadoFinalPerc.setBounds(720, 530, 90, 30);
 
         multimercadoAjuste.setBackground(java.awt.Color.gray);
         multimercadoAjuste.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1756,7 +1763,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(multimercadoAjuste);
-        multimercadoAjuste.setBounds(810, 443, 100, 30);
+        multimercadoAjuste.setBounds(810, 530, 100, 30);
 
         multimercadoFinal.setBackground(java.awt.Color.gray);
         multimercadoFinal.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1766,7 +1773,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(multimercadoFinal);
-        multimercadoFinal.setBounds(910, 443, 110, 30);
+        multimercadoFinal.setBounds(910, 530, 110, 30);
 
         final13.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         final13.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1778,7 +1785,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(final13);
-        final13.setBounds(910, 473, 110, 30);
+        final13.setBounds(910, 560, 110, 30);
 
         finalPerc13.setBackground(new java.awt.Color(129, 167, 71));
         finalPerc13.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1791,7 +1798,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(finalPerc13);
-        finalPerc13.setBounds(720, 473, 90, 30);
+        finalPerc13.setBounds(720, 560, 90, 30);
 
         ajuste13.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajuste13.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1803,7 +1810,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ajuste13);
-        ajuste13.setBounds(809, 473, 101, 30);
+        ajuste13.setBounds(810, 560, 101, 30);
 
         ajustePerc13.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajustePerc13.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1815,7 +1822,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ajustePerc13);
-        ajustePerc13.setBounds(620, 473, 100, 30);
+        ajustePerc13.setBounds(620, 560, 100, 30);
 
         perfil13.setBackground(new java.awt.Color(129, 167, 71));
         perfil13.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1828,7 +1835,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(perfil13);
-        perfil13.setBounds(540, 473, 80, 30);
+        perfil13.setBounds(540, 560, 80, 30);
 
         alocacaoPerc13.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoPerc13.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1840,7 +1847,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(alocacaoPerc13);
-        alocacaoPerc13.setBounds(460, 473, 80, 30);
+        alocacaoPerc13.setBounds(460, 560, 80, 30);
 
         alocacaoAtual14.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual14.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1852,7 +1859,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(alocacaoAtual14);
-        alocacaoAtual14.setBounds(380, 473, 80, 30);
+        alocacaoAtual14.setBounds(380, 560, 80, 30);
 
         jLabel16.setBackground(java.awt.Color.orange);
         jLabel16.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -1863,7 +1870,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel16.setOpaque(true);
         jLabel16.setPreferredSize(new java.awt.Dimension(101, 15));
         getContentPane().add(jLabel16);
-        jLabel16.setBounds(10, 473, 370, 30);
+        jLabel16.setBounds(10, 560, 370, 30);
 
         jLabel31.setBackground(java.awt.Color.red);
         jLabel31.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -1871,7 +1878,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel31.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jLabel31.setOpaque(true);
         getContentPane().add(jLabel31);
-        jLabel31.setBounds(10, 503, 370, 30);
+        jLabel31.setBounds(10, 590, 370, 30);
 
         alocacaoAtual15.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual15.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1883,7 +1890,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(alocacaoAtual15);
-        alocacaoAtual15.setBounds(380, 503, 80, 30);
+        alocacaoAtual15.setBounds(380, 590, 80, 30);
 
         alocacaoPerc14.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoPerc14.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1895,7 +1902,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(alocacaoPerc14);
-        alocacaoPerc14.setBounds(460, 503, 80, 30);
+        alocacaoPerc14.setBounds(460, 590, 80, 30);
 
         perfil14.setBackground(new java.awt.Color(129, 167, 71));
         perfil14.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1908,7 +1915,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(perfil14);
-        perfil14.setBounds(540, 503, 80, 30);
+        perfil14.setBounds(540, 590, 80, 30);
 
         ajustePerc14.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajustePerc14.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1920,7 +1927,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ajustePerc14);
-        ajustePerc14.setBounds(620, 503, 100, 30);
+        ajustePerc14.setBounds(620, 590, 100, 30);
 
         finalPerc14.setBackground(new java.awt.Color(129, 167, 71));
         finalPerc14.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1933,7 +1940,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(finalPerc14);
-        finalPerc14.setBounds(720, 503, 90, 30);
+        finalPerc14.setBounds(720, 590, 90, 30);
 
         ajuste14.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajuste14.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1945,7 +1952,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ajuste14);
-        ajuste14.setBounds(809, 503, 101, 30);
+        ajuste14.setBounds(810, 590, 101, 30);
 
         final14.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         final14.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1957,7 +1964,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(final14);
-        final14.setBounds(910, 503, 110, 30);
+        final14.setBounds(910, 590, 110, 30);
 
         final15.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         final15.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1969,7 +1976,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(final15);
-        final15.setBounds(910, 533, 110, 30);
+        final15.setBounds(910, 620, 110, 30);
 
         ajuste15.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajuste15.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1981,7 +1988,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ajuste15);
-        ajuste15.setBounds(809, 533, 101, 30);
+        ajuste15.setBounds(810, 620, 101, 30);
 
         finalPerc15.setBackground(new java.awt.Color(129, 167, 71));
         finalPerc15.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1994,7 +2001,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(finalPerc15);
-        finalPerc15.setBounds(720, 533, 90, 30);
+        finalPerc15.setBounds(720, 620, 90, 30);
 
         ajustePerc15.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajustePerc15.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -2006,7 +2013,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ajustePerc15);
-        ajustePerc15.setBounds(620, 533, 100, 30);
+        ajustePerc15.setBounds(620, 620, 100, 30);
 
         perfil15.setBackground(new java.awt.Color(129, 167, 71));
         perfil15.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -2019,7 +2026,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(perfil15);
-        perfil15.setBounds(540, 533, 80, 30);
+        perfil15.setBounds(540, 620, 80, 30);
 
         alocacaoPerc15.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoPerc15.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -2031,7 +2038,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(alocacaoPerc15);
-        alocacaoPerc15.setBounds(460, 533, 80, 30);
+        alocacaoPerc15.setBounds(460, 620, 80, 30);
 
         alocacaoAtual16.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual16.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -2043,7 +2050,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(alocacaoAtual16);
-        alocacaoAtual16.setBounds(380, 533, 80, 30);
+        alocacaoAtual16.setBounds(380, 620, 80, 30);
 
         jLabel33.setBackground(java.awt.Color.red);
         jLabel33.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -2054,7 +2061,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel33.setOpaque(true);
         jLabel33.setPreferredSize(new java.awt.Dimension(101, 15));
         getContentPane().add(jLabel33);
-        jLabel33.setBounds(10, 533, 370, 30);
+        jLabel33.setBounds(10, 620, 370, 30);
 
         jLabel30.setBackground(java.awt.Color.gray);
         jLabel30.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -2062,7 +2069,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel30.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jLabel30.setOpaque(true);
         getContentPane().add(jLabel30);
-        jLabel30.setBounds(10, 563, 370, 30);
+        jLabel30.setBounds(10, 650, 370, 30);
 
         rendaVariavelAloc.setBackground(java.awt.Color.gray);
         rendaVariavelAloc.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -2072,7 +2079,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(rendaVariavelAloc);
-        rendaVariavelAloc.setBounds(380, 563, 80, 30);
+        rendaVariavelAloc.setBounds(380, 650, 80, 30);
 
         rendaVariavelAlocPerc.setBackground(java.awt.Color.gray);
         rendaVariavelAlocPerc.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -2082,7 +2089,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(rendaVariavelAlocPerc);
-        rendaVariavelAlocPerc.setBounds(460, 563, 80, 30);
+        rendaVariavelAlocPerc.setBounds(460, 650, 80, 30);
 
         rendaVariavelPerfil.setBackground(java.awt.Color.gray);
         rendaVariavelPerfil.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -2092,7 +2099,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(rendaVariavelPerfil);
-        rendaVariavelPerfil.setBounds(540, 563, 80, 30);
+        rendaVariavelPerfil.setBounds(540, 650, 80, 30);
 
         rendaVariavelAjustePerc.setBackground(java.awt.Color.gray);
         rendaVariavelAjustePerc.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -2102,7 +2109,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(rendaVariavelAjustePerc);
-        rendaVariavelAjustePerc.setBounds(620, 563, 100, 30);
+        rendaVariavelAjustePerc.setBounds(620, 650, 100, 30);
 
         rendaVariavelFinalPerc.setBackground(java.awt.Color.gray);
         rendaVariavelFinalPerc.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -2112,7 +2119,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(rendaVariavelFinalPerc);
-        rendaVariavelFinalPerc.setBounds(720, 563, 90, 30);
+        rendaVariavelFinalPerc.setBounds(720, 650, 90, 30);
 
         rendaVariavelAjuste.setBackground(java.awt.Color.gray);
         rendaVariavelAjuste.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -2122,7 +2129,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(rendaVariavelAjuste);
-        rendaVariavelAjuste.setBounds(810, 563, 100, 30);
+        rendaVariavelAjuste.setBounds(810, 650, 100, 30);
 
         rendaVariavelFinal.setBackground(java.awt.Color.gray);
         rendaVariavelFinal.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -2132,7 +2139,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(rendaVariavelFinal);
-        rendaVariavelFinal.setBounds(910, 563, 110, 30);
+        rendaVariavelFinal.setBounds(910, 650, 110, 30);
 
         final16.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         final16.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -2144,7 +2151,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(final16);
-        final16.setBounds(910, 593, 110, 30);
+        final16.setBounds(910, 680, 110, 30);
 
         final17.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         final17.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -2156,7 +2163,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(final17);
-        final17.setBounds(910, 623, 110, 30);
+        final17.setBounds(910, 710, 110, 30);
 
         totalFinal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         totalFinal.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -2168,7 +2175,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(totalFinal);
-        totalFinal.setBounds(910, 653, 110, 30);
+        totalFinal.setBounds(910, 740, 110, 30);
 
         totalAjuste.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         totalAjuste.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -2180,7 +2187,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(totalAjuste);
-        totalAjuste.setBounds(809, 653, 101, 30);
+        totalAjuste.setBounds(810, 740, 101, 30);
 
         ajuste17.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajuste17.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -2192,7 +2199,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ajuste17);
-        ajuste17.setBounds(809, 623, 101, 30);
+        ajuste17.setBounds(810, 710, 101, 30);
 
         ajuste16.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajuste16.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -2204,7 +2211,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ajuste16);
-        ajuste16.setBounds(809, 593, 101, 30);
+        ajuste16.setBounds(810, 680, 101, 30);
 
         totalFinalPerc.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         totalFinalPerc.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -2216,7 +2223,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(totalFinalPerc);
-        totalFinalPerc.setBounds(720, 653, 90, 30);
+        totalFinalPerc.setBounds(720, 740, 90, 30);
 
         finalPerc17.setBackground(new java.awt.Color(129, 167, 71));
         finalPerc17.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -2229,7 +2236,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(finalPerc17);
-        finalPerc17.setBounds(720, 623, 90, 30);
+        finalPerc17.setBounds(720, 710, 90, 30);
 
         finalPerc16.setBackground(new java.awt.Color(129, 167, 71));
         finalPerc16.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -2242,7 +2249,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(finalPerc16);
-        finalPerc16.setBounds(720, 593, 90, 30);
+        finalPerc16.setBounds(720, 680, 90, 30);
 
         ajustePerc16.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajustePerc16.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -2254,7 +2261,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ajustePerc16);
-        ajustePerc16.setBounds(620, 593, 100, 30);
+        ajustePerc16.setBounds(620, 680, 100, 30);
 
         ajustePerc17.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajustePerc17.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -2266,7 +2273,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ajustePerc17);
-        ajustePerc17.setBounds(620, 623, 100, 30);
+        ajustePerc17.setBounds(620, 710, 100, 30);
 
         totalAjustePerc.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         totalAjustePerc.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -2278,7 +2285,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(totalAjustePerc);
-        totalAjustePerc.setBounds(620, 653, 100, 30);
+        totalAjustePerc.setBounds(620, 740, 100, 30);
 
         totalPerfil.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         totalPerfil.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -2290,7 +2297,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(totalPerfil);
-        totalPerfil.setBounds(540, 653, 80, 30);
+        totalPerfil.setBounds(540, 740, 80, 30);
 
         perfil17.setBackground(new java.awt.Color(129, 167, 71));
         perfil17.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -2303,7 +2310,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(perfil17);
-        perfil17.setBounds(540, 623, 80, 30);
+        perfil17.setBounds(540, 710, 80, 30);
 
         perfil16.setBackground(new java.awt.Color(129, 167, 71));
         perfil16.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -2316,7 +2323,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(perfil16);
-        perfil16.setBounds(540, 593, 80, 30);
+        perfil16.setBounds(540, 680, 80, 30);
 
         alocacaoPerc16.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoPerc16.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -2328,7 +2335,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(alocacaoPerc16);
-        alocacaoPerc16.setBounds(460, 593, 80, 30);
+        alocacaoPerc16.setBounds(460, 680, 80, 30);
 
         alocacaoPerc17.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoPerc17.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -2340,7 +2347,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(alocacaoPerc17);
-        alocacaoPerc17.setBounds(460, 623, 80, 30);
+        alocacaoPerc17.setBounds(460, 710, 80, 30);
 
         totalAtualPerc.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         totalAtualPerc.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -2352,7 +2359,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(totalAtualPerc);
-        totalAtualPerc.setBounds(460, 653, 80, 30);
+        totalAtualPerc.setBounds(460, 740, 80, 30);
 
         totalAtual.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         totalAtual.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -2364,7 +2371,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(totalAtual);
-        totalAtual.setBounds(380, 653, 80, 30);
+        totalAtual.setBounds(380, 740, 80, 30);
 
         alocacaoAtual18.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual18.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -2376,7 +2383,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(alocacaoAtual18);
-        alocacaoAtual18.setBounds(380, 623, 80, 30);
+        alocacaoAtual18.setBounds(380, 710, 80, 30);
 
         alocacaoAtual17.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual17.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -2388,19 +2395,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(alocacaoAtual17);
-        alocacaoAtual17.setBounds(380, 593, 80, 30);
+        alocacaoAtual17.setBounds(380, 680, 80, 30);
 
         jLabel32.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel32.setText(" Proteção (Seguro Vida)");
         jLabel32.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         getContentPane().add(jLabel32);
-        jLabel32.setBounds(10, 593, 370, 30);
+        jLabel32.setBounds(10, 680, 370, 30);
 
         jLabel20.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel20.setText(" Carteira Offshore (FX)");
         jLabel20.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         getContentPane().add(jLabel20);
-        jLabel20.setBounds(10, 623, 370, 30);
+        jLabel20.setBounds(10, 710, 370, 30);
 
         jLabel2.setBackground(java.awt.Color.white);
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -2408,7 +2415,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jLabel2.setOpaque(true);
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(10, 653, 370, 30);
+        jLabel2.setBounds(10, 740, 370, 30);
 
         jMenu1.setText("Arquivo");
 
@@ -2468,7 +2475,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        setSize(new java.awt.Dimension(1073, 835));
+        setSize(new java.awt.Dimension(1073, 881));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -2484,8 +2491,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_aporteAtualPercActionPerformed
     private void aporteAtualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aporteAtualActionPerformed
     }//GEN-LAST:event_aporteAtualActionPerformed
-    private void alocacaoAtual1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual1ActionPerformed
-    }//GEN-LAST:event_alocacaoAtual1ActionPerformed
     private void alocacaoPerc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoPerc1ActionPerformed
     }//GEN-LAST:event_alocacaoPerc1ActionPerformed
     private void ajustePerc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajustePerc1ActionPerformed
@@ -2521,14 +2526,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void alocacaoPerc3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoPerc3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoPerc3ActionPerformed
-    private void alocacaoAtual3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual3ActionPerformed
-    }//GEN-LAST:event_alocacaoAtual3ActionPerformed
-    private void alocacaoAtual2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_alocacaoAtual2ActionPerformed
-    private void alocacaoAtual4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_alocacaoAtual4ActionPerformed
     private void alocacaoPerc4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoPerc4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoPerc4ActionPerformed
@@ -2561,12 +2558,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void alocacaoPerc5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoPerc5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoPerc5ActionPerformed
-    private void alocacaoAtual5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_alocacaoAtual5ActionPerformed
-    private void alocacaoAtual6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_alocacaoAtual6ActionPerformed
     private void alocacaoPerc6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoPerc6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoPerc6ActionPerformed
@@ -2602,12 +2593,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void alocacaoPerc7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoPerc7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoPerc7ActionPerformed
-    private void alocacaoAtual7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_alocacaoAtual7ActionPerformed
-    private void alocacaoAtual8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_alocacaoAtual8ActionPerformed
     private void alocacaoPerc8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoPerc8ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoPerc8ActionPerformed
@@ -2644,9 +2629,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void alocacaoPerc9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoPerc9ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoPerc9ActionPerformed
-    private void alocacaoAtual9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_alocacaoAtual9ActionPerformed
     private void rendaFixaAtualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rendaFixaAtualActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rendaFixaAtualActionPerformed
@@ -2722,15 +2704,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void alocacaoPerc11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoPerc11ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoPerc11ActionPerformed
-    private void alocacaoAtual10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual10ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_alocacaoAtual10ActionPerformed
-    private void alocacaoAtual11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual11ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_alocacaoAtual11ActionPerformed
-    private void alocacaoAtual12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual12ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_alocacaoAtual12ActionPerformed
     private void multimercadoAtualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multimercadoAtualActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_multimercadoAtualActionPerformed
@@ -2770,12 +2743,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void alocacaoPerc13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoPerc13ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoPerc13ActionPerformed
-    private void alocacaoAtual14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual14ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_alocacaoAtual14ActionPerformed
-    private void alocacaoAtual15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual15ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_alocacaoAtual15ActionPerformed
     private void alocacaoPerc14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoPerc14ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoPerc14ActionPerformed
@@ -2812,9 +2779,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void alocacaoPerc15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoPerc15ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoPerc15ActionPerformed
-    private void alocacaoAtual16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual16ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_alocacaoAtual16ActionPerformed
     private void rendaVariavelAlocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rendaVariavelAlocActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rendaVariavelAlocActionPerformed
@@ -2878,12 +2842,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_alocacaoPerc17ActionPerformed
     private void totalAtualPercActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalAtualPercActionPerformed
     }//GEN-LAST:event_totalAtualPercActionPerformed
-    private void totalAtualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalAtualActionPerformed
-    }//GEN-LAST:event_totalAtualActionPerformed
-    private void alocacaoAtual18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual18ActionPerformed
-    }//GEN-LAST:event_alocacaoAtual18ActionPerformed
-    private void alocacaoAtual17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual17ActionPerformed
-    }//GEN-LAST:event_alocacaoAtual17ActionPerformed
 
     private void jMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSairActionPerformed
          int sair = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair?");
@@ -2912,6 +2870,78 @@ public class TelaPrincipal extends javax.swing.JFrame {
         TelaPrincipal menu = new TelaPrincipal();
         menu.setVisible(true);
     }//GEN-LAST:event_jMenuItemActionPerformed
+
+    private void totalAtualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalAtualActionPerformed
+
+    }//GEN-LAST:event_totalAtualActionPerformed
+
+    private void alocacaoAtual18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual18ActionPerformed
+
+    }//GEN-LAST:event_alocacaoAtual18ActionPerformed
+
+    private void alocacaoAtual17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual17ActionPerformed
+
+    }//GEN-LAST:event_alocacaoAtual17ActionPerformed
+
+    private void alocacaoAtual16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual16ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_alocacaoAtual16ActionPerformed
+
+    private void alocacaoAtual15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual15ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_alocacaoAtual15ActionPerformed
+
+    private void alocacaoAtual14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual14ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_alocacaoAtual14ActionPerformed
+
+    private void alocacaoAtual12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual12ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_alocacaoAtual12ActionPerformed
+
+    private void alocacaoAtual11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual11ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_alocacaoAtual11ActionPerformed
+
+    private void alocacaoAtual10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual10ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_alocacaoAtual10ActionPerformed
+
+    private void alocacaoAtual9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_alocacaoAtual9ActionPerformed
+
+    private void alocacaoAtual8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_alocacaoAtual8ActionPerformed
+
+    private void alocacaoAtual7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_alocacaoAtual7ActionPerformed
+
+    private void alocacaoAtual6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_alocacaoAtual6ActionPerformed
+
+    private void alocacaoAtual5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_alocacaoAtual5ActionPerformed
+
+    private void alocacaoAtual4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_alocacaoAtual4ActionPerformed
+
+    private void alocacaoAtual3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual3ActionPerformed
+
+    }//GEN-LAST:event_alocacaoAtual3ActionPerformed
+
+    private void alocacaoAtual2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_alocacaoAtual2ActionPerformed
+
+    private void alocacaoAtual1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual1ActionPerformed
+
+    }//GEN-LAST:event_alocacaoAtual1ActionPerformed
     
     /**
      * @param args the command line arguments

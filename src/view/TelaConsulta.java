@@ -11,6 +11,8 @@ import controller.ConexaoException;
 import controller.PosicaoCliente;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
@@ -134,7 +136,11 @@ public class TelaConsulta extends javax.swing.JFrame {
                     + "WHERE aloc.cliente_id = '" + mod.getPesquisa() + "'");
          */
          TelaPrincipal principal= new TelaPrincipal();
-         principal.setVisible(true);
+        try {
+            principal.preencherColunas(txtFieldPesquisa.getText());
+        } catch (ConexaoException | ClassNotFoundException ex) {
+            Logger.getLogger(TelaConsulta.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_buttonPesquisaActionPerformed
 
