@@ -38,7 +38,7 @@ public class ConexaoBD{
             try {
                 Class.forName("com.mysql.jdbc.Driver");
                 con = DriverManager.getConnection("jdbc:mysql://192.168.1.4:3306/alocacao?useTimezone=true&serverTimezone=UTC", "alocacao", "alocacao@2018");
-                JOptionPane.showMessageDialog(null, "Conexao efetuada com sucesso.");
+                //JOptionPane.showMessageDialog(null, "Conexao efetuada com sucesso.");
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Erro conexao: " + ex.getMessage());
             }
