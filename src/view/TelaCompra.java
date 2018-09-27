@@ -41,18 +41,19 @@ public class TelaCompra extends javax.swing.JFrame {
     private void initComponents() {
 
         jComboBoxItem = new javax.swing.JComboBox<>();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableAlocacao = new javax.swing.JTable();
+        jButtonConfirm = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
         jTableCompra = new javax.swing.JTable();
+        txtFieldPesquisa = new javax.swing.JTextField();
+        buttonPesquisa = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuSair4 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jCompra4 = new javax.swing.JMenuItem();
-        jVenda4 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jConsulta4 = new javax.swing.JMenuItem();
-        jAlocacao3 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuSair = new javax.swing.JMenuItem();
+        jAlocacao = new javax.swing.JMenu();
+        jMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -67,116 +68,104 @@ public class TelaCompra extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jComboBoxItem);
-        jComboBoxItem.setBounds(250, 30, 385, 30);
+        jComboBoxItem.setBounds(310, 30, 385, 30);
+
+        jTableAlocacao.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Alocação Atual %", "Sugestão para Perfil"
+            }
+        ));
+        jScrollPane1.setViewportView(jTableAlocacao);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(20, 30, 270, 100);
+
+        jButtonConfirm.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jButtonConfirm.setText("Confirmar Alocação");
+        jButtonConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfirmActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonConfirm);
+        jButtonConfirm.setBounds(20, 150, 140, 30);
 
         jTableCompra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
 
             }
         ));
-        jTableCompra.getTableHeader().setReorderingAllowed(false);
-        jTableCompra.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableCompraMouseClicked(evt);
+        jScrollPane3.setViewportView(jTableCompra);
+
+        getContentPane().add(jScrollPane3);
+        jScrollPane3.setBounds(10, 220, 950, 620);
+
+        txtFieldPesquisa.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        txtFieldPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFieldPesquisaActionPerformed(evt);
             }
         });
-        jScrollPane2.setViewportView(jTableCompra);
+        getContentPane().add(txtFieldPesquisa);
+        txtFieldPesquisa.setBounds(810, 80, 140, 30);
 
-        getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(10, 210, 1120, 630);
+        buttonPesquisa.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        buttonPesquisa.setText("Pesquisa");
+        buttonPesquisa.setMaximumSize(new java.awt.Dimension(100, 40));
+        buttonPesquisa.setMinimumSize(new java.awt.Dimension(100, 40));
+        buttonPesquisa.setPreferredSize(new java.awt.Dimension(90, 35));
+        buttonPesquisa.setVerifyInputWhenFocusTarget(false);
+        buttonPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonPesquisaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(buttonPesquisa);
+        buttonPesquisa.setBounds(860, 120, 90, 35);
+
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel1.setText("Emissor");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(900, 30, 50, 40);
 
         jMenu1.setText("Arquivo");
 
-        jMenuSair4.setText("Sair");
-        jMenuSair4.addActionListener(new java.awt.event.ActionListener() {
+        jMenuSair.setText("Sair");
+        jMenuSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuSair4ActionPerformed(evt);
+                jMenuSairActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuSair4);
+        jMenu1.add(jMenuSair);
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Ajuste");
+        jAlocacao.setText("Menu");
 
-        jCompra4.setText("Compra");
-        jCompra4.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem.setText("Alocação");
+        jMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCompra4ActionPerformed(evt);
+                jMenuItemActionPerformed(evt);
             }
         });
-        jMenu2.add(jCompra4);
+        jAlocacao.add(jMenuItem);
 
-        jVenda4.setText("Venda");
-        jVenda4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jVenda4ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jVenda4);
-
-        jMenuBar1.add(jMenu2);
-
-        jMenu4.setText("Clientes");
-
-        jConsulta4.setText("Consulta");
-        jConsulta4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jConsulta4ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jConsulta4);
-
-        jMenuBar1.add(jMenu4);
-
-        jAlocacao3.setText("Menu");
-
-        jMenuItem4.setText("Alocação");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
-            }
-        });
-        jAlocacao3.add(jMenuItem4);
-
-        jMenuBar1.add(jAlocacao3);
+        jMenuBar1.add(jAlocacao);
 
         setJMenuBar(jMenuBar1);
 
-        setSize(new java.awt.Dimension(1149, 913));
+        setSize(new java.awt.Dimension(991, 913));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jMenuSair4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSair4ActionPerformed
-         int sair = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair?");
-        if(sair == JOptionPane.YES_OPTION){
-            dispose();
-            //System.exit(0);
-        }
-    }//GEN-LAST:event_jMenuSair4ActionPerformed
-
-    private void jCompra4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCompra4ActionPerformed
-        TelaCompra telaCompra = new TelaCompra();
-        telaCompra.setVisible(true);
-    }//GEN-LAST:event_jCompra4ActionPerformed
-
-    private void jVenda4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVenda4ActionPerformed
-        TelaVenda telaVenda = new TelaVenda();
-        telaVenda.setVisible(true);
-    }//GEN-LAST:event_jVenda4ActionPerformed
-
-    private void jConsulta4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsulta4ActionPerformed
-        TelaConsulta telaConsulta = new TelaConsulta();
-        telaConsulta.setVisible(true);
-    }//GEN-LAST:event_jConsulta4ActionPerformed
-
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        TelaPrincipal menu = new TelaPrincipal();
-        menu.setVisible(true);
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jComboBoxItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxItemActionPerformed
         String[] mensagem = {"< Selecione uma das opções >",
@@ -217,10 +206,37 @@ public class TelaCompra extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jComboBoxItemActionPerformed
 
-    private void jTableCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableCompraMouseClicked
-        TelaAjusteCompra ajuste = new TelaAjusteCompra();
-        ajuste.setVisible(true);
-    }//GEN-LAST:event_jTableCompraMouseClicked
+    private void jMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSairActionPerformed
+        int sair = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair?");
+        if(sair == JOptionPane.YES_OPTION){
+            dispose();
+            //System.exit(0);
+        }
+    }//GEN-LAST:event_jMenuSairActionPerformed
+
+    private void jMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemActionPerformed
+        TelaPrincipal menu = new TelaPrincipal();
+        menu.setVisible(true);
+    }//GEN-LAST:event_jMenuItemActionPerformed
+
+    private void jButtonConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmActionPerformed
+        TelaPrincipal tela = new TelaPrincipal();
+        tela.setVisible(true);
+        // passar os dados para tela principal
+
+    }//GEN-LAST:event_jButtonConfirmActionPerformed
+
+    private void txtFieldPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFieldPesquisaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFieldPesquisaActionPerformed
+
+    private void buttonPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPesquisaActionPerformed
+
+        mod.setPesquisa(txtFieldPesquisa.getText());
+
+        TelaPrincipal principal= new TelaPrincipal();
+        principal.setVisible(true);
+    }//GEN-LAST:event_buttonPesquisaActionPerformed
 
     
     public void preencherTabela(String sql) throws ConexaoException, ClassNotFoundException {
@@ -311,18 +327,19 @@ public class TelaCompra extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jAlocacao3;
+    private javax.swing.JButton buttonPesquisa;
+    private javax.swing.JMenu jAlocacao;
+    private javax.swing.JButton jButtonConfirm;
     private javax.swing.JComboBox<String> jComboBoxItem;
-    private javax.swing.JMenuItem jCompra4;
-    private javax.swing.JMenuItem jConsulta4;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuSair4;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JMenuItem jMenuItem;
+    private javax.swing.JMenuItem jMenuSair;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTableAlocacao;
     private javax.swing.JTable jTableCompra;
-    private javax.swing.JMenuItem jVenda4;
+    private javax.swing.JTextField txtFieldPesquisa;
     // End of variables declaration//GEN-END:variables
 }

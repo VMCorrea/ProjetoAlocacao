@@ -5,7 +5,12 @@
  */
 package view;
 
+import controller.ConexaoBD;
+import controller.ConexaoException;
+import controller.PosicaoCliente;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import model.Posicao;
 
 /**
  *
@@ -13,12 +18,46 @@ import javax.swing.JOptionPane;
  */
 public class TelaPrincipal extends javax.swing.JFrame {
 
+    Posicao mod = new Posicao();
+    PosicaoCliente control = new PosicaoCliente();
+    ConexaoBD conex = new ConexaoBD();
     /**
      * Creates new form Tela
      */
     public TelaPrincipal() {
         initComponents();
     }
+    
+    private void preencherColunas() throws ConexaoException, ClassNotFoundException {
+        String mensagem = "Carteira de Ações";    
+        String sql = "SELECT cat.classificacao, al.NET FROM alocacao.catalogo_op AS cat INNER JOIN alocacao.alocacoes AS al ON al.catalogo_id = cat.id GROUP BY cat.classificacao  WHERE cat.classificacao= '" + mensagem + "'";
+            try {
+                conex.open();
+                conex.executaSql(sql);
+                conex.rs.first();
+                
+                //do{
+                    double soma = conex.rs.getDouble(1);
+                    alocacaoAtual1.setText(String.valueOf(soma));
+                //} while (conex.rs.next());
+                
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(rootPane, "Erro ao obter dados.");
+            } catch (ClassNotFoundException ex) {
+                JOptionPane.showMessageDialog(null, ex);
+            } finally {
+                conex.close();
+            } 
+ /* 
+    PRIMEIRA COLUNA TELA PRINCIPAL
+        total: soma todas as linhas da 1a coluna            
+
+    SEGUNDA COLUNA
+       Fazer regra de 3 
+        total                   - 100%
+        1a coluna por categoria - x
+ */  
+    }   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,9 +68,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel17 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
+        jNomeCliente = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         aporteFinal = new javax.swing.JTextField();
@@ -238,23 +275,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setTitle("Tela Principal");
         getContentPane().setLayout(null);
 
-        jLabel17.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel17.setForeground(java.awt.Color.red);
-        jLabel17.setText("XXXXX XXXXX 99999");
-        getContentPane().add(jLabel17);
-        jLabel17.setBounds(184, 0, 150, 17);
-
-        jLabel24.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel24.setForeground(java.awt.Color.red);
-        jLabel24.setText("Data Nasc. DD/MM/AAAA");
-        getContentPane().add(jLabel24);
-        jLabel24.setBounds(447, 0, 170, 17);
-
-        jLabel18.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel18.setForeground(java.awt.Color.red);
-        jLabel18.setText("Data DD/MM/AAAA");
-        getContentPane().add(jLabel18);
-        jLabel18.setBounds(710, 0, 155, 17);
+        jNomeCliente.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jNomeCliente.setForeground(java.awt.Color.red);
+        jNomeCliente.setText("XXXXX XXXXX 99999");
+        getContentPane().add(jNomeCliente);
+        jNomeCliente.setBounds(184, 0, 150, 17);
 
         jLabel40.setBackground(new java.awt.Color(153, 153, 153));
         jLabel40.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
@@ -2143,7 +2168,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(totalFinal);
-        totalFinal.setBounds(910, 653, 110, 20);
+        totalFinal.setBounds(910, 653, 110, 30);
 
         totalAjuste.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         totalAjuste.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -2155,7 +2180,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(totalAjuste);
-        totalAjuste.setBounds(809, 653, 101, 20);
+        totalAjuste.setBounds(809, 653, 101, 30);
 
         ajuste17.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajuste17.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -2191,7 +2216,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(totalFinalPerc);
-        totalFinalPerc.setBounds(720, 653, 90, 20);
+        totalFinalPerc.setBounds(720, 653, 90, 30);
 
         finalPerc17.setBackground(new java.awt.Color(129, 167, 71));
         finalPerc17.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -2253,7 +2278,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(totalAjustePerc);
-        totalAjustePerc.setBounds(620, 653, 100, 20);
+        totalAjustePerc.setBounds(620, 653, 100, 30);
 
         totalPerfil.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         totalPerfil.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -2265,7 +2290,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(totalPerfil);
-        totalPerfil.setBounds(540, 653, 80, 20);
+        totalPerfil.setBounds(540, 653, 80, 30);
 
         perfil17.setBackground(new java.awt.Color(129, 167, 71));
         perfil17.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -2327,7 +2352,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(totalAtualPerc);
-        totalAtualPerc.setBounds(460, 653, 80, 20);
+        totalAtualPerc.setBounds(460, 653, 80, 30);
 
         totalAtual.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         totalAtual.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -2339,7 +2364,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(totalAtual);
-        totalAtual.setBounds(380, 653, 80, 20);
+        totalAtual.setBounds(380, 653, 80, 30);
 
         alocacaoAtual18.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual18.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -2383,12 +2408,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jLabel2.setOpaque(true);
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(10, 653, 370, 20);
+        jLabel2.setBounds(10, 653, 370, 30);
 
-        jMenu1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\page.png")); // NOI18N
         jMenu1.setText("Arquivo");
 
-        jMenuSair.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\door_out.png")); // NOI18N
         jMenuSair.setText("Sair");
         jMenuSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2399,10 +2422,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\wrench_orange.png")); // NOI18N
         jMenu2.setText("Ajuste");
 
-        jCompra.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\user_add.png")); // NOI18N
         jCompra.setText("Compra");
         jCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2411,7 +2432,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(jCompra);
 
-        jVenda.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\user_delete.png")); // NOI18N
         jVenda.setText("Venda");
         jVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2422,10 +2442,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
-        jMenu6.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\group.png")); // NOI18N
         jMenu6.setText("Clientes");
 
-        jConsulta.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\zoom.png")); // NOI18N
         jConsulta.setText("Consulta");
         jConsulta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2436,10 +2454,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu6);
 
-        jAlocacao.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\information.png")); // NOI18N
         jAlocacao.setText("Menu");
 
-        jMenuItem.setIcon(new javax.swing.ImageIcon("C:\\Users\\Beatriz.aurelio\\Downloads\\InterfaceJava-master\\src\\images\\page.png")); // NOI18N
         jMenuItem.setText("Alocação");
         jMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2452,604 +2468,421 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        setSize(new java.awt.Dimension(1038, 725));
+        setSize(new java.awt.Dimension(1073, 835));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void aporteFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aporteFinalActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_aporteFinalActionPerformed
-
     private void aporteAjusteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aporteAjusteActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_aporteAjusteActionPerformed
-
     private void aporteFinalPercActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aporteFinalPercActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_aporteFinalPercActionPerformed
-
     private void aporteAjustePercActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aporteAjustePercActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_aporteAjustePercActionPerformed
-
     private void aporteAtualPercActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aporteAtualPercActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_aporteAtualPercActionPerformed
-
     private void aporteAtualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aporteAtualActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_aporteAtualActionPerformed
-
     private void alocacaoAtual1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual1ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoAtual1ActionPerformed
-
     private void alocacaoPerc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoPerc1ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoPerc1ActionPerformed
-
     private void ajustePerc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajustePerc1ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_ajustePerc1ActionPerformed
-
     private void finalPerc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalPerc1ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_finalPerc1ActionPerformed
-
     private void ajuste1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajuste1ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_ajuste1ActionPerformed
-
     private void final1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_final1ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_final1ActionPerformed
-
     private void final2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_final2ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_final2ActionPerformed
-
     private void ajuste3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajuste3ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_ajuste3ActionPerformed
-
     private void ajuste2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajuste2ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_ajuste2ActionPerformed
-
     private void final3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_final3ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_final3ActionPerformed
-
     private void finalPerc3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalPerc3ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_finalPerc3ActionPerformed
-
     private void finalPerc2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalPerc2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_finalPerc2ActionPerformed
-
     private void ajustePerc2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajustePerc2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ajustePerc2ActionPerformed
-
     private void ajustePerc3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajustePerc3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ajustePerc3ActionPerformed
-
     private void alocacaoPerc2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoPerc2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoPerc2ActionPerformed
-
     private void alocacaoPerc3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoPerc3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoPerc3ActionPerformed
-
     private void alocacaoAtual3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual3ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoAtual3ActionPerformed
-
     private void alocacaoAtual2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoAtual2ActionPerformed
-
     private void alocacaoAtual4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoAtual4ActionPerformed
-
     private void alocacaoPerc4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoPerc4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoPerc4ActionPerformed
-
     private void ajustePerc4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajustePerc4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ajustePerc4ActionPerformed
-
     private void finalPerc4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalPerc4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_finalPerc4ActionPerformed
-
     private void ajuste4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajuste4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ajuste4ActionPerformed
-
     private void final4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_final4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_final4ActionPerformed
-
     private void final5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_final5ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_final5ActionPerformed
-
     private void ajuste5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajuste5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ajuste5ActionPerformed
-
     private void finalPerc5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalPerc5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_finalPerc5ActionPerformed
-
     private void ajustePerc5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajustePerc5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ajustePerc5ActionPerformed
-
     private void perfil5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perfil5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_perfil5ActionPerformed
-
     private void alocacaoPerc5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoPerc5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoPerc5ActionPerformed
-
     private void alocacaoAtual5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoAtual5ActionPerformed
-
     private void alocacaoAtual6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoAtual6ActionPerformed
-
     private void alocacaoPerc6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoPerc6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoPerc6ActionPerformed
-
     private void perfil6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perfil6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_perfil6ActionPerformed
-
     private void ajustePerc6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajustePerc6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ajustePerc6ActionPerformed
-
     private void finalPerc6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalPerc6ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_finalPerc6ActionPerformed
-
     private void ajuste6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajuste6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ajuste6ActionPerformed
 
+    }//GEN-LAST:event_ajuste6ActionPerformed
     private void final6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_final6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_final6ActionPerformed
-
     private void final7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_final7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_final7ActionPerformed
-
     private void ajuste7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajuste7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ajuste7ActionPerformed
-
     private void finalPerc7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalPerc7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_finalPerc7ActionPerformed
-
     private void ajustePerc7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajustePerc7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ajustePerc7ActionPerformed
-
     private void perfil7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perfil7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_perfil7ActionPerformed
-
     private void alocacaoPerc7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoPerc7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoPerc7ActionPerformed
-
     private void alocacaoAtual7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoAtual7ActionPerformed
-
     private void alocacaoAtual8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual8ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoAtual8ActionPerformed
-
     private void alocacaoPerc8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoPerc8ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoPerc8ActionPerformed
-
     private void perfil8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perfil8ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_perfil8ActionPerformed
-
     private void ajustePerc8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajustePerc8ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ajustePerc8ActionPerformed
-
     private void finalPerc8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalPerc8ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_finalPerc8ActionPerformed
-
     private void ajuste8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajuste8ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ajuste8ActionPerformed
-
     private void final8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_final8ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_final8ActionPerformed
-
     private void final9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_final9ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_final9ActionPerformed
-
     private void ajuste9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajuste9ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ajuste9ActionPerformed
-
     private void finalPerc9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalPerc9ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_finalPerc9ActionPerformed
-
     private void ajustePerc9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajustePerc9ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ajustePerc9ActionPerformed
-
     private void perfil9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perfil9ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_perfil9ActionPerformed
-
     private void alocacaoPerc9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoPerc9ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoPerc9ActionPerformed
-
     private void alocacaoAtual9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual9ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoAtual9ActionPerformed
-
     private void rendaFixaAtualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rendaFixaAtualActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rendaFixaAtualActionPerformed
-
     private void rendaFixaAtualPercActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rendaFixaAtualPercActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rendaFixaAtualPercActionPerformed
-
     private void rendaFixaPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rendaFixaPerfilActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rendaFixaPerfilActionPerformed
-
     private void rendaFixaAjustePercActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rendaFixaAjustePercActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rendaFixaAjustePercActionPerformed
-
     private void rendaFixaFinalPercActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rendaFixaFinalPercActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rendaFixaFinalPercActionPerformed
-
     private void rendaFixaAjusteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rendaFixaAjusteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rendaFixaAjusteActionPerformed
-
     private void rendaFixaFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rendaFixaFinalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rendaFixaFinalActionPerformed
-
     private void final10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_final10ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_final10ActionPerformed
-
     private void final11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_final11ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_final11ActionPerformed
-
     private void final12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_final12ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_final12ActionPerformed
-
     private void ajuste12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajuste12ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ajuste12ActionPerformed
-
     private void ajuste11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajuste11ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ajuste11ActionPerformed
-
     private void ajuste10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajuste10ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ajuste10ActionPerformed
-
     private void finalPerc11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalPerc11ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_finalPerc11ActionPerformed
-
     private void finalPerc10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalPerc10ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_finalPerc10ActionPerformed
-
     private void finalPerc12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalPerc12ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_finalPerc12ActionPerformed
-
     private void jTextField125ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField125ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField125ActionPerformed
-
     private void jTextField131ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField131ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField131ActionPerformed
-
     private void ajustePerc10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajustePerc10ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ajustePerc10ActionPerformed
-
     private void perfil11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perfil11ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_perfil11ActionPerformed
-
     private void perfil12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perfil12ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_perfil12ActionPerformed
-
     private void perfil10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perfil10ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_perfil10ActionPerformed
-
     private void alocacaoPerc10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoPerc10ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoPerc10ActionPerformed
-
     private void alocacaoPerc12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoPerc12ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoPerc12ActionPerformed
-
     private void alocacaoPerc11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoPerc11ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoPerc11ActionPerformed
-
     private void alocacaoAtual10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual10ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoAtual10ActionPerformed
-
     private void alocacaoAtual11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual11ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoAtual11ActionPerformed
-
     private void alocacaoAtual12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual12ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoAtual12ActionPerformed
-
     private void multimercadoAtualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multimercadoAtualActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_multimercadoAtualActionPerformed
-
     private void multimercadoAtualPercActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multimercadoAtualPercActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_multimercadoAtualPercActionPerformed
-
     private void multimercadoPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multimercadoPerfilActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_multimercadoPerfilActionPerformed
-
     private void multimercadoAjustePercActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multimercadoAjustePercActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_multimercadoAjustePercActionPerformed
-
     private void multimercadoFinalPercActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multimercadoFinalPercActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_multimercadoFinalPercActionPerformed
-
     private void multimercadoAjusteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multimercadoAjusteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_multimercadoAjusteActionPerformed
-
     private void multimercadoFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multimercadoFinalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_multimercadoFinalActionPerformed
-
     private void final13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_final13ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_final13ActionPerformed
-
     private void finalPerc13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalPerc13ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_finalPerc13ActionPerformed
-
     private void ajuste13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajuste13ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ajuste13ActionPerformed
-
     private void ajustePerc13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajustePerc13ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ajustePerc13ActionPerformed
-
     private void perfil13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perfil13ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_perfil13ActionPerformed
-
     private void alocacaoPerc13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoPerc13ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoPerc13ActionPerformed
-
     private void alocacaoAtual14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual14ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoAtual14ActionPerformed
-
     private void alocacaoAtual15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual15ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoAtual15ActionPerformed
-
     private void alocacaoPerc14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoPerc14ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoPerc14ActionPerformed
-
     private void perfil14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perfil14ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_perfil14ActionPerformed
-
     private void ajustePerc14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajustePerc14ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ajustePerc14ActionPerformed
-
     private void finalPerc14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalPerc14ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_finalPerc14ActionPerformed
-
     private void ajuste14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajuste14ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ajuste14ActionPerformed
-
     private void final14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_final14ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_final14ActionPerformed
-
     private void final15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_final15ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_final15ActionPerformed
-
     private void ajuste15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajuste15ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ajuste15ActionPerformed
-
     private void finalPerc15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalPerc15ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_finalPerc15ActionPerformed
-
     private void ajustePerc15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajustePerc15ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ajustePerc15ActionPerformed
-
     private void perfil15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perfil15ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_perfil15ActionPerformed
-
     private void alocacaoPerc15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoPerc15ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoPerc15ActionPerformed
-
     private void alocacaoAtual16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual16ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoAtual16ActionPerformed
-
     private void rendaVariavelAlocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rendaVariavelAlocActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rendaVariavelAlocActionPerformed
-
     private void rendaVariavelAlocPercActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rendaVariavelAlocPercActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rendaVariavelAlocPercActionPerformed
-
     private void rendaVariavelPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rendaVariavelPerfilActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rendaVariavelPerfilActionPerformed
-
     private void rendaVariavelAjustePercActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rendaVariavelAjustePercActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rendaVariavelAjustePercActionPerformed
-
     private void rendaVariavelFinalPercActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rendaVariavelFinalPercActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rendaVariavelFinalPercActionPerformed
-
     private void rendaVariavelAjusteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rendaVariavelAjusteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rendaVariavelAjusteActionPerformed
-
     private void rendaVariavelFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rendaVariavelFinalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rendaVariavelFinalActionPerformed
-
     private void final16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_final16ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_final16ActionPerformed
-
     private void final17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_final17ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_final17ActionPerformed
-
     private void totalFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalFinalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_totalFinalActionPerformed
-
     private void totalAjusteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalAjusteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_totalAjusteActionPerformed
-
     private void ajuste17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajuste17ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ajuste17ActionPerformed
-
     private void ajuste16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajuste16ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ajuste16ActionPerformed
-
     private void totalFinalPercActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalFinalPercActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_totalFinalPercActionPerformed
-
     private void finalPerc17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalPerc17ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_finalPerc17ActionPerformed
-
     private void finalPerc16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalPerc16ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_finalPerc16ActionPerformed
-
     private void ajustePerc16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajustePerc16ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_ajustePerc16ActionPerformed
-
     private void ajustePerc17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajustePerc17ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_ajustePerc17ActionPerformed
-
     private void totalAjustePercActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalAjustePercActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_totalAjustePercActionPerformed
-
     private void totalPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalPerfilActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_totalPerfilActionPerformed
-
     private void perfil17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perfil17ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_perfil17ActionPerformed
-
     private void perfil16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perfil16ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_perfil16ActionPerformed
-
     private void alocacaoPerc16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoPerc16ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoPerc16ActionPerformed
-
     private void alocacaoPerc17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoPerc17ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoPerc17ActionPerformed
-
     private void totalAtualPercActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalAtualPercActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_totalAtualPercActionPerformed
-
     private void totalAtualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalAtualActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_totalAtualActionPerformed
-
     private void alocacaoAtual18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual18ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoAtual18ActionPerformed
-
     private void alocacaoAtual17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual17ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoAtual17ActionPerformed
 
     private void jMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSairActionPerformed
@@ -3079,7 +2912,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         TelaPrincipal menu = new TelaPrincipal();
         menu.setVisible(true);
     }//GEN-LAST:event_jMenuItemActionPerformed
-
+    
     /**
      * @param args the command line arguments
      */
@@ -3236,15 +3069,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel29;
@@ -3272,6 +3102,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem;
     private javax.swing.JMenuItem jMenuSair;
+    private javax.swing.JLabel jNomeCliente;
     private javax.swing.JTextField jTextField125;
     private javax.swing.JTextField jTextField131;
     private javax.swing.JMenuItem jVenda;

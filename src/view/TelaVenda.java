@@ -43,16 +43,17 @@ public class TelaVenda extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableVenda = new javax.swing.JTable();
         jComboBoxItens = new javax.swing.JComboBox<>();
+        jButtonConfirm = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableAlocacao = new javax.swing.JTable();
+        txtFieldPesquisa = new javax.swing.JTextField();
+        buttonPesquisa = new javax.swing.JButton();
+        jLabelAtivo = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuSair4 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jCompra4 = new javax.swing.JMenuItem();
-        jVenda4 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jConsulta4 = new javax.swing.JMenuItem();
-        jAlocacao3 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuSair = new javax.swing.JMenuItem();
+        jAlocacao = new javax.swing.JMenu();
+        jMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Vendas");
@@ -70,6 +71,12 @@ public class TelaVenda extends javax.swing.JFrame {
         jTableVenda.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableVendaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jTableVendaMouseEntered(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTableVendaMousePressed(evt);
             }
         });
         jScrollPane2.setViewportView(jTableVenda);
@@ -90,63 +97,82 @@ public class TelaVenda extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jComboBoxItens);
-        jComboBoxItens.setBounds(250, 30, 385, 30);
+        jComboBoxItens.setBounds(320, 30, 385, 30);
+
+        jButtonConfirm.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jButtonConfirm.setText("Confirmar Alocação");
+        jButtonConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfirmActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonConfirm);
+        jButtonConfirm.setBounds(20, 140, 140, 30);
+
+        jTableAlocacao.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Alocação Atual %", "Sugestão para Perfil"
+            }
+        ));
+        jScrollPane1.setViewportView(jTableAlocacao);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(20, 30, 270, 90);
+
+        txtFieldPesquisa.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        txtFieldPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFieldPesquisaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtFieldPesquisa);
+        txtFieldPesquisa.setBounds(820, 80, 150, 30);
+
+        buttonPesquisa.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        buttonPesquisa.setText("Pesquisa");
+        buttonPesquisa.setMaximumSize(new java.awt.Dimension(100, 40));
+        buttonPesquisa.setMinimumSize(new java.awt.Dimension(100, 40));
+        buttonPesquisa.setPreferredSize(new java.awt.Dimension(90, 35));
+        buttonPesquisa.setVerifyInputWhenFocusTarget(false);
+        buttonPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonPesquisaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(buttonPesquisa);
+        buttonPesquisa.setBounds(880, 130, 90, 35);
+
+        jLabelAtivo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabelAtivo.setText("Ativo");
+        getContentPane().add(jLabelAtivo);
+        jLabelAtivo.setBounds(930, 30, 40, 40);
 
         jMenu1.setText("Arquivo");
 
-        jMenuSair4.setText("Sair");
-        jMenuSair4.addActionListener(new java.awt.event.ActionListener() {
+        jMenuSair.setText("Sair");
+        jMenuSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuSair4ActionPerformed(evt);
+                jMenuSairActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuSair4);
+        jMenu1.add(jMenuSair);
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Ajuste");
+        jAlocacao.setText("Menu");
 
-        jCompra4.setText("Compra");
-        jCompra4.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem.setText("Alocação");
+        jMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCompra4ActionPerformed(evt);
+                jMenuItemActionPerformed(evt);
             }
         });
-        jMenu2.add(jCompra4);
+        jAlocacao.add(jMenuItem);
 
-        jVenda4.setText("Venda");
-        jVenda4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jVenda4ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jVenda4);
-
-        jMenuBar1.add(jMenu2);
-
-        jMenu4.setText("Clientes");
-
-        jConsulta4.setText("Consulta");
-        jConsulta4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jConsulta4ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jConsulta4);
-
-        jMenuBar1.add(jMenu4);
-
-        jAlocacao3.setText("Menu");
-
-        jMenuItem4.setText("Alocação");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
-            }
-        });
-        jAlocacao3.add(jMenuItem4);
-
-        jMenuBar1.add(jAlocacao3);
+        jMenuBar1.add(jAlocacao);
 
         setJMenuBar(jMenuBar1);
 
@@ -154,37 +180,30 @@ public class TelaVenda extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuSair4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSair4ActionPerformed
-        int sair = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair?");
-        if(sair == JOptionPane.YES_OPTION){
-            dispose();
-            //System.exit(0);
-        }
-    }//GEN-LAST:event_jMenuSair4ActionPerformed
-
-    private void jCompra4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCompra4ActionPerformed
-        TelaCompra telaCompra = new TelaCompra();
-        telaCompra.setVisible(true);
-    }//GEN-LAST:event_jCompra4ActionPerformed
-
-    private void jVenda4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVenda4ActionPerformed
-        TelaVenda telaVenda = new TelaVenda();
-        telaVenda.setVisible(true);
-    }//GEN-LAST:event_jVenda4ActionPerformed
-
-    private void jConsulta4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsulta4ActionPerformed
-        TelaConsulta telaConsulta = new TelaConsulta();
-        telaConsulta.setVisible(true);
-    }//GEN-LAST:event_jConsulta4ActionPerformed
-
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        TelaPrincipal menu = new TelaPrincipal();
-        menu.setVisible(true);
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jTableVendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableVendaMouseClicked
-        TelaAjusteCompra ajuste = new TelaAjusteCompra();
-        ajuste.setVisible(true);
+        
+        int linha = jTableVenda.getSelectedRow();
+        if (linha != -1) {
+
+            String produto = jTableVenda.getValueAt(linha, 0).toString();
+            String sub_produto = jTableVenda.getValueAt(linha, 1).toString();
+            String ativo = jTableVenda.getValueAt(linha, 2).toString();
+            String garantia = jTableVenda.getValueAt(linha, 3).toString();
+            String data_vencimento = jTableVenda.getValueAt(linha, 4).toString();
+            String net = jTableVenda.getValueAt(linha, 5).toString();
+            String[] info = {produto, sub_produto, ativo, garantia, data_vencimento, net};
+            System.out.println(info);
+            TelaAjusteVenda ajuste = new TelaAjusteVenda(info);
+            ajuste.setVisible(true);
+            
+            
+                Object[] tabela = new Object[]{produto, sub_produto, ativo, garantia, data_vencimento, net};
+                //dados.add(tabela);  
+                     
+            
+        }
+               
     }//GEN-LAST:event_jTableVendaMouseClicked
 
     private void jComboBoxItensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxItensActionPerformed
@@ -216,7 +235,7 @@ public class TelaVenda extends javax.swing.JFrame {
                         + "FROM alocacao.catalogo_op AS cat INNER JOIN alocacao.alocacoes AS al\n"
                         + "ON al.catalogo_id = cat.id\n"
                         + "WHERE cat.classificacao = '" + mensagem[jComboBoxItens.getSelectedIndex()] + "'");
-            
+              
             } catch (ConexaoException ex) {
                 JOptionPane.showMessageDialog(null, "Erro ao selecionar dados. " + ex);
             } catch (ClassNotFoundException ex) {
@@ -227,6 +246,43 @@ public class TelaVenda extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jComboBoxItensActionPerformed
+
+    private void jTableVendaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableVendaMousePressed
+    }//GEN-LAST:event_jTableVendaMousePressed
+
+    private void jTableVendaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableVendaMouseEntered
+    }//GEN-LAST:event_jTableVendaMouseEntered
+
+    private void jButtonConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmActionPerformed
+        TelaPrincipal tela = new TelaPrincipal();
+        tela.setVisible(true);
+        // passar os dados para tela principal
+        
+    }//GEN-LAST:event_jButtonConfirmActionPerformed
+
+    private void jMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSairActionPerformed
+        int sair = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair?");
+        if(sair == JOptionPane.YES_OPTION){
+            dispose();
+            //System.exit(0);
+        }
+    }//GEN-LAST:event_jMenuSairActionPerformed
+
+    private void jMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemActionPerformed
+        TelaPrincipal menu = new TelaPrincipal();
+        menu.setVisible(true);
+    }//GEN-LAST:event_jMenuItemActionPerformed
+
+    private void txtFieldPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFieldPesquisaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFieldPesquisaActionPerformed
+
+    private void buttonPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPesquisaActionPerformed
+
+        mod.setPesquisa(txtFieldPesquisa.getText());
+
+
+    }//GEN-LAST:event_buttonPesquisaActionPerformed
 
     public void preencherTabela(String sql) throws ConexaoException, ClassNotFoundException {
         ArrayList dados = new ArrayList();
@@ -243,7 +299,7 @@ public class TelaVenda extends javax.swing.JFrame {
                     conex.rs.getString("ativo"), conex.rs.getString("garantia"),
                     conex.rs.getString("data_vencimento"), conex.rs.getFloat("NET")
                 };
-                dados.add(tabela);
+                dados.add(tabela);               
             } while (conex.rs.next());
 
         }catch (SQLException ex) {
@@ -314,18 +370,19 @@ public class TelaVenda extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jAlocacao3;
+    private javax.swing.JButton buttonPesquisa;
+    private javax.swing.JMenu jAlocacao;
+    private javax.swing.JButton jButtonConfirm;
     private javax.swing.JComboBox<String> jComboBoxItens;
-    private javax.swing.JMenuItem jCompra4;
-    private javax.swing.JMenuItem jConsulta4;
+    private javax.swing.JLabel jLabelAtivo;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuSair4;
+    private javax.swing.JMenuItem jMenuItem;
+    private javax.swing.JMenuItem jMenuSair;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTableAlocacao;
     private javax.swing.JTable jTableVenda;
-    private javax.swing.JMenuItem jVenda4;
+    private javax.swing.JTextField txtFieldPesquisa;
     // End of variables declaration//GEN-END:variables
 }
