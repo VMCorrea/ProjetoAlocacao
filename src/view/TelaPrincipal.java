@@ -11,6 +11,7 @@ import controller.PosicaoCliente;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import model.Posicao;
 
 /**
@@ -59,16 +60,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
             "Renda Fixa IPCA com liquidez (NTN-B)", "Renda Fixa IPCA sem liquidez (CDBs, LCs)",
             "Renda Fixa IPCA Crédito Privado (CRI, CRA, Debentures)",
             "Multimercado Baixa Vol (até 1.5%)", "Multimercado Média Vol (de 1.5% até 4%)", 
-            "Multimercado Alta Vol (acima de 4%)", "Fundos Imobiliários", "Carteira de Ações", 
+            "Multimercado Alta Vol (Acima de 4%)", "Fundos Imobiliários", "Carteira de Ações", 
             "Fundos Internacionas sem hedge", "Proteção (Seguro Vida)", "Carteira Offshore (FX)"};
-        String[] alocacao = {alocacaoAtual1.getName(), alocacaoAtual2.getName(), alocacaoAtual3.getName(), 
-            alocacaoAtual4.getName(), alocacaoAtual5.getName(), alocacaoAtual6.getName(), alocacaoAtual7.getName(), 
-            alocacaoAtual8.getName(), alocacaoAtual9.getName(), alocacaoAtual10.getName(), alocacaoAtual11.getName(),
-            alocacaoAtual12.getName(), alocacaoAtual13.getName(), alocacaoAtual14.getName(), alocacaoAtual15.getName(), 
-            alocacaoAtual16.getName(), alocacaoAtual17.getName()};
+        JTextField alocacao[] = {alocacaoAtual1, alocacaoAtual2, alocacaoAtual3, alocacaoAtual4, alocacaoAtual5,
+            alocacaoAtual6, alocacaoAtual7, alocacaoAtual8, alocacaoAtual9, alocacaoAtual10, alocacaoAtual11,
+            alocacaoAtual12, alocacaoAtual13, alocacaoAtual14, alocacaoAtual15, alocacaoAtual16, alocacaoAtual17
+        };
         
         for(int i=0; i<alocacao.length; i++){
-            
             String sql = "SELECT cat.classificacao as class, SUM(al.NET) as soma FROM alocacao.catalogo_op AS cat \n"
                     + "INNER JOIN alocacao.alocacoes AS al ON al.catalogo_id = cat.id \n"
                     + "INNER JOIN alocacao.clientes AS cl ON cl.codCorretora = al.cliente_id\n"
@@ -79,12 +78,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 conex.executaSql(sql);
                 conex.rs.first();
 
-                //while (conex.rs.next()){
-                    String alocacaoAtual = conex.rs.getString("soma");
-                    alocacaoAtual1.setText(alocacaoAtual);
+                String alocacaoAtual = conex.rs.getString("soma");
+                alocacao[i].setText(alocacaoAtual);
 
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(rootPane, "Erro ao obter dados.");
+                JOptionPane.showMessageDialog(null, "Erro ao obter dados.");
             } catch (ClassNotFoundException ex) {
                 JOptionPane.showMessageDialog(null, ex);
             } finally {
@@ -94,12 +92,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
         
     }
  /* 
+    {alocacaoAtual1.getName(), alocacaoAtual2.getName(), alocacaoAtual3.getName(), 
+            alocacaoAtual4.getName(), alocacaoAtual5.getName(), alocacaoAtual6.getName(), alocacaoAtual7.getName(), 
+            alocacaoAtual8.getName(), alocacaoAtual9.getName(), alocacaoAtual10.getName(), alocacaoAtual11.getName(),
+            alocacaoAtual12.getName(), alocacaoAtual13.getName(), alocacaoAtual14.getName(), alocacaoAtual15.getName(), 
+            alocacaoAtual16.getName(), alocacaoAtual17.getName()};
+    
     ArrayList<String><String> nomex = new ArrayList<>();
-        dentro do while --- 
+        while (conex.rs.next()){
                 nomex[i][0] = conex.rs.getString("class");
                 nomex[i][1] = conex.rs.getString("soma");
                  i++;
-                
+        }        
     
     PRIMEIRA COLUNA TELA PRINCIPAL
         total: soma todas as linhas da 1a coluna            
