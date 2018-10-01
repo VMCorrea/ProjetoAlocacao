@@ -9,14 +9,9 @@ package view;
 import controller.ConexaoBD;
 import controller.ConexaoException;
 import controller.PosicaoCliente;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
-import javax.swing.ListSelectionModel;
-import model.ModeloTabela;
+
 import model.Posicao;
 
 
@@ -47,13 +42,11 @@ public class TelaConsulta extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         buttonPesquisa = new javax.swing.JButton();
-        txtFieldPesquisa = new javax.swing.JTextField();
         lblCodigo = new javax.swing.JLabel();
+        txtFieldPesquisa = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuSair = new javax.swing.JMenuItem();
-        jAlocacao = new javax.swing.JMenu();
-        jMenuItem = new javax.swing.JMenuItem();
 
         jButton1.setText("jButton1");
 
@@ -79,22 +72,26 @@ public class TelaConsulta extends javax.swing.JFrame {
         getContentPane().add(buttonPesquisa);
         buttonPesquisa.setBounds(30, 140, 90, 35);
 
-        txtFieldPesquisa.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        txtFieldPesquisa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFieldPesquisaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtFieldPesquisa);
-        txtFieldPesquisa.setBounds(30, 90, 90, 30);
-
         lblCodigo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lblCodigo.setText("Codigo Cliente");
         lblCodigo.setMaximumSize(new java.awt.Dimension(90, 20));
         lblCodigo.setMinimumSize(new java.awt.Dimension(90, 20));
         lblCodigo.setPreferredSize(new java.awt.Dimension(90, 30));
         getContentPane().add(lblCodigo);
-        lblCodigo.setBounds(30, 40, 90, 30);
+        lblCodigo.setBounds(30, 40, 100, 30);
+
+        txtFieldPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFieldPesquisaActionPerformed(evt);
+            }
+        });
+        txtFieldPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtFieldPesquisaKeyPressed(evt);
+            }
+        });
+        getContentPane().add(txtFieldPesquisa);
+        txtFieldPesquisa.setBounds(30, 80, 90, 30);
 
         jMenu1.setText("Arquivo");
 
@@ -108,18 +105,6 @@ public class TelaConsulta extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jAlocacao.setText("Menu");
-
-        jMenuItem.setText("Alocação");
-        jMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemActionPerformed(evt);
-            }
-        });
-        jAlocacao.add(jMenuItem);
-
-        jMenuBar1.add(jAlocacao);
-
         setJMenuBar(jMenuBar1);
 
         setSize(new java.awt.Dimension(162, 262));
@@ -127,26 +112,8 @@ public class TelaConsulta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPesquisaActionPerformed
-        
-         mod.setPesquisa(txtFieldPesquisa.getText());
-         /*
-           preencherTabela("SELECT cat.classificacao, cat.sub_produto, cat.ativo, cat.data_vencimento, aloc.NET \n"
-                    + "FROM alocacao.catalogo_op AS cat JOIN alocacao.alocacoes AS aloc\n"
-                    + "ON cat.id = aloc.id\n"
-                    + "WHERE aloc.cliente_id = '" + mod.getPesquisa() + "'");
-         */
-         TelaPrincipal principal= new TelaPrincipal();
-        try {
-            principal.preencherColunas(txtFieldPesquisa.getText());
-        } catch (ConexaoException | ClassNotFoundException ex) {
-            Logger.getLogger(TelaConsulta.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        pesquisar();
     }//GEN-LAST:event_buttonPesquisaActionPerformed
-
-    private void txtFieldPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFieldPesquisaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFieldPesquisaActionPerformed
 
     private void jMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSairActionPerformed
         int sair = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair?");
@@ -156,11 +123,38 @@ public class TelaConsulta extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuSairActionPerformed
 
-    private void jMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemActionPerformed
-        TelaPrincipal menu = new TelaPrincipal();
-        menu.setVisible(true);
-    }//GEN-LAST:event_jMenuItemActionPerformed
+    private void txtFieldPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFieldPesquisaActionPerformed
+
+    }//GEN-LAST:event_txtFieldPesquisaActionPerformed
+
+    private void txtFieldPesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFieldPesquisaKeyPressed
+        int key = evt.getKeyCode();
+        if (key == KeyEvent.VK_ENTER) {
+            pesquisar();
+        }
+    }//GEN-LAST:event_txtFieldPesquisaKeyPressed
       
+    void pesquisar(){
+        TelaPrincipal principal = new TelaPrincipal();
+        try {
+            
+            principal.preencherColunas(txtFieldPesquisa.getText());
+            principal.preencherLabel(txtFieldPesquisa.getText());
+            
+            principal.setVisible(true);
+            TelaConsulta consulta = new TelaConsulta();
+            consulta.setVisible(false);
+
+        } catch (ConexaoException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao selecionar dados. " + ex);
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Erro " + ex);
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: " + ex);
+        }
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -198,11 +192,9 @@ public class TelaConsulta extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonPesquisa;
-    private javax.swing.JMenu jAlocacao;
     private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem;
     private javax.swing.JMenuItem jMenuSair;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblCodigo;

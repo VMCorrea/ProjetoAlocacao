@@ -9,6 +9,7 @@ import controller.ConexaoBD;
 import controller.ConexaoException;
 import controller.PosicaoCliente;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import model.Posicao;
 
@@ -28,25 +29,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
         initComponents();
     }
     
-    void preencherColunas(String pesquisa) throws ConexaoException, ClassNotFoundException {    
-        
-        String sql = "SELECT cat.classificacao, SUM(al.NET) \n"
-                + "FROM alocacao.catalogo_op AS cat \n"
-                + "INNER JOIN alocacao.alocacoes AS al ON al.catalogo_id = cat.id \n"
-                + "INNER JOIN alocacao.clientes AS cl ON cl.id = al.cliente_id\n"
-                + "WHERE cl.codCorretora = \"'" + pesquisa + "'\"\n"
-                + "GROUP BY cat.classificacao";
+    void preencherLabel(String codigo) throws ConexaoException, ClassNotFoundException {
+        String sql = "SELECT nome FROM alocacao.clientes WHERE codCorretora = " + codigo;
         try {
             conex.open();
             conex.executaSql(sql);
             conex.rs.first();
-
-            do {
-                Object[] label = new Object[]{conex.rs.getString("NET")};
-                alocacaoAtual1.setText(String.valueOf(label));
-                JOptionPane.showMessageDialog(null, label);
-            } while (conex.rs.next());
-
+            
+            String nome = conex.rs.getString("nome");
+            jNomeCliente.setText(nome);
+            jCodigoCliente.setText(codigo);
+   
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(rootPane, "Erro ao obter dados.");
         } catch (ClassNotFoundException ex) {
@@ -54,16 +47,67 @@ public class TelaPrincipal extends javax.swing.JFrame {
         } finally {
             conex.close();
         }
+    }
+    
+    void preencherColunas(String pesquisa) throws ConexaoException, ClassNotFoundException {    
+        
+        String[] classificacao = {"Renda Fixa Pós com liquidez (LFT, CDBs, Fundos DI, Poupança)",
+            "Renda Fixa Pós sem liquidez (LC, LCIs, LCAs, CDB longo)",
+            "Renda Fixa Pós Crédito Privado (sem FGC - CRI, CRA, Deb)",
+            "Renda Fixa Pré com liquidez (LTNs, NTN-F)", "Renda Fixa Pré sem liquidez (CDBs, LCs)",
+            "Renda Fixa Pré Crédito Privado (LF, Debentures)",
+            "Renda Fixa IPCA com liquidez (NTN-B)", "Renda Fixa IPCA sem liquidez (CDBs, LCs)",
+            "Renda Fixa IPCA Crédito Privado (CRI, CRA, Debentures)",
+            "Multimercado Baixa Vol (até 1.5%)", "Multimercado Média Vol (de 1.5% até 4%)", 
+            "Multimercado Alta Vol (acima de 4%)", "Fundos Imobiliários", "Carteira de Ações", 
+            "Fundos Internacionas sem hedge", "Proteção (Seguro Vida)", "Carteira Offshore (FX)"};
+        String[] alocacao = {alocacaoAtual1.getName(), alocacaoAtual2.getName(), alocacaoAtual3.getName(), 
+            alocacaoAtual4.getName(), alocacaoAtual5.getName(), alocacaoAtual6.getName(), alocacaoAtual7.getName(), 
+            alocacaoAtual8.getName(), alocacaoAtual9.getName(), alocacaoAtual10.getName(), alocacaoAtual11.getName(),
+            alocacaoAtual12.getName(), alocacaoAtual13.getName(), alocacaoAtual14.getName(), alocacaoAtual15.getName(), 
+            alocacaoAtual16.getName(), alocacaoAtual17.getName()};
+        
+        for(int i=0; i<alocacao.length; i++){
+            
+            String sql = "SELECT cat.classificacao as class, SUM(al.NET) as soma FROM alocacao.catalogo_op AS cat \n"
+                    + "INNER JOIN alocacao.alocacoes AS al ON al.catalogo_id = cat.id \n"
+                    + "INNER JOIN alocacao.clientes AS cl ON cl.codCorretora = al.cliente_id\n"
+                    + "WHERE al.cliente_id = '" + pesquisa + "' AND cat.classificacao = '" + classificacao[i] + "'\n"
+                    + "GROUP BY cat.classificacao";
+            try {
+                conex.open();
+                conex.executaSql(sql);
+                conex.rs.first();
+
+                //while (conex.rs.next()){
+                    String alocacaoAtual = conex.rs.getString("soma");
+                    alocacaoAtual1.setText(alocacaoAtual);
+
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(rootPane, "Erro ao obter dados.");
+            } catch (ClassNotFoundException ex) {
+                JOptionPane.showMessageDialog(null, ex);
+            } finally {
+                conex.close();
+            }
+        }
+        
+    }
  /* 
+    ArrayList<String><String> nomex = new ArrayList<>();
+        dentro do while --- 
+                nomex[i][0] = conex.rs.getString("class");
+                nomex[i][1] = conex.rs.getString("soma");
+                 i++;
+                
+    
     PRIMEIRA COLUNA TELA PRINCIPAL
         total: soma todas as linhas da 1a coluna            
 
     SEGUNDA COLUNA
        Fazer regra de 3 
         total                   - 100%
-        1a coluna por categoria - x
- */  
-    }   
+        1a coluna por categoria - x */
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -216,10 +260,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         ajustePerc13 = new javax.swing.JTextField();
         perfil13 = new javax.swing.JTextField();
         alocacaoPerc13 = new javax.swing.JTextField();
-        alocacaoAtual14 = new javax.swing.JTextField();
+        alocacaoAtual13 = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
-        alocacaoAtual15 = new javax.swing.JTextField();
+        alocacaoAtual14 = new javax.swing.JTextField();
         alocacaoPerc14 = new javax.swing.JTextField();
         perfil14 = new javax.swing.JTextField();
         ajustePerc14 = new javax.swing.JTextField();
@@ -232,7 +276,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         ajustePerc15 = new javax.swing.JTextField();
         perfil15 = new javax.swing.JTextField();
         alocacaoPerc15 = new javax.swing.JTextField();
-        alocacaoAtual16 = new javax.swing.JTextField();
+        alocacaoAtual15 = new javax.swing.JTextField();
         jLabel33 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         rendaVariavelAloc = new javax.swing.JTextField();
@@ -261,11 +305,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         alocacaoPerc17 = new javax.swing.JTextField();
         totalAtualPerc = new javax.swing.JTextField();
         totalAtual = new javax.swing.JTextField();
-        alocacaoAtual18 = new javax.swing.JTextField();
         alocacaoAtual17 = new javax.swing.JTextField();
+        alocacaoAtual16 = new javax.swing.JTextField();
         jLabel32 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jCodigoCliente = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuSair = new javax.swing.JMenuItem();
@@ -281,11 +326,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setTitle("Tela Principal");
         getContentPane().setLayout(null);
 
+        jNomeCliente.setBackground(java.awt.Color.white);
         jNomeCliente.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jNomeCliente.setForeground(java.awt.Color.red);
-        jNomeCliente.setText("XXXXX XXXXX 99999");
+        jNomeCliente.setText("XXXXXXXX");
         getContentPane().add(jNomeCliente);
-        jNomeCliente.setBounds(10, 10, 270, 50);
+        jNomeCliente.setBounds(10, 10, 140, 50);
 
         jLabel40.setBackground(new java.awt.Color(153, 153, 153));
         jLabel40.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
@@ -494,6 +540,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         alocacaoAtual1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual1.setMaximumSize(new java.awt.Dimension(101, 15));
         alocacaoAtual1.setMinimumSize(new java.awt.Dimension(101, 15));
+        alocacaoAtual1.setName("alocacaoAtual1"); // NOI18N
         alocacaoAtual1.setPreferredSize(new java.awt.Dimension(101, 15));
         alocacaoAtual1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -713,6 +760,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         alocacaoAtual3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual3.setMaximumSize(new java.awt.Dimension(101, 15));
         alocacaoAtual3.setMinimumSize(new java.awt.Dimension(101, 15));
+        alocacaoAtual3.setName("alocacaoAtual3"); // NOI18N
         alocacaoAtual3.setPreferredSize(new java.awt.Dimension(101, 15));
         alocacaoAtual3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -725,6 +773,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         alocacaoAtual2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual2.setMaximumSize(new java.awt.Dimension(101, 15));
         alocacaoAtual2.setMinimumSize(new java.awt.Dimension(101, 15));
+        alocacaoAtual2.setName("alocacaoAtual2"); // NOI18N
         alocacaoAtual2.setPreferredSize(new java.awt.Dimension(101, 15));
         alocacaoAtual2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -770,6 +819,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         alocacaoAtual4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual4.setMaximumSize(new java.awt.Dimension(101, 15));
         alocacaoAtual4.setMinimumSize(new java.awt.Dimension(101, 15));
+        alocacaoAtual4.setName("alocacaoAtual4"); // NOI18N
         alocacaoAtual4.setPreferredSize(new java.awt.Dimension(101, 15));
         alocacaoAtual4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -925,6 +975,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         alocacaoAtual5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual5.setMaximumSize(new java.awt.Dimension(101, 15));
         alocacaoAtual5.setMinimumSize(new java.awt.Dimension(101, 15));
+        alocacaoAtual5.setName("alocacaoAtual5"); // NOI18N
         alocacaoAtual5.setPreferredSize(new java.awt.Dimension(101, 15));
         alocacaoAtual5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -959,6 +1010,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         alocacaoAtual6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual6.setMaximumSize(new java.awt.Dimension(101, 15));
         alocacaoAtual6.setMinimumSize(new java.awt.Dimension(101, 15));
+        alocacaoAtual6.setName("alocacaoAtual6"); // NOI18N
         alocacaoAtual6.setPreferredSize(new java.awt.Dimension(101, 15));
         alocacaoAtual6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1119,6 +1171,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         alocacaoAtual7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual7.setMaximumSize(new java.awt.Dimension(101, 15));
         alocacaoAtual7.setMinimumSize(new java.awt.Dimension(101, 15));
+        alocacaoAtual7.setName("alocacaoAtual7"); // NOI18N
         alocacaoAtual7.setPreferredSize(new java.awt.Dimension(101, 15));
         alocacaoAtual7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1153,6 +1206,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         alocacaoAtual8.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual8.setMaximumSize(new java.awt.Dimension(101, 15));
         alocacaoAtual8.setMinimumSize(new java.awt.Dimension(101, 15));
+        alocacaoAtual8.setName("alocacaoAtual8"); // NOI18N
         alocacaoAtual8.setPreferredSize(new java.awt.Dimension(101, 15));
         alocacaoAtual8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1313,6 +1367,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         alocacaoAtual9.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual9.setMaximumSize(new java.awt.Dimension(101, 15));
         alocacaoAtual9.setMinimumSize(new java.awt.Dimension(101, 15));
+        alocacaoAtual9.setName("alocacaoAtual9"); // NOI18N
         alocacaoAtual9.setPreferredSize(new java.awt.Dimension(101, 15));
         alocacaoAtual9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1636,6 +1691,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         alocacaoAtual10.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual10.setMaximumSize(new java.awt.Dimension(101, 15));
         alocacaoAtual10.setMinimumSize(new java.awt.Dimension(101, 15));
+        alocacaoAtual10.setName("alocacaoAtual10"); // NOI18N
         alocacaoAtual10.setPreferredSize(new java.awt.Dimension(101, 15));
         alocacaoAtual10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1648,6 +1704,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         alocacaoAtual11.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual11.setMaximumSize(new java.awt.Dimension(101, 15));
         alocacaoAtual11.setMinimumSize(new java.awt.Dimension(101, 15));
+        alocacaoAtual11.setName("alocacaoAtual11"); // NOI18N
         alocacaoAtual11.setPreferredSize(new java.awt.Dimension(101, 15));
         alocacaoAtual11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1660,6 +1717,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         alocacaoAtual12.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual12.setMaximumSize(new java.awt.Dimension(101, 15));
         alocacaoAtual12.setMinimumSize(new java.awt.Dimension(101, 15));
+        alocacaoAtual12.setName("alocacaoAtual12"); // NOI18N
         alocacaoAtual12.setPreferredSize(new java.awt.Dimension(101, 15));
         alocacaoAtual12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1849,17 +1907,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().add(alocacaoPerc13);
         alocacaoPerc13.setBounds(460, 560, 80, 30);
 
-        alocacaoAtual14.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        alocacaoAtual14.setMaximumSize(new java.awt.Dimension(101, 15));
-        alocacaoAtual14.setMinimumSize(new java.awt.Dimension(101, 15));
-        alocacaoAtual14.setPreferredSize(new java.awt.Dimension(101, 15));
-        alocacaoAtual14.addActionListener(new java.awt.event.ActionListener() {
+        alocacaoAtual13.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        alocacaoAtual13.setMaximumSize(new java.awt.Dimension(101, 15));
+        alocacaoAtual13.setMinimumSize(new java.awt.Dimension(101, 15));
+        alocacaoAtual13.setName("alocacaoAtual13"); // NOI18N
+        alocacaoAtual13.setPreferredSize(new java.awt.Dimension(101, 15));
+        alocacaoAtual13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                alocacaoAtual14ActionPerformed(evt);
+                alocacaoAtual13ActionPerformed(evt);
             }
         });
-        getContentPane().add(alocacaoAtual14);
-        alocacaoAtual14.setBounds(380, 560, 80, 30);
+        getContentPane().add(alocacaoAtual13);
+        alocacaoAtual13.setBounds(380, 560, 80, 30);
 
         jLabel16.setBackground(java.awt.Color.orange);
         jLabel16.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -1880,17 +1939,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabel31);
         jLabel31.setBounds(10, 590, 370, 30);
 
-        alocacaoAtual15.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        alocacaoAtual15.setMaximumSize(new java.awt.Dimension(101, 15));
-        alocacaoAtual15.setMinimumSize(new java.awt.Dimension(101, 15));
-        alocacaoAtual15.setPreferredSize(new java.awt.Dimension(101, 15));
-        alocacaoAtual15.addActionListener(new java.awt.event.ActionListener() {
+        alocacaoAtual14.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        alocacaoAtual14.setMaximumSize(new java.awt.Dimension(101, 15));
+        alocacaoAtual14.setMinimumSize(new java.awt.Dimension(101, 15));
+        alocacaoAtual14.setName("alocacaoAtual14"); // NOI18N
+        alocacaoAtual14.setPreferredSize(new java.awt.Dimension(101, 15));
+        alocacaoAtual14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                alocacaoAtual15ActionPerformed(evt);
+                alocacaoAtual14ActionPerformed(evt);
             }
         });
-        getContentPane().add(alocacaoAtual15);
-        alocacaoAtual15.setBounds(380, 590, 80, 30);
+        getContentPane().add(alocacaoAtual14);
+        alocacaoAtual14.setBounds(380, 590, 80, 30);
 
         alocacaoPerc14.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoPerc14.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -2040,17 +2100,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().add(alocacaoPerc15);
         alocacaoPerc15.setBounds(460, 620, 80, 30);
 
-        alocacaoAtual16.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        alocacaoAtual16.setMaximumSize(new java.awt.Dimension(101, 15));
-        alocacaoAtual16.setMinimumSize(new java.awt.Dimension(101, 15));
-        alocacaoAtual16.setPreferredSize(new java.awt.Dimension(101, 15));
-        alocacaoAtual16.addActionListener(new java.awt.event.ActionListener() {
+        alocacaoAtual15.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        alocacaoAtual15.setMaximumSize(new java.awt.Dimension(101, 15));
+        alocacaoAtual15.setMinimumSize(new java.awt.Dimension(101, 15));
+        alocacaoAtual15.setName("alocacaoAtual15"); // NOI18N
+        alocacaoAtual15.setPreferredSize(new java.awt.Dimension(101, 15));
+        alocacaoAtual15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                alocacaoAtual16ActionPerformed(evt);
+                alocacaoAtual15ActionPerformed(evt);
             }
         });
-        getContentPane().add(alocacaoAtual16);
-        alocacaoAtual16.setBounds(380, 620, 80, 30);
+        getContentPane().add(alocacaoAtual15);
+        alocacaoAtual15.setBounds(380, 620, 80, 30);
 
         jLabel33.setBackground(java.awt.Color.red);
         jLabel33.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -2373,21 +2434,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().add(totalAtual);
         totalAtual.setBounds(380, 740, 80, 30);
 
-        alocacaoAtual18.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        alocacaoAtual18.setMaximumSize(new java.awt.Dimension(101, 15));
-        alocacaoAtual18.setMinimumSize(new java.awt.Dimension(101, 15));
-        alocacaoAtual18.setPreferredSize(new java.awt.Dimension(101, 15));
-        alocacaoAtual18.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                alocacaoAtual18ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(alocacaoAtual18);
-        alocacaoAtual18.setBounds(380, 710, 80, 30);
-
         alocacaoAtual17.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         alocacaoAtual17.setMaximumSize(new java.awt.Dimension(101, 15));
         alocacaoAtual17.setMinimumSize(new java.awt.Dimension(101, 15));
+        alocacaoAtual17.setName("alocacaoAtual17"); // NOI18N
         alocacaoAtual17.setPreferredSize(new java.awt.Dimension(101, 15));
         alocacaoAtual17.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2395,7 +2445,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(alocacaoAtual17);
-        alocacaoAtual17.setBounds(380, 680, 80, 30);
+        alocacaoAtual17.setBounds(380, 710, 80, 30);
+
+        alocacaoAtual16.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        alocacaoAtual16.setMaximumSize(new java.awt.Dimension(101, 15));
+        alocacaoAtual16.setMinimumSize(new java.awt.Dimension(101, 15));
+        alocacaoAtual16.setName("alocacaoAtual16"); // NOI18N
+        alocacaoAtual16.setPreferredSize(new java.awt.Dimension(101, 15));
+        alocacaoAtual16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                alocacaoAtual16ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(alocacaoAtual16);
+        alocacaoAtual16.setBounds(380, 680, 80, 30);
 
         jLabel32.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel32.setText(" Proteção (Seguro Vida)");
@@ -2416,6 +2479,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel2.setOpaque(true);
         getContentPane().add(jLabel2);
         jLabel2.setBounds(10, 740, 370, 30);
+
+        jCodigoCliente.setBackground(java.awt.Color.white);
+        jCodigoCliente.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jCodigoCliente.setForeground(java.awt.Color.red);
+        jCodigoCliente.setText("99999");
+        getContentPane().add(jCodigoCliente);
+        jCodigoCliente.setBounds(150, 10, 80, 50);
 
         jMenu1.setText("Arquivo");
 
@@ -2875,16 +2945,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_totalAtualActionPerformed
 
-    private void alocacaoAtual18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual18ActionPerformed
-
-    }//GEN-LAST:event_alocacaoAtual18ActionPerformed
-
     private void alocacaoAtual17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual17ActionPerformed
 
     }//GEN-LAST:event_alocacaoAtual17ActionPerformed
 
     private void alocacaoAtual16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual16ActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_alocacaoAtual16ActionPerformed
 
     private void alocacaoAtual15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual15ActionPerformed
@@ -2894,6 +2960,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void alocacaoAtual14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual14ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_alocacaoAtual14ActionPerformed
+
+    private void alocacaoAtual13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual13ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_alocacaoAtual13ActionPerformed
 
     private void alocacaoAtual12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alocacaoAtual12ActionPerformed
         // TODO add your handling code here:
@@ -3016,11 +3086,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField alocacaoAtual10;
     private javax.swing.JTextField alocacaoAtual11;
     private javax.swing.JTextField alocacaoAtual12;
+    private javax.swing.JTextField alocacaoAtual13;
     private javax.swing.JTextField alocacaoAtual14;
     private javax.swing.JTextField alocacaoAtual15;
     private javax.swing.JTextField alocacaoAtual16;
     private javax.swing.JTextField alocacaoAtual17;
-    private javax.swing.JTextField alocacaoAtual18;
     private javax.swing.JTextField alocacaoAtual2;
     private javax.swing.JTextField alocacaoAtual3;
     private javax.swing.JTextField alocacaoAtual4;
@@ -3089,6 +3159,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField finalPerc8;
     private javax.swing.JTextField finalPerc9;
     private javax.swing.JMenu jAlocacao;
+    private javax.swing.JLabel jCodigoCliente;
     private javax.swing.JMenuItem jCompra;
     private javax.swing.JMenuItem jConsulta;
     private javax.swing.JLabel jLabel1;
