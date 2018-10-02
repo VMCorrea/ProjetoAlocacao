@@ -8,7 +8,6 @@ package view;
 import controller.ConexaoBD;
 import controller.ConexaoException;
 import controller.PosicaoCliente;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
@@ -24,14 +23,21 @@ public final class TelaAjusteVenda extends javax.swing.JFrame {
     Posicao mod = new Posicao();
     PosicaoCliente control = new PosicaoCliente();
     ConexaoBD conex = new ConexaoBD();
-    
+    TelaVenda venda;
+    ArrayList v;
     /**
      * Creates new form TelaAjusteVenda
      */
     public TelaAjusteVenda() {
         initComponents();
+        
     }
 
+    TelaAjusteVenda(Posicao vendas) {
+        initComponents();
+        this.venda = venda;
+    }
+    
     TelaAjusteVenda(String[] info) {
           try {
                 preencherTabela(info);
@@ -44,6 +50,8 @@ public final class TelaAjusteVenda extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Erro NullPointer: " + ex);
             }
     }
+
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -94,9 +102,9 @@ public final class TelaAjusteVenda extends javax.swing.JFrame {
         jLabelQtd.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabelQtd.setText("Quantidade");
         getContentPane().add(jLabelQtd);
-        jLabelQtd.setBounds(10, 130, 110, 50);
+        jLabelQtd.setBounds(20, 130, 110, 50);
         getContentPane().add(jTextFieldQtd);
-        jTextFieldQtd.setBounds(130, 140, 220, 40);
+        jTextFieldQtd.setBounds(130, 140, 160, 40);
 
         jButtonConf.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jButtonConf.setText("Confirmar");
@@ -106,7 +114,7 @@ public final class TelaAjusteVenda extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButtonConf);
-        jButtonConf.setBounds(380, 140, 110, 40);
+        jButtonConf.setBounds(310, 140, 110, 40);
 
         jButtonCancel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jButtonCancel.setText("Cancelar");
@@ -116,7 +124,7 @@ public final class TelaAjusteVenda extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButtonCancel);
-        jButtonCancel.setBounds(510, 140, 120, 40);
+        jButtonCancel.setBounds(440, 140, 120, 40);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

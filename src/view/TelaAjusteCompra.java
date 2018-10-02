@@ -5,8 +5,6 @@
  */
 package view;
 
-import javax.swing.JOptionPane;
-
 /**
  *
  * @author Beatriz.aurelio
@@ -43,7 +41,7 @@ public class TelaAjusteCompra extends javax.swing.JFrame {
         jLabelQtd.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabelQtd.setText("Quantidade");
         getContentPane().add(jLabelQtd);
-        jLabelQtd.setBounds(10, 290, 90, 40);
+        jLabelQtd.setBounds(10, 130, 90, 40);
 
         jTextFieldQtd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -51,7 +49,7 @@ public class TelaAjusteCompra extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jTextFieldQtd);
-        jTextFieldQtd.setBounds(110, 290, 160, 40);
+        jTextFieldQtd.setBounds(120, 130, 160, 40);
 
         jButtonConf.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jButtonConf.setText("Confirmar");
@@ -61,7 +59,7 @@ public class TelaAjusteCompra extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButtonConf);
-        jButtonConf.setBounds(290, 290, 100, 40);
+        jButtonConf.setBounds(290, 130, 100, 40);
 
         jButtonCancel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jButtonCancel.setText("Cancelar");
@@ -71,7 +69,7 @@ public class TelaAjusteCompra extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButtonCancel);
-        jButtonCancel.setBounds(400, 290, 100, 40);
+        jButtonCancel.setBounds(400, 130, 100, 40);
 
         jTable1.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -101,7 +99,7 @@ public class TelaAjusteCompra extends javax.swing.JFrame {
 
         bindingGroup.bind();
 
-        setSize(new java.awt.Dimension(744, 412));
+        setSize(new java.awt.Dimension(744, 249));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -110,22 +108,11 @@ public class TelaAjusteCompra extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldQtdActionPerformed
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
-        
         dispose();
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     private void jButtonConfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfActionPerformed
-        
-        /*
-        JConsultaProfissao frm = new JConsultaProfissao(new JFrame(), true);
-	frm.setVisible(true);
-
-	if(frm.isConfirmado){
-		Profissao p = frm.getProfissao();
-		jComboBox3;setSelectedItem(p);
-	}
-*/
-        
+      
     }//GEN-LAST:event_jButtonConfActionPerformed
 
     /**

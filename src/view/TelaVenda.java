@@ -8,6 +8,7 @@ package view;
 import controller.ConexaoBD;
 import controller.ConexaoException;
 import controller.PosicaoCliente;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -24,6 +25,8 @@ public class TelaVenda extends javax.swing.JFrame {
     Posicao mod = new Posicao();
     PosicaoCliente control = new PosicaoCliente();
     ConexaoBD conex = new ConexaoBD();
+    TelaPrincipal principal;
+    
     /**
      * Creates new form TelaAjusteVenda
      */
@@ -31,6 +34,10 @@ public class TelaVenda extends javax.swing.JFrame {
         initComponents();
     }
 
+    public TelaVenda(TelaPrincipal principal){
+        this.principal = principal;
+        initComponents();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -182,25 +189,27 @@ public class TelaVenda extends javax.swing.JFrame {
 
 
     private void jTableVendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableVendaMouseClicked
+        Posicao vendas = new Posicao();
+        ArrayList<Posicao> v = new ArrayList<Posicao>();
         
         int linha = jTableVenda.getSelectedRow();
         if (linha != -1) {
-
-            String produto = jTableVenda.getValueAt(linha, 0).toString();
-            String sub_produto = jTableVenda.getValueAt(linha, 1).toString();
-            String ativo = jTableVenda.getValueAt(linha, 2).toString();
-            String garantia = jTableVenda.getValueAt(linha, 3).toString();
-            String data_vencimento = jTableVenda.getValueAt(linha, 4).toString();
-            String net = jTableVenda.getValueAt(linha, 5).toString();
-            String[] info = {produto, sub_produto, ativo, garantia, data_vencimento, net};
-            System.out.println(info);
-            TelaAjusteVenda ajuste = new TelaAjusteVenda(info);
+            String produto = (String) jTableVenda.getValueAt(linha, 0);
+            vendas.setProduto(produto);
+            String sub_produto = (String) jTableVenda.getValueAt(linha, 1);
+            vendas.setSubproduto(sub_produto);
+            String ativo = (String) jTableVenda.getValueAt(linha, 2);
+            vendas.setAtivo(ativo);
+            String garantia =(String) jTableVenda.getValueAt(linha, 3);
+            vendas.setProdutoGarantia(garantia);
+            Date dataVencimento = (Date) jTableVenda.getValueAt(linha, 4);
+            vendas.setDataVencimento(dataVencimento);
+            Float net = (Float) jTableVenda.getValueAt(linha, 5);
+            vendas.setNet(net);
+            v.add(vendas);
+            
+            TelaAjusteVenda ajuste = new TelaAjusteVenda(vendas);
             ajuste.setVisible(true);
-            
-            
-                Object[] tabela = new Object[]{produto, sub_produto, ativo, garantia, data_vencimento, net};
-                //dados.add(tabela);  
-                     
             
         }
                

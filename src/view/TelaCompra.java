@@ -24,10 +24,17 @@ public class TelaCompra extends javax.swing.JFrame {
     Posicao mod = new Posicao();
     PosicaoCliente control = new PosicaoCliente();
     ConexaoBD conex = new ConexaoBD();
+    TelaPrincipal principal;
+    
     /**
      * Creates new form TelaDeVenda
      */
     public TelaCompra() {
+        initComponents();
+        
+    }
+    public TelaCompra(TelaPrincipal principal){
+        this.principal = principal;
         initComponents();
     }
 
@@ -104,6 +111,11 @@ public class TelaCompra extends javax.swing.JFrame {
 
             }
         ));
+        jTableCompra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableCompraMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(jTableCompra);
 
         getContentPane().add(jScrollPane3);
@@ -237,6 +249,11 @@ public class TelaCompra extends javax.swing.JFrame {
         TelaPrincipal principal= new TelaPrincipal();
         principal.setVisible(true);
     }//GEN-LAST:event_buttonPesquisaActionPerformed
+
+    private void jTableCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableCompraMouseClicked
+        TelaAjusteCompra ajuste = new TelaAjusteCompra();
+            ajuste.setVisible(true);
+    }//GEN-LAST:event_jTableCompraMouseClicked
 
     
     public void preencherTabela(String sql) throws ConexaoException, ClassNotFoundException {

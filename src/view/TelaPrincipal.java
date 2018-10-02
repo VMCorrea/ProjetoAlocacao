@@ -124,7 +124,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         for (int i = 0; i < 9; i++) {
                 rendaFixaPerc += parse(alocacaoPerc[i].getText());
         }
-        System.out.println(alocacaoPerc[9].getText());
         rendaFixaAtualPerc.setText(String.format("%.2f", rendaFixaPerc));
         double multTotalPerc = parse(alocacaoPerc[9].getText()) + parse(alocacaoPerc[10].getText()) + parse(alocacaoPerc[11].getText());
         multimercadoAtualPerc.setText(String.format("%.2f", multTotalPerc));
@@ -2960,7 +2959,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuSairActionPerformed
 
     private void jCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCompraActionPerformed
-        TelaCompra telaCompra = new TelaCompra();
+        TelaCompra telaCompra = new TelaCompra(this);
         telaCompra.setVisible(true);
     }//GEN-LAST:event_jCompraActionPerformed
 
