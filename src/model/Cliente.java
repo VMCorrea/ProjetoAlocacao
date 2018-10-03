@@ -12,11 +12,29 @@ public class Cliente {
 
     public long CodigoCliente;
     public String NomeCliente;
-    public Date DataEntrada;
     public Date DataNascimento;
 
-    public void validaCliente() {}
+    public long getCodigoCliente() {
+        return CodigoCliente;
+    }
 
+    public void setCodigoCliente(long CodigoCliente) {
+        this.CodigoCliente = CodigoCliente;
+    }
 
+    public String getNomeCliente() {
+        return NomeCliente;
+    }
 
+    public void setNomeCliente(String NomeCliente) {
+        this.NomeCliente = NomeCliente;
+    }
+
+    public Date getDataNascimento() {
+        return DataNascimento;
+    }
+
+    public void setDataNascimento(Date DataNascimento) {
+        this.DataNascimento = DataNascimento;
+    }
 }
