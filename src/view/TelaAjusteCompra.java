@@ -5,6 +5,12 @@
  */
 package view;
 
+import controller.ConexaoException;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import model.ModeloTabela;
+
 /**
  *
  * @author Beatriz.aurelio
@@ -16,8 +22,7 @@ public class TelaAjusteCompra extends javax.swing.JFrame {
      */
     public TelaAjusteCompra() {
         initComponents();
-    }
-
+    }    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,27 +34,27 @@ public class TelaAjusteCompra extends javax.swing.JFrame {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         jLabelQtd = new javax.swing.JLabel();
-        jTextFieldQtd = new javax.swing.JTextField();
+        jTextFieldAjuste = new javax.swing.JTextField();
         jButtonConf = new javax.swing.JButton();
         jButtonCancel = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableAjusteCompra = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
 
         jLabelQtd.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabelQtd.setText("Quantidade");
+        jLabelQtd.setText("Ajuste %");
         getContentPane().add(jLabelQtd);
-        jLabelQtd.setBounds(10, 130, 90, 40);
+        jLabelQtd.setBounds(30, 150, 70, 40);
 
-        jTextFieldQtd.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldAjuste.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldQtdActionPerformed(evt);
+                jTextFieldAjusteActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextFieldQtd);
-        jTextFieldQtd.setBounds(120, 130, 160, 40);
+        getContentPane().add(jTextFieldAjuste);
+        jTextFieldAjuste.setBounds(120, 150, 160, 40);
 
         jButtonConf.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jButtonConf.setText("Confirmar");
@@ -59,7 +64,7 @@ public class TelaAjusteCompra extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButtonConf);
-        jButtonConf.setBounds(290, 130, 100, 40);
+        jButtonConf.setBounds(120, 200, 100, 40);
 
         jButtonCancel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jButtonCancel.setText("Cancelar");
@@ -69,10 +74,10 @@ public class TelaAjusteCompra extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButtonCancel);
-        jButtonCancel.setBounds(400, 130, 100, 40);
+        jButtonCancel.setBounds(120, 250, 100, 40);
 
-        jTable1.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableAjusteCompra.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        jTableAjusteCompra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -89,31 +94,72 @@ public class TelaAjusteCompra extends javax.swing.JFrame {
             }
         });
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jButtonConf, org.jdesktop.beansbinding.ObjectProperty.create(), jTable1, org.jdesktop.beansbinding.BeanProperty.create("elements"));
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jButtonConf, org.jdesktop.beansbinding.ObjectProperty.create(), jTableAjusteCompra, org.jdesktop.beansbinding.BeanProperty.create("elements"));
         bindingGroup.addBinding(binding);
         binding.bind();
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableAjusteCompra);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(10, 30, 700, 80);
+        jScrollPane1.setBounds(10, 30, 1270, 80);
 
         bindingGroup.bind();
 
-        setSize(new java.awt.Dimension(744, 249));
+        setSize(new java.awt.Dimension(1299, 359));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldQtdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldQtdActionPerformed
+    private void jTextFieldAjusteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAjusteActionPerformed
+        //Ajustes ajustes = new Ajustes();
         
-    }//GEN-LAST:event_jTextFieldQtdActionPerformed
+    }//GEN-LAST:event_jTextFieldAjusteActionPerformed
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         dispose();
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     private void jButtonConfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfActionPerformed
-      
+        //criar objeto e armazenar no objeto o ajuste da % e tudo da tabela OU o ativo, como PK
     }//GEN-LAST:event_jButtonConfActionPerformed
+
+    public void adicionaLinha(Object[] objCompras) {
+        try {
+            preencherTabela(objCompras);
+
+        } catch (ConexaoException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao selecionar dados. " + ex);
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Erro " + ex);
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "Erro NullPointer: " + ex);
+        }
+    }
+    
+    public void preencherTabela(Object[] objCompras) throws ConexaoException, ClassNotFoundException {
+      ArrayList dados = new ArrayList();
+      String[] colunas = new String[]{"Produto", "Sub Produto", "CNPJ", "Ativo", "Emissor", "Data Vencimento"};
+      
+      dados.add(objCompras);              
+        
+        ModeloTabela modelo = new ModeloTabela(dados, colunas);
+
+        jTableAjusteCompra.setModel(modelo);
+        jTableAjusteCompra.getColumnModel().getColumn(0).setPreferredWidth(120);
+        jTableAjusteCompra.getColumnModel().getColumn(0).setResizable(false);
+        jTableAjusteCompra.getColumnModel().getColumn(1).setPreferredWidth(180);
+        jTableAjusteCompra.getColumnModel().getColumn(1).setResizable(false);
+        jTableAjusteCompra.getColumnModel().getColumn(2).setPreferredWidth(120);
+        jTableAjusteCompra.getColumnModel().getColumn(2).setResizable(false);
+        jTableAjusteCompra.getColumnModel().getColumn(3).setPreferredWidth(350);
+        jTableAjusteCompra.getColumnModel().getColumn(3).setResizable(false);
+        jTableAjusteCompra.getColumnModel().getColumn(4).setPreferredWidth(345);
+        jTableAjusteCompra.getColumnModel().getColumn(4).setResizable(false);
+        jTableAjusteCompra.getColumnModel().getColumn(5).setPreferredWidth(110);
+        jTableAjusteCompra.getColumnModel().getColumn(5).setResizable(false);
+
+        jTableAjusteCompra.getTableHeader().setReorderingAllowed(false);
+        jTableAjusteCompra.setAutoResizeMode(jTableAjusteCompra.AUTO_RESIZE_OFF);
+        jTableAjusteCompra.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    }
 
     /**
      * @param args the command line arguments
@@ -156,8 +202,8 @@ public class TelaAjusteCompra extends javax.swing.JFrame {
     private javax.swing.JButton jButtonConf;
     private javax.swing.JLabel jLabelQtd;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextFieldQtd;
+    private javax.swing.JTable jTableAjusteCompra;
+    private javax.swing.JTextField jTextFieldAjuste;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

@@ -8,6 +8,7 @@ package view;
 import controller.ConexaoBD;
 import controller.ConexaoException;
 import controller.PosicaoCliente;
+import java.sql.Date;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
@@ -24,7 +25,6 @@ public final class TelaAjusteVenda extends javax.swing.JFrame {
     PosicaoCliente control = new PosicaoCliente();
     ConexaoBD conex = new ConexaoBD();
     TelaVenda venda;
-    ArrayList v;
     /**
      * Creates new form TelaAjusteVenda
      */
@@ -32,26 +32,19 @@ public final class TelaAjusteVenda extends javax.swing.JFrame {
         initComponents();
         
     }
-
-    TelaAjusteVenda(Posicao vendas) {
-        initComponents();
-        this.venda = venda;
-    }
     
-    TelaAjusteVenda(String[] info) {
-          try {
-                preencherTabela(info);
-              
-            } catch (ConexaoException ex) {
-                JOptionPane.showMessageDialog(null, "Erro ao selecionar dados. " + ex);
-            } catch (ClassNotFoundException ex) {
-                JOptionPane.showMessageDialog(null, "Erro " + ex);
-            } catch (NullPointerException ex) {
-                JOptionPane.showMessageDialog(null, "Erro NullPointer: " + ex);
-            }
-    }
+    public void adicionaLinha(Object[] objVendas) {
+        try {
+            preencherTabela(objVendas);
 
-   
+        } catch (ConexaoException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao selecionar dados. " + ex);
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Erro " + ex);
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "Erro NullPointer: " + ex);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -65,11 +58,11 @@ public final class TelaAjusteVenda extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableAjusteVenda = new javax.swing.JTable();
         jLabelQtd = new javax.swing.JLabel();
-        jTextFieldQtd = new javax.swing.JTextField();
+        jTextFieldAjuste = new javax.swing.JTextField();
         jButtonConf = new javax.swing.JButton();
         jButtonCancel = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
 
         jTableAjusteVenda.setModel(new javax.swing.table.DefaultTableModel(
@@ -97,14 +90,14 @@ public final class TelaAjusteVenda extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTableAjusteVenda);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(10, 20, 700, 80);
+        jScrollPane2.setBounds(10, 30, 1070, 80);
 
         jLabelQtd.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabelQtd.setText("Quantidade");
+        jLabelQtd.setText("Ajuste %");
         getContentPane().add(jLabelQtd);
-        jLabelQtd.setBounds(20, 130, 110, 50);
-        getContentPane().add(jTextFieldQtd);
-        jTextFieldQtd.setBounds(130, 140, 160, 40);
+        jLabelQtd.setBounds(40, 140, 80, 50);
+        getContentPane().add(jTextFieldAjuste);
+        jTextFieldAjuste.setBounds(130, 150, 160, 40);
 
         jButtonConf.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jButtonConf.setText("Confirmar");
@@ -114,7 +107,7 @@ public final class TelaAjusteVenda extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButtonConf);
-        jButtonConf.setBounds(310, 140, 110, 40);
+        jButtonConf.setBounds(130, 200, 100, 40);
 
         jButtonCancel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jButtonCancel.setText("Cancelar");
@@ -124,9 +117,10 @@ public final class TelaAjusteVenda extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButtonCancel);
-        jButtonCancel.setBounds(440, 140, 120, 40);
+        jButtonCancel.setBounds(130, 250, 100, 40);
 
-        pack();
+        setSize(new java.awt.Dimension(1101, 362));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTableAjusteVendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAjusteVendaMouseClicked
@@ -144,13 +138,11 @@ public final class TelaAjusteVenda extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonConfActionPerformed
 
-    
-  public void preencherTabela(String[] info) throws ConexaoException, ClassNotFoundException {
+  public void preencherTabela(Object[] objVendas) throws ConexaoException, ClassNotFoundException {
       ArrayList dados = new ArrayList();
       String[] colunas = new String[]{"Produto", "Sub Produto", "Ativo", "Produto em Garantia", "Data Vencimento", "NET"};
-
-      Object[] tabela = new Object[]{info};
-      dados.add(tabela);              
+      
+      dados.add(objVendas);              
         
         ModeloTabela modelo = new ModeloTabela(dados, colunas);
 
@@ -172,7 +164,6 @@ public final class TelaAjusteVenda extends javax.swing.JFrame {
         jTableAjusteVenda.setAutoResizeMode(jTableAjusteVenda.AUTO_RESIZE_OFF);
         jTableAjusteVenda.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-    
     }
 
     
@@ -218,6 +209,6 @@ public final class TelaAjusteVenda extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelQtd;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableAjusteVenda;
-    private javax.swing.JTextField jTextFieldQtd;
+    private javax.swing.JTextField jTextFieldAjuste;
     // End of variables declaration//GEN-END:variables
 }

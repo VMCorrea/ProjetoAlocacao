@@ -9,7 +9,6 @@ import controller.ConexaoBD;
 import controller.ConexaoException;
 import controller.PosicaoCliente;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import model.Posicao;
@@ -130,8 +129,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         double rendaVarPerc = parse(alocacaoPerc[12].getText()) + parse(alocacaoPerc[13].getText()) + parse(alocacaoPerc[14].getText());
         rendaVariavelAlocPerc.setText(String.format("%.2f", rendaVarPerc));
         totalAtualPerc.setText("100");
-
-        
     }
  
     double parse(String strNumber) {

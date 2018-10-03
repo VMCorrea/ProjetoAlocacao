@@ -8,12 +8,12 @@ package view;
 import controller.ConexaoBD;
 import controller.ConexaoException;
 import controller.PosicaoCliente;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import model.ModeloTabela;
-import model.Posicao;
 
 /**
  *
@@ -21,11 +21,29 @@ import model.Posicao;
  */
 public class TelaCompra extends javax.swing.JFrame {
 
-    Posicao mod = new Posicao();
     PosicaoCliente control = new PosicaoCliente();
     ConexaoBD conex = new ConexaoBD();
     TelaPrincipal principal;
-    
+
+    String[] mensagem = {"< Selecione uma das opções >",
+        "Renda Fixa Pós com liquidez (LFT, CDBs, Fundos DI, Poupança)",
+        "Renda Fixa Pós sem liquidez (LC, LCIs, LCAs, CDB longo)",
+        "Renda Fixa Pós Crédito Privado (sem FGC - CRI, CRA, Deb)",
+        "Renda Fixa Pré com liquidez (LTNs, NTN-F)",
+        "Renda Fixa Pré sem liquidez (CDBs, LCs)",
+        "Renda Fixa Pré Crédito Privado (LF, Debentures)",
+        "Renda Fixa IPCA com liquidez (NTN-B)",
+        "Renda Fixa IPCA sem liquidez (CDBs, LCs)",
+        "Renda Fixa IPCA Crédito Privado (CRI, CRA, Debentures)",
+        "Multimercado Baixa Vol (até 1.5%)",
+        "Multimercado Média Vol (de 1.5% até 4%)",
+        "Multimercado Alta Vol (acima de 4%)",
+        "Fundos Imobiliários",
+        "Carteira de Ações",
+        "Fundos Internacionas sem hedge",
+        "Proteção (Seguro Vida)",
+        "Carteira Offshore (FX)"};
+
     /**
      * Creates new form TelaDeVenda
      */
@@ -75,20 +93,20 @@ public class TelaCompra extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jComboBoxItem);
-        jComboBoxItem.setBounds(310, 30, 385, 30);
+        jComboBoxItem.setBounds(20, 30, 385, 30);
 
         jTableAlocacao.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Alocação Atual %", "Sugestão para Perfil"
+                "Alocação Atual %", "Sugestão para Perfil", "Alteração Alocação"
             }
         ));
         jScrollPane1.setViewportView(jTableAlocacao);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(20, 30, 270, 100);
+        jScrollPane1.setBounds(880, 20, 380, 100);
 
         jButtonConfirm.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jButtonConfirm.setText("Confirmar Alocação");
@@ -98,7 +116,7 @@ public class TelaCompra extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButtonConfirm);
-        jButtonConfirm.setBounds(20, 150, 140, 30);
+        jButtonConfirm.setBounds(1120, 140, 140, 30);
 
         jTableCompra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -115,11 +133,14 @@ public class TelaCompra extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableCompraMouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTableCompraMousePressed(evt);
+            }
         });
         jScrollPane3.setViewportView(jTableCompra);
 
         getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(10, 220, 950, 620);
+        jScrollPane3.setBounds(80, 210, 1190, 620);
 
         txtFieldPesquisa.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         txtFieldPesquisa.addActionListener(new java.awt.event.ActionListener() {
@@ -128,10 +149,10 @@ public class TelaCompra extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtFieldPesquisa);
-        txtFieldPesquisa.setBounds(810, 80, 140, 30);
+        txtFieldPesquisa.setBounds(650, 40, 140, 30);
 
         buttonPesquisa.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        buttonPesquisa.setText("Pesquisa");
+        buttonPesquisa.setText("Pesquisar");
         buttonPesquisa.setMaximumSize(new java.awt.Dimension(100, 40));
         buttonPesquisa.setMinimumSize(new java.awt.Dimension(100, 40));
         buttonPesquisa.setPreferredSize(new java.awt.Dimension(90, 35));
@@ -142,12 +163,12 @@ public class TelaCompra extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buttonPesquisa);
-        buttonPesquisa.setBounds(860, 120, 90, 35);
+        buttonPesquisa.setBounds(700, 90, 90, 30);
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel1.setText("Emissor");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(900, 30, 50, 40);
+        jLabel1.setBounds(580, 30, 80, 40);
 
         jMenu1.setText("Arquivo");
 
@@ -175,36 +196,17 @@ public class TelaCompra extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        setSize(new java.awt.Dimension(991, 913));
+        setSize(new java.awt.Dimension(1299, 913));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBoxItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxItemActionPerformed
-        String[] mensagem = {"< Selecione uma das opções >",
-            "Renda Fixa Pós com liquidez (LFT, CDBs, Fundos DI, Poupança)",
-            "Renda Fixa Pós sem liquidez (LC, LCIs, LCAs, CDB longo)",
-            "Renda Fixa Pós Crédito Privado (sem FGC - CRI, CRA, Deb)",
-            "Renda Fixa Pré com liquidez (LTNs, NTN-F)",
-            "Renda Fixa Pré sem liquidez (CDBs, LCs)",
-            "Renda Fixa Pré Crédito Privado (LF, Debentures)",
-            "Renda Fixa IPCA com liquidez (NTN-B)",
-            "Renda Fixa IPCA sem liquidez (CDBs, LCs)",
-            "Renda Fixa IPCA Crédito Privado (CRI, CRA, Debentures)",
-            "Multimercado Baixa Vol (até 1.5%)",
-            "Multimercado Média Vol (de 1.5% até 4%)",
-            "Multimercado Alta Vol (acima de 4%)",
-            "Fundos Imobiliários",
-            "Carteira de Ações",
-            "Fundos Internacionas sem hedge",
-            "Proteção (Seguro Vida)",
-            "Carteira Offshore (FX)"};
-
         if (jComboBoxItem.getSelectedItem() == mensagem[0]) {
             JOptionPane.showMessageDialog(null, "Selecione uma das opções.");
         } else if (jComboBoxItem.getSelectedItem() == mensagem[jComboBoxItem.getSelectedIndex()]) {
             try {
 
-                preencherTabela("SELECT cat.produto, cat.sub_produto, cat.ativo, cat.emissor, cat.data_vencimento\n"
+                preencherTabela("SELECT cat.produto, cat.sub_produto, cat.cnpj, cat.ativo, cat.emissor, cat.data_vencimento\n"
                     + "FROM alocacao.catalogo_op AS cat\n"
                     + "WHERE cat.classificacao = '" + mensagem[jComboBoxItem.getSelectedIndex()] + "'");
 
@@ -222,7 +224,6 @@ public class TelaCompra extends javax.swing.JFrame {
         int sair = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair?");
         if(sair == JOptionPane.YES_OPTION){
             dispose();
-            //System.exit(0);
         }
     }//GEN-LAST:event_jMenuSairActionPerformed
 
@@ -232,33 +233,58 @@ public class TelaCompra extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemActionPerformed
 
     private void jButtonConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmActionPerformed
-        TelaPrincipal tela = new TelaPrincipal();
-        tela.setVisible(true);
-        // passar os dados para tela principal
+        int confirm = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja alterar?");
+        if(confirm == JOptionPane.YES_OPTION){
+        
+
+            TelaPrincipal tela = new TelaPrincipal();
+            tela.setVisible(true);
+            
+            // passar as porcentagens para tela principal 
+            // passar mudança de alocação para banco de dados >>>>>>>> 
+            /*
+            alocacaoRS --- alocacao%
+            ajusteassessorRS --- ajusteassessor%
+            (x = ajusteassessorRS)
+            */
+        }
 
     }//GEN-LAST:event_jButtonConfirmActionPerformed
 
     private void txtFieldPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFieldPesquisaActionPerformed
-        // TODO add your handling code here:
+        pesquisa();
     }//GEN-LAST:event_txtFieldPesquisaActionPerformed
 
     private void buttonPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPesquisaActionPerformed
-
-        mod.setPesquisa(txtFieldPesquisa.getText());
-
-        TelaPrincipal principal= new TelaPrincipal();
-        principal.setVisible(true);
+        pesquisa();
     }//GEN-LAST:event_buttonPesquisaActionPerformed
 
     private void jTableCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableCompraMouseClicked
-        TelaAjusteCompra ajuste = new TelaAjusteCompra();
-            ajuste.setVisible(true);
     }//GEN-LAST:event_jTableCompraMouseClicked
+
+    private void jTableCompraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableCompraMousePressed
+        int linha = jTableCompra.getSelectedRow();
+        if (linha != -1) {
+            String produto = (String) jTableCompra.getValueAt(linha, 0);
+            String sub_produto = (String) jTableCompra.getValueAt(linha, 1);
+            String cnpj = (String) jTableCompra.getValueAt(linha,2);
+            String ativo = (String) jTableCompra.getValueAt(linha, 3);
+            String emissor =(String) jTableCompra.getValueAt(linha, 4);
+            Date dataVencimento = (Date) jTableCompra.getValueAt(linha, 5);
+            
+            Object[] objCompras = new Object[]{produto, sub_produto, cnpj, ativo, emissor, dataVencimento};
+            
+            TelaAjusteCompra tela = new TelaAjusteCompra();
+            tela.adicionaLinha(objCompras);
+            tela.setVisible(true);
+            
+        }
+    }//GEN-LAST:event_jTableCompraMousePressed
 
     
     public void preencherTabela(String sql) throws ConexaoException, ClassNotFoundException {
         ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"Produto", "Sub Produto", "Ativo", "Emissor", "Data Vencimento"};
+        String[] colunas = new String[]{"Produto", "Sub Produto", "CNPJ", "Ativo", "Emissor", "Data Vencimento"};
 
        try {
             conex.open();
@@ -268,8 +294,8 @@ public class TelaCompra extends javax.swing.JFrame {
             conex.rs.first();
             do {
                 Object[] tabela = new Object[]{conex.rs.getString("produto"), conex.rs.getString("sub_produto"),
-                    conex.rs.getString("ativo"), conex.rs.getString("emissor"),
-                    conex.rs.getString("data_vencimento"), 
+                    conex.rs.getString("cnpj"), conex.rs.getString("ativo"), conex.rs.getString("emissor"),
+                    conex.rs.getDate("data_vencimento"), 
                 };
                 dados.add(tabela);
             } while (conex.rs.next());
@@ -286,23 +312,37 @@ public class TelaCompra extends javax.swing.JFrame {
         ModeloTabela modelo = new ModeloTabela(dados, colunas);
 
         jTableCompra.setModel(modelo);
-        jTableCompra.getColumnModel().getColumn(0).setPreferredWidth(110);
+        jTableCompra.getColumnModel().getColumn(0).setPreferredWidth(120);
         jTableCompra.getColumnModel().getColumn(0).setResizable(false);
-        jTableCompra.getColumnModel().getColumn(1).setPreferredWidth(200);
+        jTableCompra.getColumnModel().getColumn(1).setPreferredWidth(180);
         jTableCompra.getColumnModel().getColumn(1).setResizable(false);
-        jTableCompra.getColumnModel().getColumn(2).setPreferredWidth(250);
+        jTableCompra.getColumnModel().getColumn(2).setPreferredWidth(120);
         jTableCompra.getColumnModel().getColumn(2).setResizable(false);
-        jTableCompra.getColumnModel().getColumn(3).setPreferredWidth(250);
+        jTableCompra.getColumnModel().getColumn(3).setPreferredWidth(350);
         jTableCompra.getColumnModel().getColumn(3).setResizable(false);
-        jTableCompra.getColumnModel().getColumn(4).setPreferredWidth(110);
+        jTableCompra.getColumnModel().getColumn(4).setPreferredWidth(345);
         jTableCompra.getColumnModel().getColumn(4).setResizable(false);
+        jTableCompra.getColumnModel().getColumn(5).setPreferredWidth(110);
+        jTableCompra.getColumnModel().getColumn(5).setResizable(false);
         jTableCompra.getTableHeader().setReorderingAllowed(false);
         jTableCompra.setAutoResizeMode(jTableCompra.AUTO_RESIZE_OFF);
         jTableCompra.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 
     }
-
+    void pesquisa(){try {
+            preencherTabela("SELECT cat.produto, cat.sub_produto, cat.cnpj, cat.ativo, cat.emissor, cat.data_vencimento\n"
+                    + "FROM alocacao.catalogo_op AS cat\n"
+                    + "WHERE ((cat.classificacao = '" + mensagem[jComboBoxItem.getSelectedIndex()] + "') AND (cat.emissor LIKE '%" + txtFieldPesquisa.getText() + "%')) ");
+        } catch (ConexaoException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao pesquisar. " + ex);
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Erro " + ex);
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: " + ex);
+        }
+        txtFieldPesquisa.setText("");
+    }
     
     
     /**

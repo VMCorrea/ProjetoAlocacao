@@ -124,12 +124,10 @@ public class TelaConsulta extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuSairActionPerformed
 
     private void txtFieldPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFieldPesquisaActionPerformed
-
     }//GEN-LAST:event_txtFieldPesquisaActionPerformed
 
     private void txtFieldPesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFieldPesquisaKeyPressed
-        int key = evt.getKeyCode();
-        if (key == KeyEvent.VK_ENTER) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             pesquisar();
         }
     }//GEN-LAST:event_txtFieldPesquisaKeyPressed
@@ -153,7 +151,6 @@ public class TelaConsulta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Erro: " + ex);
         }
     }
-    
     
     /**
      * @param args the command line arguments
