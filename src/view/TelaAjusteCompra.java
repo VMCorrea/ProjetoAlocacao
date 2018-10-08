@@ -5,24 +5,29 @@
  */
 package view;
 
+import controller.Ajustes;
 import controller.ConexaoException;
+import java.sql.Date;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import model.ModeloTabela;
+import model.Posicao;
 
 /**
  *
  * @author Beatriz.aurelio
  */
 public class TelaAjusteCompra extends javax.swing.JFrame {
-
+    TelaCompra compras;
+    ArrayList<Posicao> arrayCompras;
     /**
      * Creates new form TelaAjuste
      */
     public TelaAjusteCompra() {
         initComponents();
-    }    
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -100,31 +105,46 @@ public class TelaAjusteCompra extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTableAjusteCompra);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(10, 30, 1270, 80);
+        jScrollPane1.setBounds(10, 30, 1250, 80);
 
         bindingGroup.bind();
 
-        setSize(new java.awt.Dimension(1299, 359));
+        setSize(new java.awt.Dimension(1281, 359));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextFieldAjusteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAjusteActionPerformed
-        //Ajustes ajustes = new Ajustes();
-        
+        salvaDados();
     }//GEN-LAST:event_jTextFieldAjusteActionPerformed
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
-        dispose();
+        int confirm = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja cancelar?");
+        if(confirm == JOptionPane.YES_OPTION){
+            dispose();
+        }
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     private void jButtonConfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfActionPerformed
         //criar objeto e armazenar no objeto o ajuste da % e tudo da tabela OU o ativo, como PK
+        salvaDados();
     }//GEN-LAST:event_jButtonConfActionPerformed
 
+    public void salvaDados(){
+        String produto = (String) jTableAjusteCompra.getValueAt(0, 0);
+        String sub_produto = (String) jTableAjusteCompra.getValueAt(0, 1);
+        String cnpj = (String) jTableAjusteCompra.getValueAt(0, 2);
+        String ativo = (String) jTableAjusteCompra.getValueAt(0, 3);
+        String emissor = (String) jTableAjusteCompra.getValueAt(0, 4);
+        Date dataVencimento = (Date) jTableAjusteCompra.getValueAt(0, 5);
+
+        Object[] dadosCompras = new Object[]{produto, sub_produto, cnpj, ativo, emissor, dataVencimento, jTextFieldAjuste.getText()};
+        Ajustes ajustes = new Ajustes();
+        ajustes.AjustePerc(dadosCompras);
+    }
+    
     public void adicionaLinha(Object[] objCompras) {
         try {
             preencherTabela(objCompras);
-
         } catch (ConexaoException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao selecionar dados. " + ex);
         } catch (ClassNotFoundException ex) {
@@ -135,13 +155,12 @@ public class TelaAjusteCompra extends javax.swing.JFrame {
     }
     
     public void preencherTabela(Object[] objCompras) throws ConexaoException, ClassNotFoundException {
-      ArrayList dados = new ArrayList();
-      String[] colunas = new String[]{"Produto", "Sub Produto", "CNPJ", "Ativo", "Emissor", "Data Vencimento"};
-      
-      dados.add(objCompras);              
-        
-        ModeloTabela modelo = new ModeloTabela(dados, colunas);
+        ArrayList dados = new ArrayList();
+        String[] colunas = new String[]{"Produto", "Sub Produto", "CNPJ", "Ativo", "Emissor", "Data Vencimento"};
 
+        dados.add(objCompras);
+
+        ModeloTabela modelo = new ModeloTabela(dados, colunas);
         jTableAjusteCompra.setModel(modelo);
         jTableAjusteCompra.getColumnModel().getColumn(0).setPreferredWidth(120);
         jTableAjusteCompra.getColumnModel().getColumn(0).setResizable(false);
@@ -155,12 +174,10 @@ public class TelaAjusteCompra extends javax.swing.JFrame {
         jTableAjusteCompra.getColumnModel().getColumn(4).setResizable(false);
         jTableAjusteCompra.getColumnModel().getColumn(5).setPreferredWidth(110);
         jTableAjusteCompra.getColumnModel().getColumn(5).setResizable(false);
-
         jTableAjusteCompra.getTableHeader().setReorderingAllowed(false);
         jTableAjusteCompra.setAutoResizeMode(jTableAjusteCompra.AUTO_RESIZE_OFF);
         jTableAjusteCompra.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
-
     /**
      * @param args the command line arguments
      */
@@ -196,7 +213,6 @@ public class TelaAjusteCompra extends javax.swing.JFrame {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonConf;

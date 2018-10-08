@@ -5,6 +5,7 @@
  */
 package view;
 
+import controller.SugarConnection;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
@@ -14,6 +15,8 @@ import javax.swing.JOptionPane;
  */
 public class TelaLogin extends javax.swing.JFrame {
 
+    SugarConnection sugar = new SugarConnection();
+    public boolean login = false;    
     /**
      * Creates new form TelaDeLogin
      */
@@ -90,31 +93,27 @@ public class TelaLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEnviarActionPerformed
-        // TODO add your handling code here:
-        setLogin(txtLogin.getText());
-        setPwd(txtSenha.getPassword());
-          
-        if (this.checkLogin(txtLogin.getText(), new String(txtSenha.getPassword()))) {
+        if (sugar.SugarLogin(txtLogin.getText(), new String(txtSenha.getPassword()))) {
                 JOptionPane.showMessageDialog(null, "Bem vindo!");
-                new TelaPrincipal().setVisible(true);
+                login = true;
+                new TelaConsulta().setVisible(true);
                 dispose();
             } else {
-                JOptionPane.showMessageDialog(null, "Dados invalidos!");
+                JOptionPane.showMessageDialog(null, "Credenciais invalidas!");
             }
     }//GEN-LAST:event_botaoEnviarActionPerformed
 
     private void botaoEnviarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_botaoEnviarKeyPressed
-        // TODO add your handling code here:
-         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (this.checkLogin(txtLogin.getText(), new String(txtSenha.getPassword()))) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (sugar.SugarLogin(txtLogin.getText(), new String(txtSenha.getPassword()))) {
                 JOptionPane.showMessageDialog(null, "Bem vindo!");
+                login = true;
                 new TelaPrincipal().setVisible(true);
                 dispose();
             } else {
-                JOptionPane.showMessageDialog(null, "Dados invalidos!");
+                JOptionPane.showMessageDialog(null, "Credenciais invalidas!");
             }
         }
-        
     }//GEN-LAST:event_botaoEnviarKeyPressed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -124,20 +123,6 @@ public class TelaLogin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    
-    private void setLogin(String text) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void setPwd(char[] password) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public boolean checkLogin(String login, String senha){
-        
-        return login.equals("lifetime") && senha.equals("lifetime");
-    }
-    
     /**
      * @param args the command line arguments
      */

@@ -18,15 +18,22 @@ import model.Posicao;
  * @author Beatriz.aurelio
  */
 public class TelaPrincipal extends javax.swing.JFrame {
-
-    Posicao mod = new Posicao();
-    PosicaoCliente control = new PosicaoCliente();
-    ConexaoBD conex = new ConexaoBD();
-
     /**
      * Creates new form Tela
      */
+    
     public TelaPrincipal() {
+        /*
+        TelaLogin telaLogin = new TelaLogin();
+        if(telaLogin.login == true){
+            initComponents();
+        }else{
+            JOptionPane.showMessageDialog(null, "Faça Login!");
+            telaLogin.setVisible(true);
+            this.setVisible(false);
+        }
+        */
+        
         initComponents();
     }
 
@@ -51,25 +58,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     void preencherColunas(String pesquisa) throws ConexaoException, ClassNotFoundException {
-        String[] classificacao = {"Renda Fixa Pós com liquidez (LFT, CDBs, Fundos DI, Poupança)",
-            "Renda Fixa Pós sem liquidez (LC, LCIs, LCAs, CDB longo)",
-            "Renda Fixa Pós Crédito Privado (sem FGC - CRI, CRA, Deb)",
-            "Renda Fixa Pré com liquidez (LTNs, NTN-F)", "Renda Fixa Pré sem liquidez (CDBs, LCs)",
-            "Renda Fixa Pré Crédito Privado (LF, Debentures)",
-            "Renda Fixa IPCA com liquidez (NTN-B)", "Renda Fixa IPCA sem liquidez (CDBs, LCs)",
-            "Renda Fixa IPCA Crédito Privado (CRI, CRA, Debentures)",
-            "Multimercado Baixa Vol (até 1.5%)", "Multimercado Média Vol (de 1.5% até 4%)",
-            "Multimercado Alta Vol (Acima de 4%)", "Fundos Imobiliários", "Carteira de Ações",
-            "Fundos Internacionas sem hedge", "Proteção (Seguro Vida)", "Carteira Offshore (FX)"};
-        JTextField alocacao[] = {alocacaoAtual1, alocacaoAtual2, alocacaoAtual3, alocacaoAtual4, alocacaoAtual5,
-            alocacaoAtual6, alocacaoAtual7, alocacaoAtual8, alocacaoAtual9, alocacaoAtual10, alocacaoAtual11,
-            alocacaoAtual12, alocacaoAtual13, alocacaoAtual14, alocacaoAtual15, alocacaoAtual16, alocacaoAtual17
-        };
-        JTextField alocacaoPerc[] = {alocacaoPerc1, alocacaoPerc2, alocacaoPerc3, alocacaoPerc4, alocacaoPerc5,
-            alocacaoPerc6, alocacaoPerc7, alocacaoPerc8, alocacaoPerc9, alocacaoPerc10, alocacaoPerc11, alocacaoPerc12,
-            alocacaoPerc13, alocacaoPerc14, alocacaoPerc15, alocacaoPerc16, alocacaoPerc17
-        };
-        double total = 0;
         for (int i = 0; i < alocacao.length; i++) {
             String sql = "SELECT cat.classificacao, ROUND(SUM(al.NET), 2) as soma FROM alocacao.catalogo_op AS cat \n"
                     + "INNER JOIN alocacao.alocacoes AS al ON al.catalogo_id = cat.id \n"
@@ -82,13 +70,22 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 conex.rs.first();
 
                 String alocacaoAtual = conex.rs.getString("soma");
-
                 alocacao[i].setText(alocacaoAtual);
 
                 if (alocacao[i].getText().length() == 0) {
                     alocacao[i].setText("0.0");
                 }
                 total += parse(alocacaoAtual);
+
+                if (alocacao[i].getText().length() != 0) {
+                    double alocRS = parse(alocacao[i].getText());
+                    double alocPerc = (100 * alocRS) / total;
+                    alocacaoPerc[i].setText(String.format("%.2f", alocPerc).replace(',', '.'));
+                } else {
+                    alocacao[i].setText("0.0");
+                    alocacaoPerc[i].setText("0.0");
+                }
+
             } catch (SQLException ex) {
                 // JOptionPane.showMessageDialog(null, "Erro ao obter dados.");
             } catch (ClassNotFoundException ex) {
@@ -96,46 +93,70 @@ public class TelaPrincipal extends javax.swing.JFrame {
             } finally {
                 conex.close();
             }
-        }
+        }  
+        //Renda Fixa TOTAL    
+        preencherFixaTotal();
+        //Multimercado TOTAL
+        preencherMultTotal();
+        //Renda Variável TOTAL
+        preencherVariavelTotal();
+        //Carteira Investimentos TOTAL
+        totalAtual.setText(String.format("%.2f", total));
+        totalAtualPerc.setText("100");
         
-        double rendaFixa = 0;      
+    }
+    void preencherFixaTotal(){
+    
         for (int i = 0; i < 9; i++) {
-                rendaFixa += parse(alocacao[i].getText());
+            rendaFixa += parse(alocacao[i].getText());
+            rendaFixaPerc += parse(alocacaoPerc[i].getText());
+            rendaFixaPerf += parse(sugestaoPerfil[i].getText());
+            rendaAjustePerc += parse(ajustePerc[i].getText());
+            rendaFinalPerc += parse(finalPerc[i].getText());
+            rendaAjuste +=parse(ajusteRS[i].getText());
+            rendaFinal += parse(finalRS[i].getText());
         }
         rendaFixaAtual.setText(String.format("%.2f", rendaFixa));
-        double multTotal = parse(alocacao[9].getText()) + parse(alocacao[10].getText()) + parse(alocacao[11].getText());
-        multimercadoAtual.setText(String.format("%.2f", multTotal));
-        double rendaVar = parse(alocacao[12].getText()) + parse(alocacao[13].getText()) + parse(alocacao[14].getText());
-        rendaVariavelAloc.setText(String.format("%.2f", rendaVar));
-        totalAtual.setText(String.format("%.2f", total));
-
-        for (int i = 0; i < alocacao.length; i++) {
-            if (alocacao[i].getText().length() != 0) {
-                double alocRS = parse(alocacao[i].getText());
-                double alocPerc = (100 * alocRS) / total;
-                alocacaoPerc[i].setText(String.format("%.2f", alocPerc).replace(',','.'));
-            } else {
-                alocacao[i].setText("0.0");
-                alocacaoPerc[i].setText("0.0");
-            }
-        }
-        double rendaFixaPerc = 0;      
-        for (int i = 0; i < 9; i++) {
-                rendaFixaPerc += parse(alocacaoPerc[i].getText());
-        }
         rendaFixaAtualPerc.setText(String.format("%.2f", rendaFixaPerc));
-        double multTotalPerc = parse(alocacaoPerc[9].getText()) + parse(alocacaoPerc[10].getText()) + parse(alocacaoPerc[11].getText());
-        multimercadoAtualPerc.setText(String.format("%.2f", multTotalPerc));
-        double rendaVarPerc = parse(alocacaoPerc[12].getText()) + parse(alocacaoPerc[13].getText()) + parse(alocacaoPerc[14].getText());
-        rendaVariavelAlocPerc.setText(String.format("%.2f", rendaVarPerc));
-        totalAtualPerc.setText("100");
+        rendaFixaPerfil.setText(String.format("%.2f", rendaFixaPerf));
+        rendaFixaAjustePerc.setText(String.format("%.2f", rendaAjustePerc));
+        rendaFixaFinalPerc.setText(String.format("%.2f",rendaFinalPerc));
+        rendaFixaAjuste.setText(String.format("%.2f",rendaAjuste));
+        rendaFixaFinal.setText(String.format("%.2f",rendaFinal));
     }
- 
+    
+    void preencherMultTotal(){
+        double multTotal = parse(alocacao[9].getText()) + parse(alocacao[10].getText()) + parse(alocacao[11].getText());
+        double multTotalPerc = parse(alocacaoPerc[9].getText()) + parse(alocacaoPerc[10].getText()) + parse(alocacaoPerc[11].getText());
+        double multTotalPerfil = parse(sugestaoPerfil[9].getText()) + parse(sugestaoPerfil[10].getText()) + parse(sugestaoPerfil[11].getText());
+        double multAjustePerc = parse(ajustePerc[9].getText()) + parse(finalPerc[10].getText()) + parse(finalPerc[11].getText());
+        double multFinalPerc =  parse(finalPerc[9].getText()) + parse(ajustePerc[10].getText()) + parse(ajustePerc[11].getText());
+        double multAjuste =  parse(ajusteRS[9].getText()) + parse(ajusteRS[10].getText()) + parse(ajusteRS[11].getText());
+        double multFinal = parse(finalRS[9].getText()) + parse(finalRS[10].getText()) + parse(finalRS[11].getText());
+
+        multimercadoAtual.setText(String.format("%.2f", multTotal));
+        multimercadoAtualPerc.setText(String.format("%.2f", multTotalPerc));
+        multimercadoPerfil.setText(String.format("%.2f", multTotalPerfil));
+        multimercadoAjustePerc.setText(String.format("%.2f", multAjustePerc));
+        multimercadoFinalPerc.setText(String.format("%.2f", multFinalPerc));
+        multimercadoAjuste.setText(String.format("%.2f", multAjuste));
+        multimercadoFinal.setText(String.format("%.2f", multFinal));
+    }
+    
+    void preencherVariavelTotal(){
+        double rendaVar = parse(alocacao[12].getText()) + parse(alocacao[13].getText()) + parse(alocacao[14].getText());
+        double rendaVarPerc = parse(alocacaoPerc[12].getText()) + parse(alocacaoPerc[13].getText()) + parse(alocacaoPerc[14].getText());
+        
+        rendaVariavelAloc.setText(String.format("%.2f", rendaVar));
+        rendaVariavelAlocPerc.setText(String.format("%.2f", rendaVarPerc));
+        
+    }
+    
     double parse(String strNumber) {
         if (strNumber != null && strNumber.length() > 0) {
             try {
                 return Double.parseDouble(strNumber);
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
                 return 0;
             }
         } else {
@@ -265,11 +286,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         finalPerc11 = new javax.swing.JTextField();
         finalPerc10 = new javax.swing.JTextField();
         finalPerc12 = new javax.swing.JTextField();
-        jTextField125 = new javax.swing.JTextField();
-        jTextField131 = new javax.swing.JTextField();
+        ajustePerc12 = new javax.swing.JTextField();
+        ajustePerc11 = new javax.swing.JTextField();
         ajustePerc10 = new javax.swing.JTextField();
         perfil11 = new javax.swing.JTextField();
-        javax.swing.JTextField perfil12 = new javax.swing.JTextField();
         perfil10 = new javax.swing.JTextField();
         alocacaoPerc10 = new javax.swing.JTextField();
         alocacaoPerc12 = new javax.swing.JTextField();
@@ -345,6 +365,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jCodigoCliente = new javax.swing.JLabel();
+        perfil12 = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuSair = new javax.swing.JMenuItem();
@@ -1611,29 +1632,29 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().add(finalPerc12);
         finalPerc12.setBounds(780, 500, 100, 30);
 
-        jTextField125.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        jTextField125.setMaximumSize(new java.awt.Dimension(101, 15));
-        jTextField125.setMinimumSize(new java.awt.Dimension(101, 15));
-        jTextField125.setPreferredSize(new java.awt.Dimension(101, 15));
-        jTextField125.addActionListener(new java.awt.event.ActionListener() {
+        ajustePerc12.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        ajustePerc12.setMaximumSize(new java.awt.Dimension(101, 15));
+        ajustePerc12.setMinimumSize(new java.awt.Dimension(101, 15));
+        ajustePerc12.setPreferredSize(new java.awt.Dimension(101, 15));
+        ajustePerc12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField125ActionPerformed(evt);
+                ajustePerc12ActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField125);
-        jTextField125.setBounds(680, 500, 100, 30);
+        getContentPane().add(ajustePerc12);
+        ajustePerc12.setBounds(680, 500, 100, 30);
 
-        jTextField131.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        jTextField131.setMaximumSize(new java.awt.Dimension(101, 15));
-        jTextField131.setMinimumSize(new java.awt.Dimension(101, 15));
-        jTextField131.setPreferredSize(new java.awt.Dimension(101, 15));
-        jTextField131.addActionListener(new java.awt.event.ActionListener() {
+        ajustePerc11.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        ajustePerc11.setMaximumSize(new java.awt.Dimension(101, 15));
+        ajustePerc11.setMinimumSize(new java.awt.Dimension(101, 15));
+        ajustePerc11.setPreferredSize(new java.awt.Dimension(101, 15));
+        ajustePerc11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField131ActionPerformed(evt);
+                ajustePerc11ActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField131);
-        jTextField131.setBounds(680, 470, 100, 30);
+        getContentPane().add(ajustePerc11);
+        ajustePerc11.setBounds(680, 470, 100, 30);
 
         ajustePerc10.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ajustePerc10.setMaximumSize(new java.awt.Dimension(101, 15));
@@ -1659,19 +1680,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         getContentPane().add(perfil11);
         perfil11.setBounds(580, 470, 100, 30);
-
-        perfil12.setBackground(new java.awt.Color(129, 167, 71));
-        perfil12.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        perfil12.setMaximumSize(new java.awt.Dimension(101, 15));
-        perfil12.setMinimumSize(new java.awt.Dimension(101, 15));
-        perfil12.setPreferredSize(new java.awt.Dimension(101, 15));
-        perfil12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                perfil12ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(perfil12);
-        perfil12.setBounds(580, 500, 100, 30);
 
         perfil10.setBackground(new java.awt.Color(129, 167, 71));
         perfil10.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -2521,6 +2529,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jCodigoCliente);
         jCodigoCliente.setBounds(150, 10, 80, 50);
 
+        perfil12.setBackground(new java.awt.Color(129, 167, 71));
+        perfil12.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        getContentPane().add(perfil12);
+        perfil12.setBounds(580, 500, 100, 30);
+
         jMenu1.setText("Arquivo");
 
         jMenuSair.setText("Sair");
@@ -2781,21 +2794,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void finalPerc12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalPerc12ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_finalPerc12ActionPerformed
-    private void jTextField125ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField125ActionPerformed
+    private void ajustePerc12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajustePerc12ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField125ActionPerformed
-    private void jTextField131ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField131ActionPerformed
+    }//GEN-LAST:event_ajustePerc12ActionPerformed
+    private void ajustePerc11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajustePerc11ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField131ActionPerformed
+    }//GEN-LAST:event_ajustePerc11ActionPerformed
     private void ajustePerc10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajustePerc10ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ajustePerc10ActionPerformed
     private void perfil11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perfil11ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_perfil11ActionPerformed
-    private void perfil12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perfil12ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_perfil12ActionPerformed
     private void perfil10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perfil10ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_perfil10ActionPerformed
@@ -2951,7 +2961,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         int sair = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair?");
         if (sair == JOptionPane.YES_OPTION) {
             dispose();
-            //System.exit(0);
         }
     }//GEN-LAST:event_jMenuSairActionPerformed
 
@@ -2966,7 +2975,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jConsultaActionPerformed
 
     private void jVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVendaActionPerformed
-        TelaVenda telaVenda = new TelaVenda();
+        TelaVenda telaVenda = new TelaVenda(this);
         telaVenda.setVisible(true);
     }//GEN-LAST:event_jVendaActionPerformed
 
@@ -3103,6 +3112,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField ajuste9;
     private javax.swing.JTextField ajustePerc1;
     private javax.swing.JTextField ajustePerc10;
+    private javax.swing.JTextField ajustePerc11;
+    private javax.swing.JTextField ajustePerc12;
     private javax.swing.JTextField ajustePerc13;
     private javax.swing.JTextField ajustePerc14;
     private javax.swing.JTextField ajustePerc15;
@@ -3238,8 +3249,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem;
     private javax.swing.JMenuItem jMenuSair;
     private javax.swing.JLabel jNomeCliente;
-    private javax.swing.JTextField jTextField125;
-    private javax.swing.JTextField jTextField131;
     private javax.swing.JMenuItem jVenda;
     private javax.swing.JLabel lblAssessorPerc;
     private javax.swing.JTextField multimercadoAjuste;
@@ -3252,6 +3261,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField perfil1;
     private javax.swing.JTextField perfil10;
     private javax.swing.JTextField perfil11;
+    private javax.swing.JTextField perfil12;
     private javax.swing.JTextField perfil13;
     private javax.swing.JTextField perfil14;
     private javax.swing.JTextField perfil15;
@@ -3287,4 +3297,40 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField totalFinalPerc;
     private javax.swing.JTextField totalPerfil;
     // End of variables declaration//GEN-END:variables
+
+    
+    Posicao mod = new Posicao();
+    PosicaoCliente control = new PosicaoCliente();
+    ConexaoBD conex = new ConexaoBD();
+    double rendaFixa = 0, rendaFixaPerc = 0, rendaFixaPerf = 0, rendaAjustePerc = 0, rendaFinalPerc = 0, 
+            rendaAjuste =0, rendaFinal=0, total = 0;
+    String[] classificacao = {"Renda Fixa Pós com liquidez (LFT, CDBs, Fundos DI, Poupança)",
+        "Renda Fixa Pós sem liquidez (LC, LCIs, LCAs, CDB longo)",
+        "Renda Fixa Pós Crédito Privado (sem FGC - CRI, CRA, Deb)",
+        "Renda Fixa Pré com liquidez (LTNs, NTN-F)", "Renda Fixa Pré sem liquidez (CDBs, LCs)",
+        "Renda Fixa Pré Crédito Privado (LF, Debentures)",
+        "Renda Fixa IPCA com liquidez (NTN-B)", "Renda Fixa IPCA sem liquidez (CDBs, LCs)",
+        "Renda Fixa IPCA Crédito Privado (CRI, CRA, Debentures)",
+        "Multimercado Baixa Vol (até 1.5%)", "Multimercado Média Vol (de 1.5% até 4%)",
+        "Multimercado Alta Vol (Acima de 4%)", "Fundos Imobiliários", "Carteira de Ações",
+        "Fundos Internacionas sem hedge", "Proteção (Seguro Vida)", "Carteira Offshore (FX)"};
+    
+    public JTextField alocacao[] = {alocacaoAtual1, alocacaoAtual2, alocacaoAtual3, alocacaoAtual4, alocacaoAtual5,
+        alocacaoAtual6, alocacaoAtual7, alocacaoAtual8, alocacaoAtual9, alocacaoAtual10, alocacaoAtual11,
+        alocacaoAtual12, alocacaoAtual13, alocacaoAtual14, alocacaoAtual15, alocacaoAtual16, alocacaoAtual17};
+    public JTextField alocacaoPerc[] = {alocacaoPerc1, alocacaoPerc2, alocacaoPerc3, alocacaoPerc4, alocacaoPerc5,
+        alocacaoPerc6, alocacaoPerc7, alocacaoPerc8, alocacaoPerc9, alocacaoPerc10, alocacaoPerc11, alocacaoPerc12,
+        alocacaoPerc13, alocacaoPerc14, alocacaoPerc15, alocacaoPerc16, alocacaoPerc17};
+    public JTextField sugestaoPerfil[] ={perfil1, perfil2, perfil3, perfil4, perfil5, perfil6, perfil7, perfil8,
+        perfil9, perfil10, perfil11, perfil12, perfil13, perfil14, perfil15, perfil16, perfil17};
+    public JTextField ajustePerc[] = {ajustePerc1, ajustePerc2, ajustePerc3, ajustePerc4, ajustePerc5, ajustePerc6, 
+        ajustePerc7, ajustePerc8, ajustePerc9, ajustePerc10, ajustePerc11, ajustePerc12, ajustePerc13, ajustePerc14, 
+        ajustePerc15, ajustePerc16, ajustePerc17};
+    public JTextField finalPerc[]={finalPerc1, finalPerc2, finalPerc3, finalPerc4, finalPerc5, finalPerc6, finalPerc7,
+        finalPerc8, finalPerc9, finalPerc10, finalPerc11, finalPerc12, finalPerc13, finalPerc14, finalPerc15, 
+                finalPerc16, finalPerc17};
+    public JTextField ajusteRS[] ={ajuste1, ajuste2, ajuste3, ajuste4, ajuste5, ajuste6, ajuste7, ajuste8,
+        ajuste9, ajuste10, ajuste11, ajuste12, ajuste13, ajuste14, ajuste15, ajuste16, ajuste17};
+    public JTextField finalRS[] ={final1, final2, final3, final4, final5, final6, final7, final8, final9, final10,
+        final11, final12, final13, final14, final15, final16, final17};
 }

@@ -5,6 +5,7 @@
  */
 package view;
 
+import controller.Ajustes;
 import controller.ConexaoBD;
 import controller.ConexaoException;
 import controller.PosicaoCliente;
@@ -96,6 +97,12 @@ public final class TelaAjusteVenda extends javax.swing.JFrame {
         jLabelQtd.setText("Ajuste %");
         getContentPane().add(jLabelQtd);
         jLabelQtd.setBounds(40, 140, 80, 50);
+
+        jTextFieldAjuste.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldAjusteActionPerformed(evt);
+            }
+        });
         getContentPane().add(jTextFieldAjuste);
         jTextFieldAjuste.setBounds(130, 150, 160, 40);
 
@@ -124,21 +131,40 @@ public final class TelaAjusteVenda extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTableAjusteVendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAjusteVendaMouseClicked
-        TelaAjusteCompra ajuste = new TelaAjusteCompra();
-        ajuste.setVisible(true);
     }//GEN-LAST:event_jTableAjusteVendaMouseClicked
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
-        // TODO add your handling code here:
+        int confirm = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja cancelar?");
+        if(confirm == JOptionPane.YES_OPTION){
+            dispose();
+        }
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     private void jButtonConfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfActionPerformed
         // Atualizar jTableAlocacao e armazenar os dados em algum lugar
         //Depois da confirmação de alocação, dados serão processados no banco.
-        
+        salvaDados();
     }//GEN-LAST:event_jButtonConfActionPerformed
 
-  public void preencherTabela(Object[] objVendas) throws ConexaoException, ClassNotFoundException {
+    private void jTextFieldAjusteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAjusteActionPerformed
+        salvaDados();
+    }//GEN-LAST:event_jTextFieldAjusteActionPerformed
+
+    public void salvaDados(){
+    
+        String produto = (String) jTableAjusteVenda.getValueAt(0, 0);
+        String sub_produto = (String) jTableAjusteVenda.getValueAt(0, 1);
+        String ativo = (String) jTableAjusteVenda.getValueAt(0, 2);
+        String garantia = (String) jTableAjusteVenda.getValueAt(0, 3);
+        Date dataVencimento = (Date) jTableAjusteVenda.getValueAt(0, 4);
+        Float net = (Float) jTableAjusteVenda.getValueAt(0, 5);
+
+        Object[] dadosVenda = new Object[]{produto, sub_produto, ativo, garantia, dataVencimento, net, jTextFieldAjuste.getText()};
+        Ajustes ajustes = new Ajustes();
+        ajustes.AjustePerc(dadosVenda);
+    }
+    
+    public void preencherTabela(Object[] objVendas) throws ConexaoException, ClassNotFoundException {
       ArrayList dados = new ArrayList();
       String[] colunas = new String[]{"Produto", "Sub Produto", "Ativo", "Produto em Garantia", "Data Vencimento", "NET"};
       
@@ -164,9 +190,7 @@ public final class TelaAjusteVenda extends javax.swing.JFrame {
         jTableAjusteVenda.setAutoResizeMode(jTableAjusteVenda.AUTO_RESIZE_OFF);
         jTableAjusteVenda.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-    }
-
-    
+    } 
     
     /**
      * @param args the command line arguments

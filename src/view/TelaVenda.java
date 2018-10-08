@@ -14,7 +14,6 @@ import java.sql.Date;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import model.ModeloTabela;
-import model.Posicao;
 
 /**
  *
@@ -50,10 +49,32 @@ public class TelaVenda extends javax.swing.JFrame {
      * Creates new form TelaAjusteVenda
      */
     public TelaVenda() {
+        /*
+        TelaLogin telaLogin = new TelaLogin();
+        if(telaLogin.login == true){
+            initComponents();
+        }else{
+            JOptionPane.showMessageDialog(null, "Faça Login!");
+            telaLogin.setVisible(true);
+            this.setVisible(false);
+        }
+        */
+        
         initComponents();
     }
 
     public TelaVenda(TelaPrincipal principal){
+        /*
+        TelaLogin telaLogin = new TelaLogin();
+        if(telaLogin.login == true){
+            initComponents();
+        }else{
+            JOptionPane.showMessageDialog(null, "Faça Login!");
+            telaLogin.setVisible(true);
+            this.setVisible(false);
+        }
+        */
+        
         this.principal = principal;
         initComponents();
     }
@@ -146,7 +167,7 @@ public class TelaVenda extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTableAlocacao);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(740, 30, 330, 90);
+        jScrollPane1.setBounds(710, 30, 360, 90);
 
         txtFieldPesquisa.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         txtFieldPesquisa.addActionListener(new java.awt.event.ActionListener() {
@@ -155,7 +176,7 @@ public class TelaVenda extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtFieldPesquisa);
-        txtFieldPesquisa.setBounds(530, 40, 150, 30);
+        txtFieldPesquisa.setBounds(510, 40, 150, 30);
 
         buttonPesquisa.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         buttonPesquisa.setText("Pesquisar");
@@ -169,12 +190,12 @@ public class TelaVenda extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buttonPesquisa);
-        buttonPesquisa.setBounds(590, 80, 90, 30);
+        buttonPesquisa.setBounds(570, 80, 90, 30);
 
         jLabelAtivo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabelAtivo.setText("Ativo");
         getContentPane().add(jLabelAtivo);
-        jLabelAtivo.setBounds(470, 40, 50, 40);
+        jLabelAtivo.setBounds(460, 30, 50, 40);
 
         jMenu1.setText("Arquivo");
 

@@ -48,10 +48,30 @@ public class TelaCompra extends javax.swing.JFrame {
      * Creates new form TelaDeVenda
      */
     public TelaCompra() {
+        /*
+        TelaLogin telaLogin = new TelaLogin();
+        if(telaLogin.login == true){
+            initComponents();
+        }else{
+            JOptionPane.showMessageDialog(null, "Faça Login!");
+            telaLogin.setVisible(true);
+            this.setVisible(false);
+        }
+        */
         initComponents();
         
     }
     public TelaCompra(TelaPrincipal principal){
+        /*
+        TelaLogin telaLogin = new TelaLogin();
+        if(telaLogin.login == true){
+            initComponents();
+        }else{
+            JOptionPane.showMessageDialog(null, "Faça Login!");
+            telaLogin.setVisible(true);
+            this.setVisible(false);
+        }
+        */
         this.principal = principal;
         initComponents();
     }
@@ -104,9 +124,14 @@ public class TelaCompra extends javax.swing.JFrame {
             }
         ));
         jScrollPane1.setViewportView(jTableAlocacao);
+        if (jTableAlocacao.getColumnModel().getColumnCount() > 0) {
+            jTableAlocacao.getColumnModel().getColumn(0).setHeaderValue("Alocação Atual %");
+            jTableAlocacao.getColumnModel().getColumn(1).setHeaderValue("Sugestão para Perfil");
+            jTableAlocacao.getColumnModel().getColumn(2).setHeaderValue("Alteração Alocação");
+        }
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(880, 20, 380, 100);
+        jScrollPane1.setBounds(810, 20, 450, 100);
 
         jButtonConfirm.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jButtonConfirm.setText("Confirmar Alocação");
@@ -140,7 +165,7 @@ public class TelaCompra extends javax.swing.JFrame {
         jScrollPane3.setViewportView(jTableCompra);
 
         getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(80, 210, 1190, 620);
+        jScrollPane3.setBounds(20, 200, 1240, 620);
 
         txtFieldPesquisa.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         txtFieldPesquisa.addActionListener(new java.awt.event.ActionListener() {
@@ -149,7 +174,7 @@ public class TelaCompra extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtFieldPesquisa);
-        txtFieldPesquisa.setBounds(650, 40, 140, 30);
+        txtFieldPesquisa.setBounds(600, 40, 140, 30);
 
         buttonPesquisa.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         buttonPesquisa.setText("Pesquisar");
@@ -163,12 +188,12 @@ public class TelaCompra extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buttonPesquisa);
-        buttonPesquisa.setBounds(700, 90, 90, 30);
+        buttonPesquisa.setBounds(650, 90, 90, 30);
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel1.setText("Emissor");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(580, 30, 80, 40);
+        jLabel1.setBounds(520, 30, 80, 40);
 
         jMenu1.setText("Arquivo");
 
@@ -235,8 +260,6 @@ public class TelaCompra extends javax.swing.JFrame {
     private void jButtonConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmActionPerformed
         int confirm = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja alterar?");
         if(confirm == JOptionPane.YES_OPTION){
-        
-
             TelaPrincipal tela = new TelaPrincipal();
             tela.setVisible(true);
             
@@ -307,7 +330,6 @@ public class TelaCompra extends javax.swing.JFrame {
         }finally{
             conex.close();
         }
-        
 
         ModeloTabela modelo = new ModeloTabela(dados, colunas);
 
@@ -327,10 +349,9 @@ public class TelaCompra extends javax.swing.JFrame {
         jTableCompra.getTableHeader().setReorderingAllowed(false);
         jTableCompra.setAutoResizeMode(jTableCompra.AUTO_RESIZE_OFF);
         jTableCompra.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-
     }
-    void pesquisa(){try {
+    void pesquisa(){
+        try {
             preencherTabela("SELECT cat.produto, cat.sub_produto, cat.cnpj, cat.ativo, cat.emissor, cat.data_vencimento\n"
                     + "FROM alocacao.catalogo_op AS cat\n"
                     + "WHERE ((cat.classificacao = '" + mensagem[jComboBoxItem.getSelectedIndex()] + "') AND (cat.emissor LIKE '%" + txtFieldPesquisa.getText() + "%')) ");

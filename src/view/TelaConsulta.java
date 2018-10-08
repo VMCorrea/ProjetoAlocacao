@@ -9,6 +9,7 @@ package view;
 import controller.ConexaoBD;
 import controller.ConexaoException;
 import controller.PosicaoCliente;
+import controller.SugarConnection;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
@@ -26,8 +27,18 @@ public class TelaConsulta extends javax.swing.JFrame {
     ConexaoBD conex = new ConexaoBD();
     
     public TelaConsulta() {
-        initComponents();
-               
+        /*
+        TelaLogin telaLogin = new TelaLogin();
+        if(telaLogin.login == true){
+            initComponents();
+        }else{
+            JOptionPane.showMessageDialog(null, "Faça Login!");
+            telaLogin.setVisible(true);
+            this.setVisible(false);
+        }
+        */
+        initComponents();        
+            
     }
 
     /**
@@ -119,7 +130,6 @@ public class TelaConsulta extends javax.swing.JFrame {
         int sair = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair?");
         if(sair == JOptionPane.YES_OPTION){
             dispose();
-            //System.exit(0);
         }
     }//GEN-LAST:event_jMenuSairActionPerformed
 
@@ -134,15 +144,18 @@ public class TelaConsulta extends javax.swing.JFrame {
       
     void pesquisar(){
         TelaPrincipal principal = new TelaPrincipal();
+        SugarConnection sugar = new SugarConnection();
         try {
-            
-            principal.preencherColunas(txtFieldPesquisa.getText());
-            principal.preencherLabel(txtFieldPesquisa.getText());
-            
-            principal.setVisible(true);
-            TelaConsulta consulta = new TelaConsulta();
-            consulta.setVisible(false);
+            if(sugar.isClient(txtFieldPesquisa.getText())){
+                principal.preencherColunas(txtFieldPesquisa.getText());
+                principal.preencherLabel(txtFieldPesquisa.getText());
 
+                principal.setVisible(true);
+                TelaConsulta consulta = new TelaConsulta();
+                consulta.setVisible(false);
+            }else{
+                JOptionPane.showMessageDialog(null, "Cliente inválido.");
+            }
         } catch (ConexaoException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao selecionar dados. " + ex);
         } catch (ClassNotFoundException ex) {
