@@ -13,8 +13,8 @@ public class SugarConnection {
     private String urls = "https://lftmdev.sugarondemand.com/rest/v11";
     private long time;
     private HttpURLConnection con;
-    private String username;
-    private String password;
+    private String username = "";
+    private String password = "";
     private String accessToken;
     private int status;
 
@@ -40,7 +40,8 @@ public class SugarConnection {
         String inputLine;
 
         if(isExpired()) {
-            SugarLogin(username,password);
+            if(!SugarLogin(username,password))
+                return false;
         }
 
         //setting up connection url
