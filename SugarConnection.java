@@ -7,7 +7,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-class SugarConnection {
+public class SugarConnection {
 
     private URL url;
     private String urls = "https://lftmdev.sugarondemand.com/rest/v11";
@@ -153,12 +153,6 @@ class SugarConnection {
             System.out.println("Error on connection output");
             return false;
         }
-    }
-
-    public static void main (String args[]) {
-        SugarConnection con = new SugarConnection();
-
-
     }
 }
 
