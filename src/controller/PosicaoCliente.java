@@ -22,7 +22,6 @@ public class PosicaoCliente{
        
     	String query = "INSERT INTO alocacao.catalogo_op (classificacao, garantia, ativo, data_vencimento) VALUES (?,?,?,?)";
         pst = conex.con.prepareStatement(query);
-        
         pst.setString(1, pos.getClassificacao());
         pst.setString(2, pos.getProdutoGarantia());
         pst.setString(3, pos.getAtivo());
@@ -58,22 +57,22 @@ public class PosicaoCliente{
     }
 
     public void atualizaPosicaoCliente() throws ConexaoException, SQLException, ClassNotFoundException {
-   	conex.open();
-        
+        conex.open();
+
         String query = "UPDATE alocacao.catalogo_op SET ativo=?, "
                 + "data_vencimento=?, classificacao=?, garantia=?, quantidade=? "
                 + "INNER JOIN alocacos AS al ON al.id = id WHERE id=?";
         pst = conex.con.prepareStatement(query);
-        
+
         pst.setString(1, pos.getClassificacao());
         pst.setString(2, pos.getSubproduto());
         pst.setString(3, pos.getAtivo());
         pst.setDate(4, pos.getDataVencimento());
         pst.setFloat(5, pos.getNet());
-        
-        pst.execute();	
-	conex.close();
-        }
+
+        pst.execute();
+        conex.close();
+    }
 	
 	public void deletaPosicaoCliente() throws ConexaoException, SQLException, ClassNotFoundException{
 	    conex.open();
